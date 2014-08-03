@@ -14,10 +14,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'beXsKRIOGfKKTwkkcTkh',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': const.MYSQL_USER,
-        'PASSWORD': const.MYSQL_PASS,
-        'HOST': const.MYSQL_HOST,                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': const.MYSQL_PORT,                      # Set to empty string for default.
+        'USER': '4vvtke0DV3yR9bIYcGyDvKBC',
+        'PASSWORD': '1B65i354OUTyyyVxMhI9IlgBxFztCp84',
+        'HOST': 'sqld.duapp.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '4050',                      # Set to empty string for default.
     }
 }
 

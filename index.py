@@ -10,6 +10,5 @@ if path not in sys.path:
  
 from django.core.handlers.wsgi import WSGIHandler
 from bae.core.wsgi import WSGIApplication
-from bae.core import const
  
 application = WSGIApplication(WSGIHandler())
