@@ -25,7 +25,10 @@ def testcreateTable():
 
 def excutecmd():
     from django.core.management import call_command
-    call_command('validate')
+    ret = call_command('syncdb')
+    import logging
+    log = logging.getLogger(__name__)
+    log.debug(str(ret))
 
 def dbtest(request):
     testcreateTable()
@@ -33,11 +36,5 @@ def dbtest(request):
 
 def runcmd(request):
     excutecmd()
-    # import logging
-    # log = logging.getLogger(__name__)
-    # log.debug('from debug')
-    # log.info('from info')
-    # log.warn('from warn')
-    # log.error('from error')
-
+    
     return HttpResponse('complete')

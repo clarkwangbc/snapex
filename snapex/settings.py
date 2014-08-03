@@ -190,5 +190,9 @@ LOGGING = {
             'handlers': ['logfile'],
             'level': 'DEBUG',
         },
+        'test': {
+            'handlers': ['logfile'],
+            'level': 'DEBUG',
+        },
     }
 }
