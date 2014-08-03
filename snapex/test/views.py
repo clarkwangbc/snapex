@@ -25,7 +25,8 @@ def testcreateTable():
 
 def excutecmd():
     from django.core.management import call_command
-    ret = call_command('syncdb')
+    # ret = call_command('syncdb')
+    ret = call_command('changepassword', 'admin', 'dingxiangyuan')
     import logging
     log = logging.getLogger(__name__)
     log.debug(str(ret))
