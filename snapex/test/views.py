@@ -35,6 +35,9 @@ def runcmd(request):
     excutecmd()
     import logging
     log = logging.getLogger(__name__)
-    log.debug('cmd runed well')
-    
+    log.debug('from debug')
+    log.info('from info')
+    log.warn('from warn')
+    log.error('from error')
+
     return HttpResponse('complete')

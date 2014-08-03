@@ -154,7 +154,7 @@ LOGGING = {
         'logfile': {
             'level':'DEBUG',
             'class':'logging.handlers.RotatingFileHandler',
-            'filename': '/home/bae/log/debug.log.temp',
+            'filename': '/home/bae/log/debug.log',
             'maxBytes': 50000,
             'backupCount': 2,
             'formatter': 'standard',
