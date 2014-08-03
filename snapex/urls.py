@@ -5,6 +5,6 @@ import views
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
-    url(r'^polls/', include('snapex.polls.urls')),
+    url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
