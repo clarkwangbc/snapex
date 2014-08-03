@@ -9,8 +9,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-from bae.core import const
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
