@@ -1,15 +1,14 @@
 from django.http import HttpResponse
 
-from bae.core import const
-
 def testcreateTable():
    dbname = "beXsKRIOGfKKTwkkcTkh"
+   import MySQLdb
    mydb = MySQLdb.connect(
-      host   = const.MYSQL_HOST,
-      port   = int(const.MYSQL_PORT),
-      user   = const.MYSQL_USER,
-      passwd = const.MYSQL_PASS,
-      db = dbname)
+      host   = 'sqld.duapp.com',
+      port   = 4050,
+      user   = '4vvtke0DV3yR9bIYcGyDvKBC',
+      passwd = '1B65i354OUTyyyVxMhI9IlgBxFztCp84',
+      db = 'beXsKRIOGfKKTwkkcTkh')
  
    cursor = mydb.cursor()
  
