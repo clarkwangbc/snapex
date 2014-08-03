@@ -2,9 +2,9 @@
 import os
 import sys
  
-os.environ['DJANGO_SETTINGS_MODULE'] = 'polls.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'snapex.settings'
  
-path = os.path.dirname(os.path.abspath(__file__)) + '/polls'
+path = os.path.dirname(os.path.abspath(__file__)) + '/snapex'
 if path not in sys.path:
     sys.path.insert(1, path)
  
