@@ -33,5 +33,8 @@ def dbtest(request):
 
 def runcmd(request):
     excutecmd()
-    print 'cmd runed well'
+    import logging
+    log = logging.getLogger(__name__)
+    log.debug('cmd runed well')
+    
     return HttpResponse('complete')
