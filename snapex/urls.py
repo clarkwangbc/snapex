@@ -7,4 +7,5 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^test/', include('test.urls')),
 ]
