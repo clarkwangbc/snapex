@@ -32,6 +32,6 @@ def dbtest(request):
     return HttpResponse('complete')
 
 def runcmd(request):
-    excutedcmd()
+    excutecmd()
     print 'cmd runed well'
     return HttpResponse('complete')
