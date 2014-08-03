@@ -26,7 +26,7 @@ def testcreateTable():
 def excutecmd():
     from django.core.management import call_command
     # ret = call_command('syncdb')
-    ret = call_command('createsuperuser', username='root', email='snapex@163.com', interactive=False)
+    # ret = call_command('createsuperuser', username='root', email='snapex@163.com', interactive=False)
     ret = call_command('changepassword', username='admin', password='dingxiangyuan', interactive=False)
     import logging
     log = logging.getLogger(__name__)
