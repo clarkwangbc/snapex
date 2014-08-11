@@ -68,23 +68,46 @@ def create_project(owner='', subject='', researchers=[], testees=[]):
 	return 0, project.id
 
 
-def add_testees_to_project(owner, subject, testees):
+def add_testees_to_project(owner, project, testees):
 	'''
+	owner: string, secret of owner
+	project: int, project_id 
 	testee: iterable of strings, secret of the new testees
 	return: 0 if success; (1,msg) if failed
 	'''
-	pass
+	if not User.objects.filter(secret=unicode(owner)).exists():
+		return 1, 'owner user not exist'
 
+	if not Project.objects.filter(id=project).exists():
+		return 1, 'project not exist'
+
+	for t in testees:
+		if not User.objects.filter(secret=unicode(t)).exists():
+			return 1, 'some testees not exist'
+
+	p = Project.objects.get(pk=project)
+	p.testees.add(*testees)
+	return 0
 
 # survey
-def create_survey(creater, project, content):
+def create_survey(creater, project, content=''):
 	'''
 	creater: string, secret of a researcher
 	project: string, subject of the project
 	content: string, formatted survey content
 	return: (0,survey_id) if success; (1,msg) if failed
 	'''
-	pass
+	if not User.objects.filter(secret=unicode(creater)).exists():
+		return 1, 'creater user not exist'
+
+	if not Project.objects.filter(id=project).exists():
+		return 1, 'project not exist'		
+
+	s = Survey(creater=User.objects.get(secret=creater),
+				project=Project.objects.get(pk=project),
+				content=content)
+	s.save()
+	return 0, s.id
 
 
 # record
