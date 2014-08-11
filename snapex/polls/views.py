@@ -9,4 +9,4 @@ def test(request):
 	db_ops.create_researcher()
 	db_ops.create_testees()
 
-	return Httpresponse("I'm testing...")
+	return HttpResponse("I'm testing...")

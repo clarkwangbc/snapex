@@ -24,3 +24,6 @@ def create_testees(number=10):
 	for i in range(number):
 		create_user(secret=unicode(uuid.uuid1()))
 
+# project
+def create_project(owner, subject, 	researchers, testees):
+	pass
