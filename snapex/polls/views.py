@@ -10,7 +10,10 @@ def test(request):
 	# db_ops.create_testees()
 	i = db_ops.create_project(owner='19770707', 
 					subject='test', 
-					researchers=['19770707'], 
-					testees=['19770707'])
+					researchers=['19770707',
+								'67d66e86-210c-11e4-a642-ee80fb9fa428'], 
+					testees=['19770707',
+							'67b0681c-210c-11e4-a642-ee80fb9fa428',
+							'67d1a98c-210c-11e4-a642-ee80fb9fa428'])
 
 	return HttpResponse("I'm testing... %s %s"%(i))
