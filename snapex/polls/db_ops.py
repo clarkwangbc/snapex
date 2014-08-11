@@ -99,7 +99,7 @@ def create_record(testee, survey, reply):
 
 
 # plan
-def create_plan(survey, owner, testee, is_sent=False, is_done=False, schedule):
+def create_plan(survey, owner, testee, is_sent=False, is_done=False, schedule=''):
 	'''
 	survey: int, survey_id
 	owner: string, secret of the owner researcher
