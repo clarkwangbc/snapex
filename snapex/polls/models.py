@@ -30,7 +30,7 @@ class Survey(models.Model):
 		return u'%s @ %s'%(creater, date_created)
 
 class Record(models.Model):
-	testee = model.ForeignKey(User)
+	testee = models.ForeignKey(User)
 	date_created = models.DateTimeField(auto_now=True)
 	survey = models.ForeignKey(Survey)
 	reply = models.TextField(default='')
