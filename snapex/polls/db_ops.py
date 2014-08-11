@@ -8,18 +8,21 @@ def create_user(secret, is_admin=False, is_researcher=False, is_activated=False)
 					is_activated=is_activated)
 	user.save()
 	
+
 def create_admin():
 	create_user(secret=u'19770707',
 					is_admin=True,
 					is_researcher=True,
 					is_activated=True)
 
+
 def create_researcher():
 	import uuid
 	secret = unicode(uuid.uuid1()
-	create_user(secret=secret),
+	create_user(secret=secret,
 					is_researcher=True)
 	return secret
+
 
 def create_testees(number=10):
 	import uuid
@@ -29,6 +32,7 @@ def create_testees(number=10):
 	for s in secrets:
 		create_user(secret=s)
 	return secrets
+
 
 # project
 def create_project(owner='', subject='', researchers=[], testees=[]):
@@ -71,6 +75,7 @@ def add_testees_to_project(owner, subject, testees):
 	'''
 	pass
 
+
 # survey
 def create_survey(creater, project, content):
 	'''
@@ -81,6 +86,7 @@ def create_survey(creater, project, content):
 	'''
 	pass
 
+
 # record
 def create_record(testee, survey, reply):
 	'''
@@ -90,6 +96,7 @@ def create_record(testee, survey, reply):
 	return: (0,record_id) if success; (1,msg) if failed
 	'''
 	pass
+
 
 # plan
 def create_plan(survey, owner, testee, is_sent=False, is_done=False, schedule):

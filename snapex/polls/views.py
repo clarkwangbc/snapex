@@ -8,7 +8,7 @@ def test(request):
 	# db_ops.create_admin()
 	# db_ops.create_researcher()
 	# db_ops.create_testees()
-	i = create_project(owner='19770707', 
+	i = db_ops.create_project(owner='19770707', 
 					subject='test', 
 					researchers=['19770707'], 
 					testees=['19770707'])
