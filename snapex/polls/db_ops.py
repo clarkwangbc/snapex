@@ -18,7 +18,7 @@ def create_admin():
 
 def create_researcher():
 	import uuid
-	secret = unicode(uuid.uuid1()
+	secret = unicode(uuid.uuid1())
 	create_user(secret=secret,
 					is_researcher=True)
 	return secret
@@ -28,7 +28,7 @@ def create_testees(number=10):
 	import uuid
 	if number<0:
 		return
-	secrets = [unicode(uuid.uuid1() for i in range(number)]
+	secrets = [unicode(uuid.uuid1()) for i in range(number)]
 	for s in secrets:
 		create_user(secret=s)
 	return secrets
