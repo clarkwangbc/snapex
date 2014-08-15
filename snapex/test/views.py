@@ -36,7 +36,9 @@ def excutecmd():
     # log.debug(str(ret))
 
     from django.contrib.auth import authenticate
-    u = authenticate(username='admin', password='dingxiangyuan')
+    # u = authenticate(username='admin', password='dingxiangyuan')
+    from django.contrib.auth.models import User
+    u = User.objects.filter(is_superuser=True)[0]
     s1 = u.is_staff
     s2 = u.is_superuser
     s3 = u.is_active
