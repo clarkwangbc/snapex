@@ -40,17 +40,9 @@ def excutecmd():
 def dbtest(request):
     # testcreateTable()
     from django.contrib.auth.models import User
-    # u = User(username='snapex', is_active=True,
-    #             is_staff=True, is_superuser=True, email='snapex@163.com')
-    # u.set_password('dingxiangyuan')
-    # u.save()
+    u = User.objects.get(username='admin')
 
-    from polls.models import UserProfile
-    u = User.objects.get(username='snapex')
-    up = UserProfile(device_id='19770707', is_admin=True, is_researcher=True, user=u)
-    up.save()
-
-    return HttpResponse('ok')
+    return HttpResponse(str(u.user_profile))
 
 
 def runcmd(request):
