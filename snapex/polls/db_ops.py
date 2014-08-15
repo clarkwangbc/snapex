@@ -1,8 +1,22 @@
 from models import *
 
-def create_uid():
+def generate_uid():
 	import uuid
 	return str(uuid.uuid4())[:30]
+
+
+def create_admin(username, password, device_id):
+	from django.contrib.auth.models import User
+	u = User.objects.get(username=username)
+	if u:
+		return 1, 'username already exist'
+	else:
+		u = User(username=username, is_active=True, is_staff=True, is_superuser=True)
+		u.set_password = password
+		u.save()
+		up = UserProfile(user=u, is_admin=True, is_researcher=True, device_id=device_id)
+		up.save()
+
 
 # user
 def create_user(secret, device_id='0', is_admin=False, is_researcher=False, is_activated=False):
@@ -14,12 +28,12 @@ def create_user(secret, device_id='0', is_admin=False, is_researcher=False, is_a
 	user.save()
 	
 
-def create_admin():
-	create_user(secret=u'19770707',
-					device_id='19770707',
-					is_admin=True,
-					is_researcher=True,
-					is_activated=True)
+# def create_admin():
+# 	create_user(secret=u'19770707',
+# 					device_id='19770707',
+# 					is_admin=True,
+# 					is_researcher=True,
+# 					is_activated=True)
 
 
 def create_researcher():
