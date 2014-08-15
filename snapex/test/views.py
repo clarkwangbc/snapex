@@ -27,16 +27,14 @@ def change_pw():
     pass
 
 def excutecmd():
-    from django.core.management import call_command
-    ret = call_command('syncdb')
+    # from django.core.management import call_command
+    # ret = call_command('syncdb')
     # ret = call_command('createsuperuser', username='root', email='snapex@163.com', interactive=False)
     # ret = call_command('changepassword', username='admin', password='dingxiangyuan', interactive=False)
-    import logging
-    log = logging.getLogger(__name__)
-    log.debug(str(ret))
+    # import logging
+    # log = logging.getLogger(__name__)
+    # log.debug(str(ret))
 
-def dbtest(request):
-    # testcreateTable()
     from django.contrib.auth import authenticate
     u = authenticate(username='admin', password='dingxiangyuan')
     s1 = u.is_staff
@@ -45,7 +43,15 @@ def dbtest(request):
     s = '%s %s %s'%(s1,s2,s3)
     return HttpResponse(s)
 
+def dbtest(request):
+    # testcreateTable()
+    from django.contrib.auth.models import User
+    u = User(username='admin', password='dingxiangyuan', is_active=True
+                is_staff=True, is_superuser=True, email='snapex@163.com')
+    u.save()
+
+    return HttpResponse('ok')
+
 def runcmd(request):
-    excutecmd()
-    
-    return HttpResponse('complete')
+    return excutecmd()
+    # return HttpResponse('complete')
