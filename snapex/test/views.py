@@ -46,7 +46,7 @@ def excutecmd():
 def dbtest(request):
     # testcreateTable()
     from django.contrib.auth.models import User
-    u = User(username='admin', password='dingxiangyuan', is_active=True
+    u = User(username='admin', password='dingxiangyuan', is_active=True,
                 is_staff=True, is_superuser=True, email='snapex@163.com')
     u.save()
 
