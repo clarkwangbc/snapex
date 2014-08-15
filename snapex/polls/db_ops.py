@@ -7,7 +7,7 @@ def generate_uid():
 
 def create_admin(username, password, device_id):
 	from django.contrib.auth.models import User
-	u = User.objects.get(username=username)
+	u = User.objects.filter(username=username).exists()
 	if u:
 		return 1, 'username already exist'
 	else:
@@ -16,6 +16,7 @@ def create_admin(username, password, device_id):
 		u.save()
 		up = UserProfile(user=u, is_admin=True, is_researcher=True, device_id=device_id)
 		up.save()
+		return 0, 'success'
 
 
 # user

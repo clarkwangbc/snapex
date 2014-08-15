@@ -22,4 +22,4 @@ def test(request):
 
 	
 
-	return HttpResponse("I'm testing... %s %s"%(i))
+	return HttpResponse("I'm testing...")
