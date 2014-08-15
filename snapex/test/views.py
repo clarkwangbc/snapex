@@ -40,7 +40,8 @@ def excutecmd():
 def dbtest(request):
     # testcreateTable()
     from django.contrib.auth.models import User
-    u = User.objects.get(username='admin')
+    u = User(username='test')
+    u.save()
 
     return HttpResponse(str(u.user_profile))
 
