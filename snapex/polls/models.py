@@ -2,6 +2,7 @@ from django.db import models
 
 class User(models.Model):
 	secret = models.CharField(max_length=40)
+	device_id = models.CharField(max_length=100)
 	is_admin = models.BooleanField(default=False)
 	is_researcher = models.BooleanField(default=False)
 	is_activated = models.BooleanField(default=False)

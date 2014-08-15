@@ -1,8 +1,9 @@
 from models import *
 
 # user
-def create_user(secret, is_admin=False, is_researcher=False, is_activated=False):
-	user = User(secret=secret, 
+def create_user(secret, device_id='0', is_admin=False, is_researcher=False, is_activated=False):
+	user = User(secret=secret,
+					device_id=device_id,
 					is_admin=is_admin, 
 					is_researcher=is_researcher,
 					is_activated=is_activated)
@@ -11,6 +12,7 @@ def create_user(secret, is_admin=False, is_researcher=False, is_activated=False)
 
 def create_admin():
 	create_user(secret=u'19770707',
+					device_id='19770707',
 					is_admin=True,
 					is_researcher=True,
 					is_activated=True)
@@ -111,14 +113,24 @@ def create_survey(creater, project, content=''):
 
 
 # record
-def create_record(testee, survey, reply):
+def create_record(testee, survey, reply=''):
 	'''
 	testee: string, secret of a testee
 	survey: int, survey_id
 	reply: string, formatted survey reply to the survey
 	return: (0,record_id) if success; (1,msg) if failed
 	'''
-	pass
+	if not User.objects.filter(secret=unicode(testee)).exists():
+		return 1, 'testee user not exist'
+
+	if not Survey.objects.filter(id=survey).exists():
+		return 1, 'survey not exist'
+
+	r = Record(testee=User.objects.get(secret=testee),
+				survey=Survey.objects.get(pk=survey),
+				reply=reply)
+	r.save()
+	return 0, r.id
 
 
 # plan
@@ -130,4 +142,21 @@ def create_plan(survey, owner, testee, is_sent=False, is_done=False, schedule=''
 	schedule: string, formatted schedule string
 	return: (0,plan_id) if success; (1,msg) if failed
 	'''
-	pass
+	if not User.objects.filter(secret=unicode(testee)).exists():
+		return 1, 'testee user not exist'
+
+	if not User.objects.filter(secret=unicode(owner)).exists():
+		return 1, 'owner user not exist'
+
+	if not Survey.objects.filter(id=survey).exists():
+		return 1, 'survey not exist'
+
+	p = Plan(survey=Survey.objects.get(pk=survey),
+			owner=User.objects.get(secret=owner),
+			testee=User.objects.get(secret=testee),
+			is_sent=is_sent,
+			is_done=is_done,
+			schedule=schedule)
+	p.save()
+	return 0, p.id
+	
