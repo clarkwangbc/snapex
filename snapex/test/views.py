@@ -23,6 +23,9 @@ def testcreateTable():
 
     mydb.close()
 
+def change_pw():
+
+
 def excutecmd():
     from django.core.management import call_command
     ret = call_command('syncdb')
@@ -33,8 +36,14 @@ def excutecmd():
     log.debug(str(ret))
 
 def dbtest(request):
-    testcreateTable()
-    return HttpResponse('complete')
+    # testcreateTable()
+    from django.contrib.auth import authenticate
+    u = authenticate(username='admin', password='dingxiangyuan')
+    s1 = u.is_staff
+    s2 = u.is_superuser
+    s3 = u.is_active
+    s = '%s %s %s'%(s1,s2,s3)
+    return HttpResponse(s)
 
 def runcmd(request):
     excutecmd()
