@@ -36,9 +36,9 @@ def excutecmd():
     # log.debug(str(ret))
 
     from django.contrib.auth import authenticate
-    # u = authenticate(username='admin', password='dingxiangyuan')
-    from django.contrib.auth.models import User
-    u = User.objects.filter(is_superuser=True)[0]
+    u = authenticate(username='snapex', password='dingxiangyuan')
+    # from django.contrib.auth.models import User
+    # u = User.objects.filter(is_superuser=True)[0]
     s1 = u.is_staff
     s2 = u.is_superuser
     s3 = u.is_active
@@ -48,8 +48,9 @@ def excutecmd():
 def dbtest(request):
     # testcreateTable()
     from django.contrib.auth.models import User
-    u = User(username='admin', password='dingxiangyuan', is_active=True,
+    u = User(username='snapex', password='dingxiangyuan', is_active=True,
                 is_staff=True, is_superuser=True, email='snapex@163.com')
+    u.set_password('dingxiangyuan')
     u.save()
 
     return HttpResponse('ok')
