@@ -24,7 +24,7 @@ def testcreateTable():
     mydb.close()
 
 def change_pw():
-
+    pass
 
 def excutecmd():
     from django.core.management import call_command
