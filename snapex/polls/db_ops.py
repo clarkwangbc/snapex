@@ -12,7 +12,7 @@ def create_admin(username, password, device_id):
 		return 1, 'username already exist'
 	else:
 		u = User(username=username, is_active=True, is_staff=True, is_superuser=True)
-		u.set_password = password
+		u.set_password(password)
 		u.save()
 		up = UserProfile(user=u, is_admin=True, is_researcher=True, device_id=device_id)
 		up.save()
