@@ -3,6 +3,8 @@ from django.contrib import admin
 
 import views
 
+admin.autodiscover()
+
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
     url(r'^polls/', include('polls.urls')),
