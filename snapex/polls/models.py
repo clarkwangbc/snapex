@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-	secret = models.CharField(max_length=40)
+class UserProfile(models.Model):
+	user = models.OneToOneField(User, related_name='user_profile')
 	device_id = models.CharField(max_length=100)
 	is_admin = models.BooleanField(default=False)
 	is_researcher = models.BooleanField(default=False)
-	is_activated = models.BooleanField(default=False)
-	date_created = models.DateTimeField(auto_now_add=True)
-
+	
 	def __unicode__(self):
 		return u'%s'%(secret) if secret is not None else u'None'
+
+	def __str__(self):
+		return "%s's profile" % self.user  
 
 class Project(models.Model):
 	owner = models.ForeignKey(User, related_name='project_owner')

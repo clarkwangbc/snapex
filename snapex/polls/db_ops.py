@@ -1,5 +1,9 @@
 from models import *
 
+def create_uid():
+	import uuid
+	return str(uuid.uuid4())[:30]
+
 # user
 def create_user(secret, device_id='0', is_admin=False, is_researcher=False, is_activated=False):
 	user = User(secret=secret,

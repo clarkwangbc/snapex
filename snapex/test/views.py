@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 
+
 def testcreateTable():
     dbname = "beXsKRIOGfKKTwkkcTkh"
     import MySQLdb
@@ -23,37 +24,29 @@ def testcreateTable():
 
     mydb.close()
 
-def change_pw():
-    pass
 
 def excutecmd():
-    # from django.core.management import call_command
-    # ret = call_command('syncdb')
-    # ret = call_command('createsuperuser', username='root', email='snapex@163.com', interactive=False)
-    # ret = call_command('changepassword', username='admin', password='dingxiangyuan', interactive=False)
+    from django.core.management import call_command
+    ret = call_command('syncdb')
     # import logging
     # log = logging.getLogger(__name__)
     # log.debug(str(ret))
 
-    from django.contrib.auth import authenticate
-    u = authenticate(username='snapex', password='dingxiangyuan')
-    # from django.contrib.auth.models import User
-    # u = User.objects.filter(is_superuser=True)[0]
-    s1 = u.is_staff
-    s2 = u.is_superuser
-    s3 = u.is_active
-    s = '%s %s %s'%(s1,s2,s3)
-    return HttpResponse(s)
+    # from django.contrib.auth import authenticate
+    # u = authenticate(username='snapex', password='dingxiangyuan')
+    return HttpResponse('complete')
+
 
 def dbtest(request):
     # testcreateTable()
     from django.contrib.auth.models import User
-    u = User(username='snapex', password='dingxiangyuan', is_active=True,
+    u = User(username='snapex', is_active=True,
                 is_staff=True, is_superuser=True, email='snapex@163.com')
     u.set_password('dingxiangyuan')
     u.save()
 
     return HttpResponse('ok')
+
 
 def runcmd(request):
     return excutecmd()
