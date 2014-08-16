@@ -5,8 +5,8 @@ def index(request):
 
 def test(request):
 	import db_ops
-	db_ops.create_admin('admin', 'taoliyuan', '19770707')
-	# db_ops.create_admin()
+	
+	# db_ops.create_admin('admin', 'taoliyuan', '19770707')
 	# db_ops.create_researcher()
 	# db_ops.create_testees()
 	

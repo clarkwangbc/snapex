@@ -27,14 +27,6 @@ def create_user(secret, device_id='0', is_admin=False, is_researcher=False, is_a
 					is_researcher=is_researcher,
 					is_activated=is_activated)
 	user.save()
-	
-
-# def create_admin():
-# 	create_user(secret=u'19770707',
-# 					device_id='19770707',
-# 					is_admin=True,
-# 					is_researcher=True,
-# 					is_activated=True)
 
 
 def create_researcher():

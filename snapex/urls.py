@@ -7,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
+	url(r'^signin/', include('singin.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^test/', include('test.urls')),

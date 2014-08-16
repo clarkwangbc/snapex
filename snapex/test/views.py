@@ -38,14 +38,15 @@ def excutecmd():
 
 
 def dbtest(request):
-    # testcreateTable()
+    ret = ''
+
     from django.contrib.auth.models import User
     u = User(username='test')
     u.save()
+    ret = str(u.user_profile) if hasattr(u,'user_profile') else 'None'
 
-    return HttpResponse(str(u.user_profile))
+    return HttpResponse(ret)
 
 
 def runcmd(request):
     return excutecmd()
-    # return HttpResponse('complete')
