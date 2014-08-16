@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'polls',
     'signin',
+    'api',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -208,3 +209,5 @@ SESSION_COOKIE_AGE = 86400 # sec
 SESSION_COOKIE_DOMAIN = None
 SESSION_COOKIE_NAME = 'DSESSIONID'
 SESSION_COOKIE_SECURE = False
+
+LOGIN_URL = '/signin/'
