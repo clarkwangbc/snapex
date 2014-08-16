@@ -9,7 +9,8 @@ signin = function(){
 			type: "post",
 			data: {
 				test: "test",
-				secret: input_secret
+				secret: input_secret,
+				csrfmiddlewaretoken: "{{ csrf_token }}"
 			},
 		}).done(function(data){
 			console.log(data.status);
