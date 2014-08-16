@@ -12,11 +12,9 @@ except ImportError:
     from urlparse import urlparse
 import functools
 import simplejson as json
-import teach.status_code as sc
 from .dj import dj_setting
 import time
 import datetime
-from .log import write
 
 
 def get_rest_method(req):
@@ -104,25 +102,6 @@ def _to_response(ret, func, req, template, rest, **kw):
                                    getattr(func, '__name__', '')))
         ret = HttpResponse(ret, **kw)
     return ret
-
-
-def _set_redirect(req, rest, login_url=None, redirect_field_name=REDIRECT_FIELD_NAME):
-    '''
-    used when req is not authenticated but login is required.
-    '''
-    if not rest:
-        path = req.build_absolute_uri()
-
-        resolved_login_url = login_url or dj_setting('LOGIN_URL')
-
-        from django.contrib.auth.views import redirect_to_login
-        resp = redirect_to_login(
-            path, resolved_login_url, redirect_field_name)
-
-        resp.set_cookie(redirect_field_name, path)
-        return resp
-    else:
-        return sc.CLIENT_ERROR, {'error_code': sc.ILLEGAL_ACCESS}
 
 
 def _to_log(req, resp, params):
@@ -246,7 +225,7 @@ def expose(**kw):
             use_time = '%4.3f' % (time.time() - use_time)
 
             # Logging
-            write(_to_log(req, ret, [use_time]), 'access')
+            # write(_to_log(req, ret, [use_time]), 'access')
 
             return ret
         wrapper._exposed = True
