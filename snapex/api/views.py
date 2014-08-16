@@ -6,4 +6,7 @@ from polls.models import *
 
 @utility.expose(rest=True)
 def signin(req):
-	return 200, dict(secret=req.POST['secret'])
+	if req.method == 'POST':
+		return 200, dict(method='post')
+	elif req.method == 'GET':
+		return 200, dict(method='get')
