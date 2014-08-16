@@ -1,5 +1,5 @@
 signin = function(){
-	input_secret = $("#input_secret").value;
+	input_secret = document.getElementById("input_secret").value;
 	if (input_secret) {
 		$.ajax("/api/v0/signin", {
 			test: "test",
