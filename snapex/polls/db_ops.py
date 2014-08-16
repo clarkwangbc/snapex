@@ -1,12 +1,18 @@
 from models import *
+from django.conf import settings
+import uuid
+from django.contrib.auth.models import User
+
 
 def generate_uid():
-	import uuid
 	return str(uuid.uuid4())[:30]
 
 
+def generate_uids(number):
+	return [generate_uid() for x in range(number)]
+
+
 def create_admin(username, password, device_id):
-	from django.contrib.auth.models import User
 	u = User.objects.filter(username=username).exists()
 	if u:
 		return 1, 'username already exist'
@@ -19,32 +25,42 @@ def create_admin(username, password, device_id):
 		return 0, 'success'
 
 
-# user
-def create_user(secret, device_id='0', is_admin=False, is_researcher=False, is_activated=False):
-	user = User(secret=secret,
-					device_id=device_id,
-					is_admin=is_admin, 
-					is_researcher=is_researcher,
-					is_activated=is_activated)
-	user.save()
+def create_researcher(user):
+	if type(user) == type(str()):
+		user = [user]
+	if type(user) == type(list()):
+		for one_user in user:
+			if type(one_user) != type(str()):
+				return 1, 'invalid input'
+			if User.objects.filter(username=one_user).exists():
+				return 1, 'username already exists'
+			else:
+				u = User(username=one_user, is_active=False, is_staff=False, is_superuser=False)
+				u.set_password(settings.DEFAULT_PASSWORD)
+				u.save()
+				up = UserProfile(user=u, is_admin=False, is_researcher=True, device_id='')
+				up.save()
+		return 0
+	return 1, 'invalid input, string or list of string required'
+	
 
-
-def create_researcher():
-	import uuid
-	secret = unicode(uuid.uuid1())
-	create_user(secret=secret,
-					is_researcher=True)
-	return secret
-
-
-def create_testees(number=10):
-	import uuid
-	if number<0:
-		return
-	secrets = [unicode(uuid.uuid1()) for i in range(number)]
-	for s in secrets:
-		create_user(secret=s)
-	return secrets
+def create_testee(user):
+	if type(user) == type(str()):
+		user = [user]
+	if type(user) == type(list()):
+		for one_user in user:
+			if type(one_user) != type(str()):
+				return 1, 'invalid input'
+			if User.objects.filter(username=one_user).exists():
+				return 1, 'username already exists'
+			else:
+				u = User(username=one_user, is_active=False, is_staff=False, is_superuser=False)
+				u.set_password(settings.DEFAULT_PASSWORD)
+				u.save()
+				up = UserProfile(user=u, is_admin=False, is_researcher=False, device_id='')
+				up.save()
+		return 0
+	return 1, 'invalid input, string or list of string required'
 
 
 # project

@@ -211,3 +211,6 @@ SESSION_COOKIE_NAME = 'DSESSIONID'
 SESSION_COOKIE_SECURE = False
 
 LOGIN_URL = '/signin/'
+
+# default password for testees and researchers in User model
+DEFAULT_PASSWORD = '9'
