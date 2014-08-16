@@ -1,6 +1,7 @@
 var input_secret;
 
 signin = function(){
+	console.log("in sign in");
 	input_secret = $("#input_secret")[0].value;
 	if (input_secret) {
 		$.ajax("/api/v0/signin", {
