@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from polls.models import *
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 
 @csrf_exempt
@@ -19,7 +20,9 @@ def signin(req):
 				if u.is_superuser and 'device_id' in req.POST:
 					user = authenticate(username=secret, password=req.POST['device_id'])
 				else:
-					user = authenticate(username=secret, password='9')
+					user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
+					if user is None:
+						return 400, {msg:'user is none'}
 
 			if user is not None and user.is_active:
 				# redirect due to `next` field
