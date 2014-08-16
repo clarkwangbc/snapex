@@ -3,8 +3,10 @@ import polls.utility as utility
 from django.contrib.auth.models import User
 from polls.models import *
 from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 @utility.expose(rest=True)
 def signin(req):
 	if req.method == 'POST':
