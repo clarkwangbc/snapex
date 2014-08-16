@@ -1,5 +1,7 @@
+var input_secret;
+
 signin = function(){
-	input_secret = document.getElementById("input_secret").value;
+	input_secret = $("#input_secret")[0].value;
 	if (input_secret) {
 		$.ajax("/api/v0/signin", {
 			test: "test",
@@ -8,6 +10,8 @@ signin = function(){
 			console.log(data.status);
 			console.log(data.secret);
 		});
+	} else {
+		$("#empty_secret_msg")[0].style.display = "";
 	}
 	return 0;
 }
