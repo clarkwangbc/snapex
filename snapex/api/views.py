@@ -24,6 +24,8 @@ def signin(req):
 			if user is not None and user.is_active:
 				# redirect due to `next` field
 				return 200, dict(msg='singin success')
-			# else:
-			# 	return 400, 
+			else:
+				return 400, dict(msg='user is None')
+		else:
+			return 400, dict(msg='no secret in req.POST')
 	return 400, dict(msg='invalid signin')
