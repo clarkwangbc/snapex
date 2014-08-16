@@ -10,5 +10,5 @@ urlpatterns = [
 	url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^test/', include('test.urls')),
-    url(r'^signin/', include('singin.urls')),
+    url(r'^signin/', include('signin.urls')),
 ]
