@@ -12,8 +12,12 @@ signin = function(){
 				secret: input_secret,
 			},
 		}).done(function(data){
-			console.log(data.status);
-			console.log(data.msg);
+			if (data.status===200) {
+				// redirect
+				window.location.replace("http://snapex.duapp.com/mypage");
+			} else {
+				$("#wrong_secret_msg")[0].style.display = "";
+			}
 		});
 	} else {
 		$("#empty_secret_msg")[0].style.display = "";

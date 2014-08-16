@@ -21,11 +21,8 @@ def signin(req):
 					user = authenticate(username=secret, password=req.POST['device_id'])
 				else:
 					user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
-					if user is None:
-						return 400, {msg:'user is none'}
 
 			if user is not None and user.is_active:
-				# redirect due to `next` field
 				return 200, dict(msg='singin success')
 			else:
 				return 400, dict(msg='user is None')

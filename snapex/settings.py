@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'polls',
     'signin',
     'api',
+    'mypage'
 )
 
 # A sample logging configuration. The only tangible logging
