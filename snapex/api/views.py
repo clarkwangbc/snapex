@@ -2,7 +2,7 @@ from django.http import HttpResponse
 import polls.utility as utility
 from django.contrib.auth.models import User
 from polls.models import *
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
@@ -23,9 +23,17 @@ def signin(req):
 					user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
 
 			if user is not None and user.is_active:
+				login(req, user)
 				return 200, dict(msg='singin success')
 			else:
 				return 400, dict(msg='user is None')
 		else:
 			return 400, dict(msg='no secret in req.POST')
 	return 400, dict(msg='invalid signin')
+
+
+@csrf_exempt
+@utility.expose(rest=True)
+def signout(req):
+	logout(req)
+	return 200, dict(msg='signout success')

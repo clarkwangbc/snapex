@@ -17,9 +17,11 @@ signin = function(){
 				window.location.replace("http://snapex.duapp.com/mypage");
 			} else {
 				$("#wrong_secret_msg")[0].style.display = "";
+				$("#empty_secret_msg")[0].style.display = "none";
 			}
 		});
 	} else {
 		$("#empty_secret_msg")[0].style.display = "";
+		$("#wrong_secret_msg")[0].style.display = "none"
 	}
 }
