@@ -1,12 +1,13 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 import views
 
 admin.autodiscover()
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
+	url(r'^$', RedirectView.as_view(url='mypage/')),
 	url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^test/', include('test.urls')),

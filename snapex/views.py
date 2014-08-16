@@ -1,4 +1,6 @@
 from django.http import HttpResponse
 
-def index(request):
+
+@login_required
+def index(req):
     return HttpResponse("It works!")
