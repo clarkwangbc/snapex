@@ -16,7 +16,7 @@ def signin(req):
 				# authenticate admin
 				if u.is_superuser and 'device_id' in req.POST:
 					user = authenticate(username=secret, password=req.POST['device_id'])
-				else
+				else:
 					user = authenticate(username=secret, password='9')
 
 			if user is not None and user.is_active:
