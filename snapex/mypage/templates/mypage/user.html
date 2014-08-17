@@ -64,9 +64,8 @@
       </thead>
 
       <tbody>
-        {% for loc, plan in enumerate(user_plans) %}
+        {% for plan in user_plans %}
           <tr>
-            <td>{{ loc + 1 }}</td>
             <td>{{ plan['survey_name'] }}</td>
             <td>{{ plan['project_name'] }}</td>
             <td>{{ plan['schedule_name'] }}</td>
