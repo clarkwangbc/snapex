@@ -67,21 +67,25 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Survey Name</th>
                   <th>Project Name</th>
-                  <th>Schedule Name</th>
-                  <th>Status</th>
+                  <th>User Count</th>
+                  <th>Active User Count</th>
+                  <th>Survey Count</th>
+                  <th>Plan Count</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>a</td>
-                  <td>b</td>
-                  <td>c</td>
-                  <td>d</td>
-                </tr>
+                {% for loc, project in enumerate(projects) %}
+                  <tr>
+                    <td>{{ loc + 1 }}</td>
+                    <td>{{ project['name'] }}</td>
+                    <td>{{ project['all_user'] }}</td>
+                    <td>{{ project['active_user'] }}</td>
+                    <td>{{ project['surveys'] }}</td>
+                    <td>{{ project['plans'] }}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -91,7 +95,7 @@
           </div>
 
           <div>
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="post">
               <fieldset>
                 <!-- Form Name -->
                 <legend>Create Project</legend>
@@ -101,6 +105,14 @@
                   <label class="col-md-4 control-label" for="project_name">Project Name</label>  
                   <div class="col-md-5">
                     <input id="project_name" name="project_name" type="text" placeholder="" class="form-control input-md" required="">
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="project_subject">Project Subject</label>  
+                  <div class="col-md-5">
+                  <input id="project_subject" name="project_subject" type="text" placeholder="" class="form-control input-md" required="">
                   </div>
                 </div>
 

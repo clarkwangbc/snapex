@@ -26,9 +26,13 @@ def create_admin(username, password, device_id):
 
 
 def create_researcher(user):
+	'''
+		user: string or list of string
+	'''
 	if type(user) == type(str()):
 		user = [user]
 	if type(user) == type(list()):
+		ret = []
 		for one_user in user:
 			if type(one_user) != type(str()):
 				return 1, 'invalid input'
@@ -40,14 +44,19 @@ def create_researcher(user):
 				u.save()
 				up = UserProfile(user=u, is_admin=False, is_researcher=True, device_id='')
 				up.save()
-		return 0
+				ret.append(u)
+		return 0, ret
 	return 1, 'invalid input, string or list of string required'
 	
 
 def create_testee(user):
+	'''
+		user: string or list of string
+	'''
 	if type(user) == type(str()):
 		user = [user]
 	if type(user) == type(list()):
+		ret = []
 		for one_user in user:
 			if type(one_user) != type(str()):
 				return 1, 'invalid input'
@@ -59,7 +68,8 @@ def create_testee(user):
 				u.save()
 				up = UserProfile(user=u, is_admin=False, is_researcher=False, device_id='')
 				up.save()
-		return 0
+				ret.append(u)
+		return 0, ret
 	return 1, 'invalid input, string or list of string required'
 
 
@@ -87,6 +97,22 @@ def get_survey_from_plan(plan):
 	return plan.survey
 
 
+def get_projects_from_researcher(rs):
+	return rs.owner_projects
+
+
+def get_testees_from_project(project):
+	return project.testees_projects
+
+
+def get_surveys_from_project(project):
+	return project.project_surveys
+
+
+def get_plans_from_project(project):
+	return project.project_plans
+
+
 def activate_user(secret):
 	user = get_user_from_secret(secret)
 	if user:
@@ -98,37 +124,29 @@ def activate_user(secret):
 
 
 # project
-def create_project(owner='', subject='', researchers=[], testees=[]):
-	'''
-	owner: string, secret of a owner user
-	subject: string, subject of the project
-	researchers: iterable of strings, secret of the researcher users
-	testees: iterable of stirngs, secret of the testee users
-	return: (0,project_id) if success; (1,msg) if failed
-	'''
-	# validate owner
-	if owner=='':
-		owner = create_researcher()
-	else:
-		if not User.objects.filter(secret=unicode(owner)).exists():
-			return 1, 'owner user not exist'
+def create_project(owner, name, subject='', init=0, researchers=[]):
+	# create new testees
+	user_names = generate_uids(init)
+	new_testees = None
+	for i in range(3):
+		st, new_testees = create_testee(user_names)
+		if st==0:
+			break
+		else:
+			user_names = generate_uids(init)
+		if i==3:
+			return 1, 'create project failed due to lack of available usernames'
 
-	# validate researchers
-	for r in researchers:
-		if not User.objects.filter(secret=unicode(r)).exists():
-			return 1, 'some researchers not exist'
+	if not type(new_testees) == type(list()):
+		return 1, 'create_testee failed'
 
-	# validate testees
-	for t in testees:
-		if not User.objects.filter(secret=unicode(t)).exists():
-			return 1, 'some testees not exist'
+	p = Project(owner=owner, name=name, subject=subject)
+	p.save()
+	for testee in new_testees:
+		ptm = ProjectTesteeMembership(project=p, testee=testee, alias='')
+		ptm.save()
 
-	owner_user = User.objects.get(secret=owner)
-	project = Project(owner=owner_user, subject=subject)
-	project.save()
-	project.researchers.add(*User.objects.filter(secret__in=researchers))
-	project.testees.add(*User.objects.filter(secret__in=testees))
-	return 0, project.id
+	return 0, p
 
 
 def add_testees_to_project(owner, project, testees):

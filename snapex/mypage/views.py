@@ -8,12 +8,44 @@ from django.shortcuts import redirect
 
 @login_required
 def mypage(req):
-	# for researchers, display a default page
-	if req.user.user_profile.is_researcher:
-		return render(req, 'mypage/index.html', {'user_name': req.user.username})
-	else:
-		# for testees, direct them to their user page
-		return HttpResponse('hi you testees')
+	if req.method == 'GET':	
+		# for researchers, display a default page
+		if req.user.user_profile.is_researcher:
+			ret = {'user_name': req.user.username}
+			projects = db_ops.get_projects_from_researcher(req.user)
+			p = []
+			for project in projects:
+				pinfo = {}
+				testees = db_ops.get_testees_from_project(project)
+				surveys = db_ops.get_surveys_from_project(project)
+				plans = db_ops.get_plans_from_project(project)
+
+				pinfo['name'] = project.name
+				# TODO: using django model filtering
+				pinfo['all_user'] = len(testees)
+				pinfo['active_user'] = sum(x.is_active==True for x in testees)
+				pinfo['surveys'] = len(surveys)
+				pinfo['plans'] = len(plans)
+
+				p.append(pinfo)
+
+			ret['projects'] = p
+			return render(req, 'mypage/index.html', ret)
+		else:
+			# for testees, direct them to their user page
+			return HttpResponse('hi you testees')
+	elif req.method == 'POST':
+		if req.user.user_profile.is_researcher:
+			project_name = req.POST.get('project_name', None)
+			project_subject = req.POST.get('project_subject', None)
+			init_testees = req.POST.get('init_testees', None)
+			init_testees = int(init_testees) if init_testees else None
+			if project_name and project_subject and (init_testees is not None):
+				db_ops.create_project(owner=req.user, 
+										subject=project_subject,
+										name=project_name, 
+										init=init_testees)
+		return redirect('/mypage')
 
 
 @login_required
