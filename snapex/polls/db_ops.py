@@ -82,7 +82,7 @@ def get_user_from_secret(secret):
 			
 
 def get_plans_from_user(user):
-	return user.testee_plans
+	return user.testee_plans.all()
 
 
 def get_schedule_from_plan(plan):
@@ -98,19 +98,19 @@ def get_survey_from_plan(plan):
 
 
 def get_projects_from_researcher(rs):
-	return rs.owner_projects.all
+	return rs.owner_projects.all()
 
 
 def get_testees_from_project(project):
-	return project.testees_projects.all
+	return project.testees_projects.all()
 
 
 def get_surveys_from_project(project):
-	return project.project_surveys.all
+	return project.project_surveys.all()
 
 
 def get_plans_from_project(project):
-	return project.project_plans.all
+	return project.project_plans.all()
 
 
 def activate_user(secret):
