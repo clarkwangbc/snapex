@@ -87,6 +87,16 @@ def get_survey_from_plan(plan):
 	return plan.survey
 
 
+def activate_user(secret):
+	user = get_user_from_secret(secret)
+	if user:
+		user.is_active = True
+		user.save()
+		return 0
+	else:
+		return 1
+
+
 # project
 def create_project(owner='', subject='', researchers=[], testees=[]):
 	'''

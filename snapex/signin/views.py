@@ -8,5 +8,3 @@ def index(req):
 	
 	if req.method == 'GET':
 		return render(req, 'signin/index.html', {})
-	# elif request.method == 'POST':
-	# 	return HttpResponse('response for POST request')
