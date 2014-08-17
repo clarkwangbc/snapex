@@ -102,7 +102,7 @@ def get_projects_from_researcher(rs):
 
 
 def get_testees_from_project(project):
-	return project.testees_projects.all()
+	return project.testees.all()
 
 
 def get_surveys_from_project(project):
