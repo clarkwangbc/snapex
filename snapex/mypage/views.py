@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 import polls.db_ops as db_ops
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
+from polls.models import *
 
 
 @csrf_exempt
