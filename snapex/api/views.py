@@ -19,14 +19,13 @@ def signin(req):
 				# authenticate admin
 				if u.is_superuser and 'device_id' in req.POST:
 					user = authenticate(username=secret, password=req.POST['device_id'])
+				# authenticate researcher and testee
 				else:
 					user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
 
 			if user is not None and user.is_active:
 				login(req, user)
 				return 200, dict(msg='singin success')
-			else:
-				return 400, dict(msg='user is None')
 		else:
 			return 400, dict(msg='no secret in req.POST')
 	return 400, dict(msg='invalid signin')

@@ -1,7 +1,6 @@
 var input_secret;
 
 signin = function(){
-	console.log("in sign in");
 	input_secret = $("#input_secret")[0].value;
 	if (input_secret) {
 		$.ajax({
@@ -12,8 +11,7 @@ signin = function(){
 				secret: input_secret,
 			},
 		}).done(function(data){
-			if (data.status===200) {
-				// redirect
+			if (data && data.status===200) {
 				window.location.replace("http://snapex.duapp.com/mypage");
 			} else {
 				$("#wrong_secret_msg")[0].style.display = "";
