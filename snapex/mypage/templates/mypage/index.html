@@ -77,7 +77,13 @@
               <tbody>
                 {% for project in projects %}
                   <tr>
-                    <td>{{ project.name }}</td>
+                    <td>
+                      <a href="{{ project.url }}">
+                        <div style="height:100%;width:100%">
+                          {{ project.name }}
+                        </div>
+                      </a>
+                    </td>
                     <td>{{ project.all_user }}</td>
                     <td>{{ project.active_user }}</td>
                     <td>{{ project.surveys }}</td>

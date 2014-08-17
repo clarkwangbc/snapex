@@ -28,6 +28,7 @@ def mypage(req):
 				pinfo['active_user'] = sum(x.is_active==True for x in testees)
 				pinfo['surveys'] = len(surveys)
 				pinfo['plans'] = len(plans)
+				pinfo['url'] = '/mypage/project?pid=%s'%(project.id)
 
 				p.append(pinfo)
 
@@ -53,15 +54,36 @@ def mypage(req):
 @login_required
 def myproject(req):
 	if not req.user.user_profile.is_researcher:
-		return redirect('mypage')
+		return redirect('/mypage')
 
 	q = req.GET
+	pid = q.get('pid', None)
 	action = q.get('action', None)
+	
+	if pid is None:
+		return HttpResponse('need a pid')
+
+	# default: view project
 	if action is None:
-		# view project
-		return HttpResponse('view projects')
-	elif action == 'create':
-		# create project
+		ret = {}
+		t = []
+		# get project from pid
+		project = Project.objects.get(pk=int(pid))
+		testees = db_ops.get_testees_from_project(project)
+		ret['project'] = project
+		for testee in testees:
+			tinfo = {}
+			tinfo['name'] = testee.username
+			tinfo['is_active'] = testee.is_active
+			pls = Plan.objects.filter(testee=testee, project=project)
+			tinfo['plan_count'] = pls.count()
+			tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
+			t.append(tinfo)
+
+		ret['testees'] = t
+		return render(req, 'mypage/project.html', ret)
+	elif action == 'push_plan':
+		# push plan
 		return HttpResponse('create projects')
 	else:
 		return HttpResponse('nothing projects')
