@@ -4,8 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 import polls.db_ops as db_ops
 from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 @login_required
 def mypage(req):
 	if req.method == 'GET':	
