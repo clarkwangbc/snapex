@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Page</title>
+    <title>User</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +19,7 @@
     <script src="/static/snapex/js/mypage.js"></script>
 
   </head>
+
 
   <body>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -42,21 +43,52 @@
     </div>
 
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9" role="main">
-          <div>
-            <h2>Welcome</h2>
-            <h3>You can</h3>
-            <h3><a href="project">Inspect your projects</a> or 
-              <a href="project?action=create&pid={{ user_name }}">
-              Create new project
-            </a>.</h3>
-          </div>
-        </div>  
-      </div>
-    </div>
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">All plans belong to {{ user_name }}</div>
+    <!-- <div class="panel-body">
+    <p>...</p>
+     --></div>
+    
+    <!-- Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Survey Name</th>
+          <th>Project Name</th>
+          <th>Schedule Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        {% for loc, plan in enumerate(user_plans) %}
+          <tr>
+            <td>{{ loc + 1 }}</td>
+            <td>{{ plan['survey_name'] }}</td>
+            <td>{{ plan['project_name'] }}</td>
+            <td>{{ plan['schedule_name'] }}</td>
+            <td>
+              {% if plan['not_sent'] %}
+                Not Sent
+              {% elif plan['not_done'] %}
+                Not Done
+              {% else %}
+                <a href="{{ plan['target_url'] }}" target="_blank">
+                  <div style="height:100%;width:100%">
+                  Replied
+                  </div>
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+
+    <!-- Footer -->
     <div class="footer">
       <div class="container">
         <p class="text-muted">Snap Experience Team: snapex$163.com</p>

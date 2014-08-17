@@ -6,9 +6,8 @@ def index(request):
 def test(request):
 	import db_ops
 	
-	db_ops.create_admin('admin', 'taoliyuan', '19770707')
-
+	# db_ops.create_admin('admin', 'taoliyuan', '19770707')
 	users = db_ops.generate_uids(3)
-	s = str(db_ops.create_researcher(users))
+	s = str(db_ops.create_testee(users))
 
 	return HttpResponse(s)

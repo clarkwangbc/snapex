@@ -63,6 +63,30 @@ def create_testee(user):
 	return 1, 'invalid input, string or list of string required'
 
 
+def get_user_from_secret(secret):
+	objs = User.objects.filter(secret=secret)
+	if objs.exists():
+		return objs[0]
+	else:
+		return None
+			
+
+def get_plans_from_user(user):
+	return user.testee_plans
+
+
+def get_schedule_from_plan(plan):
+	return plan.schedule
+
+
+def get_project_from_plan(plan):
+	return plan.project
+
+
+def get_survey_from_plan(plan):
+	return plan.survey
+
+
 # project
 def create_project(owner='', subject='', researchers=[], testees=[]):
 	'''
