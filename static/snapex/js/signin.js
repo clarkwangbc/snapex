@@ -1,5 +1,5 @@
 var input_secret,
-	input_device_id
+	input_device_id,
 	input_remember;
 
 signin = function(){
