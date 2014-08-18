@@ -67,8 +67,8 @@
       tmp = '<div class="survey-name-wrapper" id="survey_name_wrapper"><form class="form-horizontal"><fieldset><div class="form-group"><label class="col-md-4 control-label" for="survey_name">Survey Name</label><div class="col-md-5"><input id="survey_name" name="survey_name" type="text" placeholder="" class="form-control input-md" required=""></div></div></fieldset></form></div>';
       $("#fb_main").prepend($(tmp));
 
+      submit_button = $("#submit_survey")[0];
       submit_button.onclick = function() {
-        submit_button = $("#submit_survey")[0];
         name = $("#survey_name")[0].value;
         if (name) {
           fb_output.survey_name = name;
