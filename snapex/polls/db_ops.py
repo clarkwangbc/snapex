@@ -83,6 +83,11 @@ def get_project_from_pk(pk):
 	return objs[0] if objs.exists() else None
 
 
+def get_survey_from_pk(pk):
+	objs = Survey.objects.filter(pk=pk)
+	return objs[0] if objs.exists() else None
+
+
 def get_plans_from_user(user):
 	return user.testee_plans.all()
 

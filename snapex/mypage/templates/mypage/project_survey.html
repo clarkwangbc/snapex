@@ -20,7 +20,13 @@
       <tbody>
         {% for survey in surveys %}
           <tr>
-            <td>{{ survey.name }}</td>
+            <td>
+              <a href="/mypage/survey?pid={{ project.id }}&sid={{ survey.id }}">
+                <div style="height:100%;width:100%">
+                  {{ survey.name }}
+                </div>
+              </a>
+            </td>
             <td>{{ survey.questions.count }}</td>
             <td>{{ survey.date_created }}</td>
             <td>{{ survey.survey_plans.count }}</td>

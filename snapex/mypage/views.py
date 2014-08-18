@@ -125,6 +125,7 @@ def myproject(req):
 def mysurvey(req):
 	action = req.GET.get('action', None)
 	pid = req.GET.get('pid', None)
+	sid = req.GET.get('sid', None)
 
 	if action is None:
 		return HttpResponse("action can't be blank")
@@ -132,16 +133,26 @@ def mysurvey(req):
 	user = req.user
 	
 	if req.method == 'GET':
+		if pid is None:
+			return HttpResponse("pid can't be blank")
+		project = db_ops.get_project_from_pk(int(pid))
+		if project is None:
+			return HttpResponse('invalid pid')
+		
 		if action == 'create': # a survey creating page
-			if pid is None:
-				return HttpResponse("pid can't be blank")
-			project = db_ops.get_project_from_pk(int(pid))
-			if project is None:
-				return HttpResponse('invalid pid')
-			return render(req, 'mypage/survey_create.html', {'project': project})
+			return render(req, 'mypage/survey_create.html', 
+				{'project': project, 'create_survey': 1, 'raw_survey': []})
 					
 		else: # a survey displaying page
-			return HttpResponse('test')
+			if sid is None:
+				return HttpResponse("sid can't be blank")
+			survey = db_ops.get_survey_from_pk(int(sid))
+			if survey is None:
+				return HttpResponse('invalid sid')
+			import simplejson
+			survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
+			return render(req, 'mypage/survey_create.html',
+				{'project': project, 'create_survey': 0, raw_survey: survey_content})	
 
 	elif req.method == 'POST':
 		# post a survey creating form?
