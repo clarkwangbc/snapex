@@ -70,12 +70,12 @@
       submit_button.onclick = function() {
         name = $("#survey_name")[0].value;
         if (name) {
-          fb_output.survey_name = name;
-          fb_output.project_id = project_id;
+          window.fb_output.survey_name = name;
+          window.fb_output.project_id = project_id;
           $.ajax({
             url: "/api/v0/create_survey",
             type: "post",
-            data: JSON.stringfy({data: fb_output}),
+            data: JSON.stringfy({data: window.fb_output}),
             contentType: "application/json",
             dataType: "json",
           }).done(function(data){
