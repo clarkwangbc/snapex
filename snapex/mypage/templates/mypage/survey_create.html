@@ -60,7 +60,7 @@
       });
 
       fb.on('save', function(payload){
-        fb_output = payload;
+        fb_output.t = payload;
         console.log(fb_output);
       })
 
