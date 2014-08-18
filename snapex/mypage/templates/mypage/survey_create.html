@@ -68,10 +68,10 @@
       $("#fb_main").prepend($(tmp));
 
       submit_button = $("#submit_survey")[0];
-      survey_name = $("#survey_name")[0].value;
+      name = $("#survey_name")[0].value;
       submit_button.onclick = function() {
-        if (survey_name) {
-          fb_output.survey_name = survey_name;
+        if (name) {
+          fb_output.survey_name = name;
           fb_output.project_id = project_id;
           $.ajax({
             url: "/api/v0/create_survey",
