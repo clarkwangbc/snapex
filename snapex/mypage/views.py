@@ -121,6 +121,7 @@ def myproject(req):
 
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	
+
 @login_required
 def mysurvey(req):
 	action = req.GET.get('action', None)
@@ -143,7 +144,7 @@ def mysurvey(req):
 			return render(req, 'mypage/survey_create.html', 
 				{'project': project, 'create_survey': 1, 'raw_survey': []})
 					
-		else: # a survey displaying page
+		elif action == 'view': # a survey displaying page
 			if sid is None:
 				return HttpResponse("sid can't be blank")
 			survey = db_ops.get_survey_from_pk(int(sid))
@@ -152,7 +153,7 @@ def mysurvey(req):
 			import simplejson
 			survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
 			return render(req, 'mypage/survey_create.html',
-				{'project': project, 'create_survey': 0, raw_survey: survey_content})	
+				{'project': project, 'create_survey': 0, 'raw_survey': survey_content})	
 
 	elif req.method == 'POST':
 		# post a survey creating form?

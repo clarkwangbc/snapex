@@ -21,7 +21,7 @@
         {% for survey in surveys %}
           <tr>
             <td>
-              <a href="/mypage/survey?pid={{ project.id }}&sid={{ survey.id }}">
+              <a href="/mypage/survey?action=view&pid={{ project.id }}&sid={{ survey.id }}">
                 <div style="height:100%;width:100%">
                   {{ survey.name }}
                 </div>
