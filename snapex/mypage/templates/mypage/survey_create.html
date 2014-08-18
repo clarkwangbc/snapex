@@ -59,7 +59,7 @@
       });
 
       fb.on('save', function(payload){
-        window.fb_output = payload;
+        window.fb_output = JSON.parse(payload);
         console.log(fb_output);
       })
 
