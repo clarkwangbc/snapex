@@ -57,7 +57,7 @@ def create_survey(req):
 		if not Project.objects.filter(owner=user, pk=project_id).exists():
 			return 400, dict(msg='permission denied')
 
-		project = db_ops.get_poject_from_pk(project_id)
+		project = db_ops.get_project_from_pk(project_id)
 		# create survey
 		survey = Survey(project=project, name=survey_name, raw_content=req.body)
 		survey.save()
