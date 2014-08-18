@@ -38,6 +38,7 @@ def mypage(req):
 		else:
 			# for testees, direct them to their user page
 			return HttpResponse('hi you testees')
+	
 	elif req.method == 'POST':
 		if req.user.user_profile.is_researcher:
 			project_name = req.POST.get('project_name', None)
@@ -69,11 +70,11 @@ def myproject(req):
 		# default: view project
 		if action is None:
 			ret = {}
-			t = []
-			# get project from pid
 			project = Project.objects.get(pk=int(pid))
-			testees = db_ops.get_testees_from_project(project)
 			ret['project'] = project
+
+			t = []
+			testees = db_ops.get_testees_from_project(project)
 			for testee in testees:
 				tinfo = {}
 				tinfo['name'] = testee.username
@@ -82,8 +83,10 @@ def myproject(req):
 				tinfo['plan_count'] = pls.count()
 				tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
 				t.append(tinfo)
-
 			ret['testees'] = t
+
+			ret['surveys'] = Survey.ojects.filter(project=project).all()
+
 			return render(req, 'mypage/project.html', ret)
 		elif action == 'push_plan':
 			# push plan

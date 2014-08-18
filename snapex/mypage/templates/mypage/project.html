@@ -21,27 +21,9 @@
   </head>
 
   <body>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Snap Experience</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/mypage">Home</a></li>
-            <li><a href="#signout" onclick="signout()">Sign out</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-
+    <!-- Navbar -->
+    {% include "project_navbar.html" %}
+    
     <div class="container">
       <div class="row">
         <div class="col-md-9" role="main">
@@ -52,86 +34,15 @@
           
           <!-- Title -->
           <div>
-            <h3>Name: {{ project.name }}</h3>
-            <h3>Subject: {{ project.subject }}</h3>
+            <h3>{{ project.name }}</h3>
+            <h4>{{ project.subject }}</h4>
           </div>
 
-          <!-- Table Panel -->
-          <div>
-            <div class="panel panel-default">
-              <!-- Default panel contents -->
-              <div class="panel-heading">All testees belong to project {{ project.id }}</div>
-              <div class="panel-body">
-                <!-- <p><a href>Add</a></p> -->
-                <form class="form-horizontal" method="post">
-                  <fieldset>
+          <!-- Testees -->
+          {% include "project_testee.html" %}
 
-                  <!-- Form Name -->
-                  <!-- <legend>Add Testee</legend> -->
-
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="user_secret">User Secret</label>  
-                    <div class="col-md-5">
-                    <input id="user_secret" name="user_secret" type="text" placeholder="" class="form-control input-md">
-                    <span class="help-block">Specified user's secret</span>  
-                    </div>
-                  </div>
-
-                  <!-- Select Basic -->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="user_number">Testee Number</label>
-                    <div class="col-md-5">
-                      <select id="user_number" name="user_number" class="form-control">
-                        <option value="0">0</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <input type="hidden" id="add_user" name="action_type" value="new_user">
-
-                  <!-- Button -->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="submit_add_testee"></label>
-                    <div class="col-md-4">
-                      <button id="submit_add_testee" name="submit_add_testee" class="btn btn-primary">Submit</button>
-                    </div>
-                  </div>
-
-                  </fieldset>
-                </form>
-
-              </div>
-              
-              
-              <!-- Table -->
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Username</th>
-                    <th>Active</th>
-                    <th>Plan Count</th>
-                    <th>Record Count</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {% for testee in testees %}
-                    <tr>
-                      <td>{{ testee.name }}</td>
-                      <td>{{ testee.is_active }}</td>
-                      <td>{{ testee.plan_count }}</td>
-                      <td>{{ testee.record_count }}</td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <!-- Surveys -->
+          {% include "project_survey.html" %}
 
         </div>  
       </div>
@@ -142,7 +53,6 @@
         <p class="text-muted">Snap Experience Team: snapex$163.com</p>
       </div>
     </div>
-
 
     <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
     <!-- Bootstrap core JavaScript
