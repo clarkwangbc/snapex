@@ -154,7 +154,9 @@ def mysurvey(req):
 			survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/survey_create.html',
-				{'project': project, 'create_survey': 0, 'raw_survey': mark_safe(survey_content)})	
+				{'project': project, 'create_survey': 0, 
+				'survey_name': survey.name,
+				'raw_survey': mark_safe(survey_content)})	
 
 	elif req.method == 'POST':
 		# post a survey creating form?
