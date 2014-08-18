@@ -104,9 +104,10 @@ def myproject(req):
 						db_ops.add_testee_to_project(u, p)
 				else:
 					user_number = int(user_number)
-					new_testees = db_ops.create_new_testees(user_number)
-					for testee in new_testees:
-						db_ops.add_testee_to_project(testee, p)
+					st, new_testees = db_ops.create_new_testees(user_number)
+					if st == 0:
+						for testee in new_testees:
+							db_ops.add_testee_to_project(testee, p)
 
 		elif action_type == 'new_schedule':
 			pass

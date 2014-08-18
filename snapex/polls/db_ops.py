@@ -156,7 +156,7 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
 	p.save()
 
 	for testee in new_testees:
-		add_testee_to_project(test, p)
+		add_testee_to_project(testee, p)
 	
 	return 0, p
 
