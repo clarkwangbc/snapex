@@ -51,6 +51,7 @@ class Survey(models.Model):
 					related_name='questions_surveys')
 
 	name = models.CharField(max_length=50)
+	raw_content = models.TextField() # stored raw json of all the survey
 	date_created = models.DateTimeField(auto_now=True)
 	
 	def __unicode__(self):

@@ -80,6 +80,7 @@
             dataType: "json",
           }).done(function(data){
             if (data && data.status===200) {
+              console.log(data);
               window.location.replace("http://snapex.duapp.com/mypage/project?pid={{ project.id }}");
             } else {
               // alert("error when submitting survey " + data.toString());
