@@ -115,7 +115,7 @@ def myproject(req):
 		else:
 			pass
 
-		return redirect('/mypage/project')		
+		return redirect('/mypage/project?pid=%s'%(pid))		
 	
 @login_required
 def q_user(req):

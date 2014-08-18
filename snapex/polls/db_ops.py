@@ -114,8 +114,12 @@ def get_plans_from_project(project):
 
 
 def add_testee_to_project(testee, project):
-	ptm = ProjectTesteeMembership(project=project, testee=testee, alias='')
-	ptm.save()
+	if ProjectTesteeMembership.objects.filter(project=project, testee=testee).exists():
+		return 1, 'testee already in project'
+	else:
+		ptm = ProjectTesteeMembership(project=project, testee=testee, alias='')
+		ptm.save()
+		return 0, ptm
 
 
 def activate_user(secret):
