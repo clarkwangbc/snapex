@@ -75,7 +75,7 @@
           $.ajax({
             url: "/api/v0/create_survey",
             type: "post",
-            data: JSON.stringfy({data: window.fb_output}),
+            data: JSON.stringify({data: window.fb_output}),
             contentType: "application/json",
             dataType: "json",
           }).done(function(data){
