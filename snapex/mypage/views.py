@@ -84,9 +84,8 @@ def myproject(req):
 				tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
 				t.append(tinfo)
 			ret['testees'] = t
-
 			ret['surveys'] = Survey.objects.filter(project=project).all()
-
+			ret['schedules'] = Schedule.objects.filter(owner=req.user).all()
 			return render(req, 'mypage/project.html', ret)
 		elif action == 'push_plan':
 			# push plan
@@ -167,6 +166,47 @@ def mysurvey(req):
 	# 	return HttpResponse('permission denied')
 
 	# permission to view a survey
+
+
+def myschedule(req):
+	action = req.GET.get('action', None)
+	pid = req.GET.get('pid', None)
+	sid = req.GET.get('sid', None)
+
+	if action is None:
+		return HttpResponse("action can't be blank")
+
+	user = req.user
+
+	if req.method == 'GET':
+		if pid is None:
+			return HttpResponse("pid can't be blank")
+		project = db_ops.get_project_from_pk(int(pid))
+		if project is None:
+			return HttpResponse('invalid pid')
+		
+		if action == 'create': # a survey creating page
+			return render(req, 'mypage/schedule_create.html', 
+				{'project': project, 'create_schedule': 1, 'raw_schedule': []})
+					
+		elif action == 'view': # a survey displaying page
+			pass
+			# if sid is None:
+			# 	return HttpResponse("sid can't be blank")
+			# survey = db_ops.get_survey_from_pk(int(sid))
+			# if survey is None:
+			# 	return HttpResponse('invalid sid')
+			# import simplejson
+			# survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
+			# from django.utils.safestring import mark_safe
+			# return render(req, 'mypage/survey_create.html',
+			# 	{'project': project, 'create_survey': 0, 
+			# 	'survey_name': survey.name,
+			# 	'raw_survey': mark_safe(survey_content)})	
+
+	elif req.method == 'POST':
+		# post a survey creating form?
+		return HttpResponse('post test')
 
 
 @login_required

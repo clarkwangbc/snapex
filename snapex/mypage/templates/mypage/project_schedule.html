@@ -3,26 +3,23 @@
     <!-- Default panel contents -->
     <div class="panel-heading">Schedules</div>
     <div class="panel-body">
+      <a href="/mypage/schedule?action=create&pid={{ project.id }}">Create new schedule</a>
     </div>
-    
     
     <!-- Table -->
     <table class="table">
       <thead>
         <tr>
           <th>Schedule Name</th>
-          <th>Last Days</th>
           <th>Used Count</th>
         </tr>
       </thead>
 
       <tbody>
-        {% for testee in testees %}
+        {% for schedule in schedules %}
           <tr>
-            <td>{{ testee.name }}</td>
-            <td>{{ testee.is_active }}</td>
-            <td>{{ testee.plan_count }}</td>
-            <td>{{ testee.record_count }}</td>
+            <td>{{ schedule.name }}</td>
+            <td>{{ schedule.schedule_plans.count }}</td>
           </tr>
         {% endfor %}
       </tbody>
