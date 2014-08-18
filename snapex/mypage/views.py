@@ -52,6 +52,7 @@ def mypage(req):
 		return redirect('/mypage')
 
 
+@csrf_exempt
 @login_required
 def myproject(req):
 	if not req.user.user_profile.is_researcher:
@@ -113,7 +114,7 @@ def myproject(req):
 			pass
 		else:
 			pass
-			
+
 		return redirect('/mypage/project')		
 	
 @login_required
