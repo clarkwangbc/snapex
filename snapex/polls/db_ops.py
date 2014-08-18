@@ -74,7 +74,7 @@ def create_testee(user):
 
 
 def get_user_from_secret(secret):
-	objs = User.objects.filter(secret=secret)
+	objs = User.objects.filter(username=secret)
 	if objs.exists():
 		return objs[0]
 	else:
