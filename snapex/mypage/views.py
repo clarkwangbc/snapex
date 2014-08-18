@@ -151,7 +151,7 @@ def mysurvey(req):
 			if survey is None:
 				return HttpResponse('invalid sid')
 			import simplejson
-			survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
+			survey_content = repr(simplejson.loads(survey.raw_content)['data']['fields'])
 			return render(req, 'mypage/survey_create.html',
 				{'project': project, 'create_survey': 0, 'raw_survey': survey_content})	
 
