@@ -49,7 +49,6 @@
   <script>
     $(function(){
       var fb,
-          fb_output,
           project_id = {{ project.id }},
           submit_button,
           survey_name;
@@ -60,7 +59,7 @@
       });
 
       fb.on('save', function(payload){
-        fb_output.t = payload;
+        window.fb_output = payload;
         console.log(fb_output);
       })
 
