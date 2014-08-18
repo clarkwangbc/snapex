@@ -1,0 +1,31 @@
+<div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Schedules</div>
+    <div class="panel-body">
+    </div>
+    
+    
+    <!-- Table -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Schedule Name</th>
+          <th>Last Days</th>
+          <th>Used Count</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for testee in testees %}
+          <tr>
+            <td>{{ testee.name }}</td>
+            <td>{{ testee.is_active }}</td>
+            <td>{{ testee.plan_count }}</td>
+            <td>{{ testee.record_count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

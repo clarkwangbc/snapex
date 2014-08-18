@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>Schedule</title>
+        <!-- head -->
+        <meta charset="utf-8">
+        
+        <link type="text/css" rel="stylesheet" href="/static/snapex/css/schedule_layout.css?v=923">
+        <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
+        <script src="/static/snapex/js/daypilot-all.min.js?v=923" type="text/javascript"></script>
+        
+        <!-- /head -->
+    </head>
+    <body>
+        <!-- top -->
+        <div id="main">
+            <div id="container">
+                <div id="left" class="menu">
+                    <div>
+                        <!-- menu -->
+                        <div class="header">Main</div>
+                        <div class="col-md-4">
+                            <button id="submit_schedule" name="submit_schedule" class="btn btn-primary">Submit</button>
+                        </div>
+                        <!-- /menu -->
+                    </div>
+                </div><div id="content">
+                <div>
+                    <!-- /top -->
+                    <div id="dp"></div>
+                    <script type="text/javascript">
+                    
+                    var dp = new DayPilot.Calendar("dp");
+                    // view
+                    dp.startDate = "2013-03-25";  // or just dp.startDate = "2013-03-25";
+                    dp.viewType = "Week";
+                    dp.allDayEventHeight = 25;
+                    dp.initScrollPos = 9 * 40;
+                    
+                    dp.eventDeleteHandling = "Update";
+                    dp.onEventDelete = function(args) {
+                    alert("deleting: " + args.e.text());
+                    };
+                    
+                    // bubble, with async loading
+                    dp.bubble = new DayPilot.Bubble({
+                    onLoad: function(args) {
+                    var ev = args.source;
+                    //alert("event: " + ev);
+                    args.async = true;  // notify manually using .loaded()
+                    
+                    // simulating slow server-side load
+                    setTimeout(function() {
+                    args.html = "testing bubble for: <br>" + ev.text();
+                    args.loaded();
+                    }, 500);
+                    }
+                    });
+                    
+                    dp.contextMenu = new DayPilot.Menu({
+                    items: [
+                    {text:"Show event ID", onclick: function() {alert("Event value: " + this.source.value());} },
+                    {text:"Show event text", onclick: function() {alert("Event text: " + this.source.text());} },
+                    {text:"Show event start", onclick: function() {alert("Event start: " + this.source.start().toStringSortable());} },
+                    {text:"Delete", onclick: function() { dp.events.remove(this.source); } }
+                    ]});
+                    // event moving
+                    dp.onEventMoved = function (args) {
+                    dp.message("Moved: " + args.e.text());
+                    };
+                    
+                    // event resizing
+                    dp.onEventResized = function (args) {
+                    dp.message("Resized: " + args.e.text());
+                    };
+                    // event creating
+                    dp.onTimeRangeSelected = function (args) {
+                    var name = prompt("New event name:", "Event");
+                    if (!name) return;
+                    var e = new DayPilot.Event({
+                    start: args.start,
+                    end: args.end,
+                    id: DayPilot.guid(),
+                    resource: args.resource,
+                    text: "Event"
+                    });
+                    dp.events.add(e);
+                    dp.clearSelection();
+                    dp.message("Created");
+                    };
+                    
+                    dp.onTimeRangeDoubleClicked = function(args) {
+                    alert("DoubleClick: start: " + args.start + " end: " + args.end + " resource: " + args.resource);
+                    };
+                    dp.onEventClick = function(args) {
+                    alert("clicked: " + args.e.id());
+                    };
+                    dp.showEventStartEnd = true;
+                    
+                    dp.init();
+                    var e = new DayPilot.Event({
+                    start: new DayPilot.Date("2013-03-25T12:00:00"),
+                    end: new DayPilot.Date("2013-03-25T12:00:00").addHours(3),
+                    id: DayPilot.guid(),
+                    text: "Special event"
+                    });
+                    dp.events.add(e);
+                    </script>
+                    <!-- bottom -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /bottom -->
+</body></html>
