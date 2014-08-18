@@ -113,6 +113,11 @@ def get_plans_from_project(project):
 	return project.project_plans.all()
 
 
+def add_testee_to_project(testee, project):
+	ptm = ProjectTesteeMembership(project=project, testee=testee, alias='')
+	ptm.save()
+
+
 def activate_user(secret):
 	user = get_user_from_secret(secret)
 	if user:
@@ -123,10 +128,8 @@ def activate_user(secret):
 		return 1
 
 
-# project
-def create_project(owner, name, subject='', init=0, researchers=[]):
-	# create new testees
-	user_names = generate_uids(init)
+def create_new_testees(number):
+	user_names = generate_uids(number)
 	new_testees = None
 	for i in range(3):
 		st, new_testees = create_testee(user_names)
@@ -137,15 +140,20 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
 		if i==3:
 			return 1, 'create project failed due to lack of available usernames'
 
+	return 0, new_testees
+
+# project
+def create_project(owner, name, subject='', init=0, researchers=[]):
+	st, new_testees = create_new_testees(init)
 	if not type(new_testees) == type(list()):
 		return 1, 'create_testee failed'
 
 	p = Project(owner=owner, name=name, subject=subject)
 	p.save()
-	for testee in new_testees:
-		ptm = ProjectTesteeMembership(project=p, testee=testee, alias='')
-		ptm.save()
 
+	for testee in new_testees:
+		add_testee_to_project(test, p)
+	
 	return 0, p
 
 

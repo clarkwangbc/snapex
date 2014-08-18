@@ -59,36 +59,62 @@ def myproject(req):
 
 	q = req.GET
 	pid = q.get('pid', None)
-	action = q.get('action', None)
-	
 	if pid is None:
 		return HttpResponse('need a pid')
 
-	# default: view project
-	if action is None:
-		ret = {}
-		t = []
-		# get project from pid
-		project = Project.objects.get(pk=int(pid))
-		testees = db_ops.get_testees_from_project(project)
-		ret['project'] = project
-		for testee in testees:
-			tinfo = {}
-			tinfo['name'] = testee.username
-			tinfo['is_active'] = testee.is_active
-			pls = Plan.objects.filter(testee=testee, project=project)
-			tinfo['plan_count'] = pls.count()
-			tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
-			t.append(tinfo)
+	if req.method=='GET':
+		action = q.get('action', None)	
 
-		ret['testees'] = t
-		return render(req, 'mypage/project.html', ret)
-	elif action == 'push_plan':
-		# push plan
-		return HttpResponse('create projects')
-	else:
-		return HttpResponse('nothing projects')
-		
+		# default: view project
+		if action is None:
+			ret = {}
+			t = []
+			# get project from pid
+			project = Project.objects.get(pk=int(pid))
+			testees = db_ops.get_testees_from_project(project)
+			ret['project'] = project
+			for testee in testees:
+				tinfo = {}
+				tinfo['name'] = testee.username
+				tinfo['is_active'] = testee.is_active
+				pls = Plan.objects.filter(testee=testee, project=project)
+				tinfo['plan_count'] = pls.count()
+				tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
+				t.append(tinfo)
+
+			ret['testees'] = t
+			return render(req, 'mypage/project.html', ret)
+		elif action == 'push_plan':
+			# push plan
+			return HttpResponse('create projects')
+		else:
+			return HttpResponse('nothing projects')
+
+	elif req.method=='POST':
+		action_type = req.POST.get('action_type', None)
+		if action_type == 'new_user':
+			user_secret = req.POST.get('user_secret', None)
+			user_number = req.POST.get('user_number', None)
+			if user_secret is not None and user_number is not None:
+				p = Project.objects.get(pk=int(pid))
+				if user_secret != '':
+					u = db_ops.get_user_from_secret(user_secret)
+					if u and p:
+						db_ops.add_testee_to_project(u, p)
+				else:
+					user_number = int(user_number)
+					new_testees = db_ops.create_new_testees(user_number)
+					for testee in new_testees:
+						db_ops.add_testee_to_project(testee, p)
+
+		elif action_type == 'new_schedule':
+			pass
+		elif action_type == 'new_survey':
+			pass
+		else:
+			pass
+			
+		return redirect('/mypage/project')		
 	
 @login_required
 def q_user(req):
