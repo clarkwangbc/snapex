@@ -39,7 +39,7 @@ class ProjectTesteeMembership(models.Model):
 
 
 class QuestionEntry(models.Model):
-	qtype = models.CharField(max_length=10)
+	qtype = models.CharField(max_length=20)
 	content = models.TextField() # json
 
 
