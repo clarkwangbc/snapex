@@ -36,3 +36,10 @@ def signin(req):
 def signout(req):
 	logout(req)
 	return 200, dict(msg='signout success')
+
+
+@csrf_exempt
+@utility.expose(rest=True)
+def create_survey(req):
+	if req.method=='POST':
+		return 400
