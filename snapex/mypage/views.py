@@ -85,7 +85,7 @@ def myproject(req):
 				t.append(tinfo)
 			ret['testees'] = t
 
-			ret['surveys'] = Survey.ojects.filter(project=project).all()
+			ret['surveys'] = Survey.objects.filter(project=project).all()
 
 			return render(req, 'mypage/project.html', ret)
 		elif action == 'push_plan':
