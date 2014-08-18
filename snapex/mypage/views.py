@@ -122,6 +122,39 @@ def myproject(req):
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	
 @login_required
+def mysurvey(req):
+	action = req.GET.get('action', None)
+	pid = req.GET.get('pid', None)
+
+	if action is None:
+		return HttpResponse("action can't be blank")
+
+	user = req.user
+	
+	if req.method == 'GET':
+		if action == 'create': # a survey creating page
+			if pid is None:
+				return HttpResponse("pid can't be blank")
+			project = db_ops.get_project_from_pk(int(pid))
+			if project is None:
+				return HttpResponse('invalid pid')
+			return render(req, 'mypage/survey_create.html', {'project': project})
+					
+		else: # a survey displaying page
+			return HttpResponse('test')
+
+	elif req.method == 'POST':
+		# post a survey creating form?
+		return HttpResponse('post test')
+	
+	# permission to create survey into project
+	# if not (project.owner == user)):
+	# 	return HttpResponse('permission denied')
+
+	# permission to view a survey
+
+
+@login_required
 def q_user(req):
 	user = req.user
 	ret = {'user_name': user.username, 'user_plans':[]}

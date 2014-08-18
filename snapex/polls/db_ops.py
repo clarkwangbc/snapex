@@ -75,11 +75,13 @@ def create_testee(user):
 
 def get_user_from_secret(secret):
 	objs = User.objects.filter(username=secret)
-	if objs.exists():
-		return objs[0]
-	else:
-		return None
+	return objs[0] if objs.exists() else None
 			
+
+def get_project_from_pk(pk):
+	objs = Project.objects.filter(pk=pk)
+	return objs[0] if objs.exists() else None
+
 
 def get_plans_from_user(user):
 	return user.testee_plans.all()

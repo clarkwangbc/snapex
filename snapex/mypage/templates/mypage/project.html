@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>My Page</title>
+    <title>Project</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,14 +29,14 @@
         <div class="col-md-9" role="main">
           <!-- Header -->
           <div class="page-header">
-            <h2>Project <small>{{ project.id }}</small></h2>
+            <h2>Project <small>{{ project.name }} : {{ project.subject }}</small></h2>
           </div>
           
           <!-- Title -->
-          <div>
-            <h3>{{ project.name }}</h3>
-            <h4>{{ project.subject }}</h4>
-          </div>
+          <!-- <div>
+            <h3></h3>
+            <h4></h4>
+          </div> -->
 
           <!-- Testees -->
           {% include "mypage/project_testee.html" %}
