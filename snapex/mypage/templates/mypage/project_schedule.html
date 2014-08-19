@@ -11,7 +11,8 @@
       <thead>
         <tr>
           <th>Schedule Name</th>
-          <th>Used Count</th>
+          <th>Date Created</th>
+          <th>Used Times</th>
         </tr>
       </thead>
 
@@ -19,11 +20,12 @@
         {% for schedule in schedules %}
           <tr>
             <td><a href="/mypage/schedule?action=view&sid={{ schedule.id }}">
-                <div style="height:100%;width:100%">
-                  {{ schedule.name }}
-                </div>
+                {{ schedule.name }}
+                <!-- <div style="height:100%;width:100%"> -->
+                <!-- </div> -->
               </a>
             </td>
+            <td>{{ schedule.date_created }}</td>
             <td>{{ schedule.schedule_plans.count }}</td>
           </tr>
         {% endfor %}

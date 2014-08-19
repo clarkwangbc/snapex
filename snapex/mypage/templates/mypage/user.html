@@ -70,15 +70,13 @@
             <td>{{ plan.project_name }}</td>
             <td>{{ plan.schedule_name }}</td>
             <td>
-              {% if plan.not_sent. %}
+              {% if plan.not_sent %}
                 Not Sent
               {% elif plan.not_done %}
                 Not Done
               {% else %}
                 <a href="{{ plan.target_url }}" target="_blank">
-                  <div style="height:100%;width:100%">
                   Replied
-                  </div>
                 </a>
               {% endif %}
             </td>

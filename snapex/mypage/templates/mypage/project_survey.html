@@ -10,7 +10,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Survey Name</th>
           <th>Question Number</th>
           <th>Date Created</th>
           <th>Used Times</th>
@@ -22,9 +22,9 @@
           <tr>
             <td>
               <a href="/mypage/survey?action=view&pid={{ project.id }}&sid={{ survey.id }}">
-                <div style="height:100%;width:100%">
+                <!-- <div style="height:100%;width:100%"> -->
                   {{ survey.name }}
-                </div>
+                <!-- </div> -->
               </a>
             </td>
             <td>{{ survey.questions.count }}</td>
