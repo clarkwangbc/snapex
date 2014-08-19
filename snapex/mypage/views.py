@@ -86,6 +86,7 @@ def myproject(req):
 			ret['testees'] = t
 			ret['surveys'] = Survey.objects.filter(project=project).all()
 			ret['schedules'] = Schedule.objects.filter(owner=req.user).all()
+			ret['plans'] = Plans.objects.filter(project=project).all()
 			return render(req, 'mypage/project.html', ret)
 		elif action == 'push_plan':
 			# push plan
