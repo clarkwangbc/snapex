@@ -191,6 +191,11 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
 	
 	return 0, p
 
+
+def send_plans():
+	pass
+
+
 #########################
 ### abandon below
 #########################

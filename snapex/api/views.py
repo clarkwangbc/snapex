@@ -126,7 +126,7 @@ def auth(req):
 			if device_id != '':
 				user.user_profile.device_id = device_id
 			user.save()
-			return 1000, dict(msg='ok')
+			return 200, dict(msg='ok')
 		except Exception as e:
 			return 1000, dict(msg='json format error')
 
@@ -221,6 +221,7 @@ def pull_plans(req):
 				survey = simplejson.loads(pl.survey.raw_content)['data']
 				ret['survey'] = survey
 				ret['schedule'] = simplejson.loads(pl.schedule.content)
+				pl.is_sent = True
 				plans.append(ret)
 
 			return 200, dict(msg='ok', plans=plans)
@@ -320,6 +321,8 @@ def report_record(req):
 			for re, qm in zip(reply_entries, qms):
 				ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
 				ae.save()
+
+			plan.is_done = True
 
 			return 200, dict(msg='ok')
 
