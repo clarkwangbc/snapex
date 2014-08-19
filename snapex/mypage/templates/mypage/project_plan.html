@@ -14,7 +14,7 @@
           <label class="col-md-4 control-label" for="plan_testee">Active Testee</label>
           <div class="col-md-5">
             <select id="plan_testee" name="plan_testee" class="form-control">
-              {% for testee in testees  %}
+              {% for testee in testees %}
                 {% if testee.is_active %}
                   <option value="{{ testee.name }}">{{ testee.name }}</option>
                 {% endif %}
@@ -90,7 +90,7 @@
             <td>{{ plan.testee.username }}</td>
             <td>
               {% if plan.is_done %}
-                {% for record in plan.plan_records %}
+                {% for record in plan.plan_records.all %}
                   <div>
                     <a href="/mypage/record?rid={{ record.id }}">
                     Submitted on {{ record.date_created }}
