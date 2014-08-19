@@ -70,3 +70,20 @@ def create_survey(req):
 
 		return 200, dict(msg='ok')
 
+
+@csrf_exempt
+@login_required
+@utility.expose(rest=True)
+def create_schedule(req):
+	if req.method=='POST':
+		json_data = simplejson.loads(req.body)
+		events = json_data['data']
+		schedule_name = json_data['schedule_name']
+		project_id = int(data['project_id']) # in fact, nothing to do with project
+		# user = req.user
+
+		schedule = Schedule(name=schedule_name, content=events)
+		schedule.save()
+
+		return 200, dict(msg='ok')
+

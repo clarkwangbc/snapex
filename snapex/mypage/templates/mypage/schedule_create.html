@@ -65,7 +65,7 @@
                     dp.contextMenu = new DayPilot.Menu({
                         items: [
                             // {text:"Show event ID", onclick: function() {alert("Event value: " + this.source.value());} },
-                            {text:"Show event text", onclick: function() {alert("Event text: " + this.source.text());} },
+                            {text:"Show event message", onclick: function() {alert("Event text: " + this.source.text());} },
                             {text:"Show event start", onclick: function() {alert("Event start: " + this.source.start().toStringSortable());} },
                             {text:"Delete", onclick: function() { dp.events.remove(this.source); } }
                         ]});
@@ -115,6 +115,42 @@
                     });
                     dp.events.add(e);
                     
+
+                    submit_button = $("#submit_schedule")[0];
+                    if ({{ create_schedule }}) {
+                        submit_button.onclick = function(){
+                            name = $("#schedule_name")[0].value;
+                            if (name) {
+                                var ret = [];
+                                dp.events.list.forEach(function(ev){
+                                    var t = Object();
+                                    t.msg = ev.text;
+                                    t.start = ev.start.value;
+                                    t.end = ev.end.value;
+                                    ret.push(t);
+                                });
+                                $.ajax({
+                                  url: "/api/v0/create_schedule",
+                                  type: "post",
+                                  data: JSON.stringify({data: ret, schedule_name: name, project_id: {{project.id }}}),
+                                  contentType: "application/json",
+                                  dataType: "json",
+                                }).done(function(data){
+                                  if (data && data.status===200) {
+                                    console.log(data);
+                                    window.location.replace("http://snapex.duapp.com/mypage/project?pid={{ project.id }}");
+                                  } else {
+                                    // alert("error when submitting survey " + data.toString());
+                                    console.log(data)
+                                  }
+                                });
+                            }
+                        }
+                    } else {
+                        schedule_name.value = {{ schedule_name }};
+                        submit_button.style.display = "none";
+                    }
+
                     </script>
                     <!-- bottom -->
                 </div>
