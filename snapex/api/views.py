@@ -79,7 +79,7 @@ def create_schedule(req):
 		json_data = simplejson.loads(req.body)
 		events = json_data['data']
 		schedule_name = json_data['schedule_name']
-		project_id = int(json_data['project_id']) # in fact, nothing to do with project
+		# project_id = int(json_data['project_id']) # in fact, nothing to do with project
 		user = req.user
 
 		schedule = Schedule(name=schedule_name, content=events, owner=user)

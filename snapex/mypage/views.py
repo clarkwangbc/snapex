@@ -179,13 +179,12 @@ def myschedule(req):
 	user = req.user
 
 	if req.method == 'GET':
-		if pid is None:
-			return HttpResponse("pid can't be blank")
-		project = db_ops.get_project_from_pk(int(pid))
-		if project is None:
-			return HttpResponse('invalid pid')
-		
 		if action == 'create': # a schedule creating page
+			if pid is None:
+				return HttpResponse("pid can't be blank")
+			project = db_ops.get_project_from_pk(int(pid))
+			if project is None:
+				return HttpResponse('invalid pid')
 			import datetime
 			return render(req, 'mypage/schedule_create.html', 
 				{'project': project, 'create_schedule': 1, 
@@ -201,7 +200,7 @@ def myschedule(req):
 			import dateutil.parser
 			schedule_content = simplejson.loads(schedule.content)
 			return render(req, 'mypage/schedule_create.html',
-				{'project': project, 'create_schedule': 0, 
+				{'create_schedule': 0, 
 				'schedule_name': schedule.name,
 				'events': schedule_content,
 				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	

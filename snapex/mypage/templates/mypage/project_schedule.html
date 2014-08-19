@@ -18,7 +18,12 @@
       <tbody>
         {% for schedule in schedules %}
           <tr>
-            <td>{{ schedule.name }}</td>
+            <td><a href="/mypage/survey?action=view&sid={{ schedule.id }}">
+                <div style="height:100%;width:100%">
+                  {{ schedule.name }}
+                </div>
+              </a>
+            </td>
             <td>{{ schedule.schedule_plans.count }}</td>
           </tr>
         {% endfor %}
