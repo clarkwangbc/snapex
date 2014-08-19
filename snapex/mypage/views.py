@@ -198,11 +198,12 @@ def myschedule(req):
 				return HttpResponse('invalid sid')
 			import simplejson
 			import dateutil.parser
-			schedule_content = simplejson.loads(schedule.content)
+			# schedule_content = simplejson.loads(schedule.content)
+			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/schedule_create.html',
 				{'create_schedule': 0, 
 				'schedule_name': schedule.name,
-				'events': schedule_content,
+				'events': mark_safe(schedule.content),
 				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
 
 	elif req.method == 'POST':
