@@ -253,19 +253,19 @@ def myrecord(req):
 		reply = reply_data['reply']
 		
 		if entry_type=='simple_question':
-			i_html += template_simple_question%(question, reply, description) + '<br>'
+			i_html += template_simple_question%(question, description, reply) + '<br>'
 		elif entry_type=='hard_question':
-			i_html += template_hard_question%(question, reply, description) + '<br>'
+			i_html += template_hard_question%(question, description, reply) + '<br>'
 		elif entry_type=='single_choice':
-			i_html += template_single_choice%(question, reply, description) + '<br>'
+			i_html += template_single_choice%(question, description, reply) + '<br>'
 		elif entry_type=='multi_choice':
-			i_html += template_multi_choice%(question, reply, description) + '<br>'
+			i_html += template_multi_choice%(question, description, reply) + '<br>'
 		elif entry_type=='l5':
-			i_html += template_l5%(question, reply, description) + '<br>'
+			i_html += template_l5%(question, description, reply) + '<br>'
 		elif entry_type=='l7':
-			i_html += template_l7%(question, reply, description) + '<br>'
+			i_html += template_l7%(question, description, reply) + '<br>'
 		elif entry_type=='date':
-			i_html += template_date%(question, reply, description) + '<br>'
+			i_html += template_date%(question, description, reply) + '<br>'
 
 	from django.utils.safestring import mark_safe
 	return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})
