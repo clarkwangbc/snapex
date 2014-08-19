@@ -16,7 +16,7 @@
           <select id="plan_testee" name="plan_testee" class="form-control">
             {% for testee in testees  %}
               {% if testee.is_active %}
-                <option value="{{ testee.username }}">{{ testee.username }}</option>
+                <option value="{{ testee.name }}">{{ testee.name }}</option>
               {% endif %}
             {% endfor %}
           </select>
@@ -41,7 +41,7 @@
         <div class="col-md-5">
           <select id="plan_schedule" name="plan_schedule" class="form-control">
             {% for schedule in schedules %}
-              <option value="{{ schedule.id }}">{{ survey.name }}</option>
+              <option value="{{ schedule.id }}">{{ schedule.name }}</option>
             {% endfor %}
           </select>
         </div>
