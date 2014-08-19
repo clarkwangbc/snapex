@@ -233,7 +233,7 @@ def myrecord(req):
 
 	ret = []
 
-	for ae in record.record_aentries:
+	for ae in record.record_aentries.all():
 		entry = {}
 		entry['type'] = ae.qentry.qtype
 		import simplejson
