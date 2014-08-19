@@ -111,12 +111,24 @@ def myproject(req):
 						for testee in new_testees:
 							db_ops.add_testee_to_project(testee, p)
 
-		elif action_type == 'new_schedule':
-			pass
-		elif action_type == 'new_survey':
-			pass
-		else:
-			pass
+		elif action_type == 'new_plan':
+			plan_testee = req.POST.get('plan_testee', None)
+			plan_survey = req.POST.get('plan_survey', None)
+			plan_schedule = req.POST.get('plan_schedule', None)
+			if plan_testee is not None and plan_survey is not None and plan_schedule is not None:
+				user = req.user
+				testee = db_ops.get_user_from_secret(plan_testee)
+				survey = db_ops.get_survey_from_pk(int(plan_survey))
+				schedule = db_ops.get_schedule_from_pk(int(plan_schedule))
+				project = Project.objects.get(pk=int(pid))
+
+				if not project.owner==user:
+					return HttpResponse('permission denied')
+
+				if testee and survey and schedule and project:
+					plan = Plan(survey=survey, owner=user, 
+						testee=testee, project=project, schedule=schedule)
+					plan.save()
 
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	
@@ -202,7 +214,7 @@ def myschedule(req):
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/schedule_create.html',
 				{'create_schedule': 0, 
-				'schedule_name': schedule.name,
+				'schedule_name': mark_safe(schedule.name),
 				'events': mark_safe(schedule.content),
 				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
 
