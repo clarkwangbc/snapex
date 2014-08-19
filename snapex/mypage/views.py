@@ -231,23 +231,31 @@ def myrecord(req):
 	if not record:
 		return HttpResponse('invalid rid')
 
-	ret = []
+	# simple_question
+	template_simple_question = '''
+	<div class="simple_question">
+	  <label><span>%s</span></label>
+	  <input type="text" value="%s">
+	  <span class="help-block">%s</span>
+	</div>
+	'''
+	i_html = ''
 
 	for ae in record.record_aentries.all():
-		entry = {}
-		entry['type'] = ae.qentry.qtype
+		entry_type = ae.qentry.qtype
 		import simplejson
 		data = simplejson.loads(ae.qentry.content)
-		entry['question'] = data['label']
-		entry['description'] = data['field_options'].get('description', None)
-		entry['media'] = data['required']
+		question = data['label']
+		description = data['field_options'].get('description', '')
+		media = data['required']
 		reply_data = simplejson.loads(ae.content)
-		entry['reply'] = reply_data['reply']
-
-		ret.append(entry)
+		reply = reply_data['reply']
+		
+		if entry_type=='simple_question':
+			i_html += template_simple_question%(question, reply, description)
 
 	from django.utils.safestring import mark_safe
-	return render(req, 'mypage/record.html', {'record': mark_safe(simplejson.dumps(ret))})
+	return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})
 
 
 @login_required
