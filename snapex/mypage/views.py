@@ -232,13 +232,14 @@ def myrecord(req):
 		return HttpResponse('invalid rid')
 
 	# simple_question
-	template_simple_question = '''
-	<div class="simple_question">
-	  <label><span>%s</span></label>
-	  <input type="text" value="%s">
-	  <span class="help-block">%s</span>
-	</div>
-	'''
+	template_simple_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_hard_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_single_choice = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_multi_choice = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_l5 = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_l7 = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_date = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+
 	i_html = ''
 
 	for ae in record.record_aentries.all():
@@ -246,13 +247,25 @@ def myrecord(req):
 		import simplejson
 		data = simplejson.loads(ae.qentry.content)
 		question = data['label']
-		description = data['field_options'].get('description', '')
+		description = data['field_options']#.get('description', '')
 		media = data['required']
 		reply_data = simplejson.loads(ae.content)
 		reply = reply_data['reply']
 		
 		if entry_type=='simple_question':
-			i_html += template_simple_question%(question, reply, description)
+			i_html += template_simple_question%(question, reply, description) + '<br>'
+		elif entry_type=='hard_question':
+			i_html += template_hard_question%(question, reply, description) + '<br>'
+		elif entry_type=='single_choice':
+			i_html += template_single_choice%(question, reply, description) + '<br>'
+		elif entry_type=='multi_choice':
+			i_html += template_multi_choice%(question, reply, description) + '<br>'
+		elif entry_type=='l5':
+			i_html += template_l5%(question, reply, description) + '<br>'
+		elif entry_type=='l7':
+			i_html += template_l7%(question, reply, description) + '<br>'
+		elif entry_type=='date':
+			i_html += template_date%(question, reply, description) + '<br>'
 
 	from django.utils.safestring import mark_safe
 	return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})
