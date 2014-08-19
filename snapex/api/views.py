@@ -86,3 +86,55 @@ def create_schedule(req):
 
 		return 200, dict(msg='ok')
 
+
+@csrf_exempt
+@utility.expose(rest=True)
+def report_record(req):
+	'''
+		Report a survey record, json like this:
+		{	
+			pid: 'plan_id', 
+			testee: 'testee_id',
+			data: {
+				fields: [ // order counts!
+					{
+						field_type: 'field_type',
+						reply: 'reply'
+					},
+				]
+			}
+		}
+	'''
+	if req.method=='POST':
+		try:
+			json_data = simplejson.loads(req.body)
+			pid = json_data['pid']
+			user_secret = json_data['testee']
+
+			plan = db_ops.get_plan_from_pk(int(pid))
+			user = db_ops.get_user_from_secret(user_secret)
+
+			if not plan.testee==user:
+				return 1002, dict(msg='permission denied')
+
+			reply_entries = json_data['data']['fields']
+			qms = plan.survey.survey_memberships.order_by('entry_order')
+
+			if len(reply_entries) != len(qms):
+				return 1003, dict(msg='record not matching survey')
+			for re, qm in zip(reply_entries, qms):
+				# check if their types
+				if re['field_type'] != qm.qentry.qtype:
+					return 1003, dict(msg='record not matching survey')
+
+			record = Record(testee=user, plan=plan)
+			record.save()
+
+			for re, qm in zip(reply_entries, qms):
+				ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
+				ae.save()
+
+			return 200, dict(msg='ok')
+
+		except Exception as e:
+			return 1001, dict(msg='json format error', verbose=str(e))	

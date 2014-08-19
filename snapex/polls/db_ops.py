@@ -129,6 +129,11 @@ def get_surveys_from_project(project):
 	return project.project_surveys.all()
 
 
+def get_plan_from_pk(pk):
+	objs = Plan.objects.filter(pk=pk)
+	return objs[0] if objs.exists() else None
+
+
 def add_testee_to_project(testee, project):
 	if ProjectTesteeMembership.objects.filter(project=project, testee=testee).exists():
 		return 1, 'testee already in project'
