@@ -133,7 +133,7 @@ def auth(req):
 
 @csrf_exempt
 @utility.expose(rest=True)
-def pull_plans:
+def pull_plans(req):
 	'''
 		Pull all plans of a testee
 		input:
