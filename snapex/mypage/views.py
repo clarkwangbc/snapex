@@ -68,7 +68,7 @@ def myproject(req):
 
 	q = req.GET
 	pid = q.get('pid', None)
-	if pid is None:
+	if pid is None or pid=='':
 		return HttpResponse('need a pid')
 
 	if req.method=='GET':
@@ -153,7 +153,7 @@ def mysurvey(req):
 	user = req.user
 	
 	if req.method == 'GET':
-		if pid is None:
+		if pid is None or pid == '':
 			return HttpResponse("pid can't be blank")
 		project = db_ops.get_project_from_pk(int(pid))
 		if project is None:
@@ -164,7 +164,7 @@ def mysurvey(req):
 				{'project': project, 'create_survey': 1, 'raw_survey': []})
 					
 		elif action == 'view': # a survey displaying page
-			if sid is None:
+			if sid is None or sid=='':
 				return HttpResponse("sid can't be blank")
 			survey = db_ops.get_survey_from_pk(int(sid))
 			if survey is None:
@@ -194,7 +194,7 @@ def myschedule(req):
 
 	if req.method == 'GET':
 		if action == 'create': # a schedule creating page
-			if pid is None:
+			if pid is None or pid=='':
 				return HttpResponse("pid can't be blank")
 			project = db_ops.get_project_from_pk(int(pid))
 			if project is None:
@@ -205,7 +205,7 @@ def myschedule(req):
 				'events': [], 'schedule_start': datetime.date.today().isoformat()})
 					
 		elif action == 'view': # a schedule displaying page
-			if sid is None:
+			if sid is None or sid=='':
 				return HttpResponse("sid can't be blank")
 			schedule = db_ops.get_schedule_from_pk(int(sid))
 			if schedule is None:
@@ -228,7 +228,7 @@ def myschedule(req):
 @login_required
 def myrecord(req):
 	rid = req.GET.get('rid', None)
-	if rid is None:
+	if rid is None or rid=='':
 		return HttpResponse("rid can't be blank")
 
 	# permission: for everyone logged in
