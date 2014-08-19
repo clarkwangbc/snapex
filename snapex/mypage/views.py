@@ -198,7 +198,7 @@ def myschedule(req):
 				return HttpResponse('invalid sid')
 			import simplejson
 			import dateutil.parser
-			# schedule_content = simplejson.loads(schedule.content)
+			schedule_content = simplejson.loads(schedule.content)
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/schedule_create.html',
 				{'create_schedule': 0, 
