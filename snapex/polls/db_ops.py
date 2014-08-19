@@ -139,6 +139,11 @@ def get_record_from_pk(pk):
 	return objs[0] if objs.exists() else None
 
 
+def get_record_from_pk(pk):
+	objs = Record.objects.filter(pk=pk)
+	return objs[0] if objs.exists() else None
+
+
 def add_testee_to_project(testee, project):
 	if ProjectTesteeMembership.objects.filter(project=project, testee=testee).exists():
 		return 1, 'testee already in project'

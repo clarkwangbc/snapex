@@ -106,5 +106,6 @@ class AnswerEntry(models.Model):
 
 
 class MediaEntry(models.Model):
-	aentry = models.ForeignKey(AnswerEntry, related_name='answer_media')
+	# aentry = models.ForeignKey(AnswerEntry, related_name='answer_media')
+	uid = models.CharField(max_length=100)
 	content = models.TextField() # json
