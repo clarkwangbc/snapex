@@ -1,0 +1,54 @@
+<div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Plans</div>
+    <div class="panel-body">
+    </div>
+    
+    <!-- Table -->
+    <table class="table" id="plan_table">
+      <thead>
+        <tr>
+          <th>Survey Name</th>
+          <th>Schedule Name</th>
+          <th>Username</th>
+          <th>State</th>
+          <th>Date Created</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for plan in plans %}
+          <tr>
+            <td>
+              <a href="/mypage/survey?action=view&pid={{ project.id }}&sid={{ plan.survey.id }}">
+                {{ plan.survey.name }}
+              </a>
+            </td>
+            <td><a href="/mypage/schedule?action=view&sid={{ plan.schedule.id }}">
+                {{ plan.schedule.name }}
+              </a>
+            </td>
+            <td>{{ plan.testee.username }}</td>
+            <td>
+              {% if plan.is_done %}
+                {% for record in plan.plan_records.all %}
+                  <div>
+                    <a href="/mypage/record?rid={{ record.id }}">
+                    Submitted on {{ record.date_created }}
+                    </a>
+                  </div>
+                {% endfor %}
+              {% elif plan.is_sent %}
+                Not Done
+              {% else %}
+                Not Sent
+              {% endif %}
+            </td>
+            <td>{{ plan.date_created }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

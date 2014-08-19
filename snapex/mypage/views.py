@@ -37,7 +37,8 @@ def mypage(req):
 			return render(req, 'mypage/index.html', ret)
 		else:
 			# for testees, direct them to their user page
-			return HttpResponse('hi you testees')
+			# return HttpResponse('hi you testees')
+			return redirect('/mypage/project')
 	
 	elif req.method == 'POST':
 		if req.user.user_profile.is_researcher:
@@ -57,7 +58,13 @@ def mypage(req):
 @login_required
 def myproject(req):
 	if not req.user.user_profile.is_researcher:
-		return redirect('/mypage')
+		if req.method=='GET':
+			user = req.user
+			plans = Plan.objects.filter(testee=user).all()
+			return render(req, 'mypage/testee.html', {'plans':plans})
+		else:
+			return HttpResponse('invalid method')
+		# return redirect('/mypage')
 
 	q = req.GET
 	pid = q.get('pid', None)
