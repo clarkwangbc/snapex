@@ -81,7 +81,6 @@ def create_schedule(req):
 		schedule_name = json_data['schedule_name']
 		# project_id = int(json_data['project_id']) # in fact, nothing to do with project
 		user = req.user
-		import simplejson
 		schedule = Schedule(name=schedule_name, content=simplejson.dumps(events), owner=user)
 		schedule.save()
 
