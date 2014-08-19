@@ -88,6 +88,11 @@ def get_survey_from_pk(pk):
 	return objs[0] if objs.exists() else None
 
 
+def get_schedule_from_pk(pk):
+	objs = Schedule.objects.filter(pk=pk)
+	return objs[0] if objs.exists() else None	
+
+
 def get_plans_from_user(user):
 	return user.testee_plans.all()
 

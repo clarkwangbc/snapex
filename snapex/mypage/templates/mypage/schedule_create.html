@@ -37,7 +37,7 @@
                     
                     var dp = new DayPilot.Calendar("dp");
                     // view
-                    dp.startDate = "2013-03-25";//"{{ scheudle.start_date }}";
+                    dp.startDate = "{{ scheudle_start }}"; //"2013-03-25";;
                     dp.viewType = "Week";
                     dp.allDayEventHeight = 25;
                     dp.initScrollPos = 9 * 40;
@@ -107,15 +107,25 @@
                     
                     dp.init();
                     
-                    var e = new DayPilot.Event({
-                        start: new DayPilot.Date("2013-03-25T12:00:00"),
-                        end: new DayPilot.Date("2013-03-25T12:00:00").addHours(3),
-                        // id: DayPilot.guid(),
-                        text: "Special event"
-                    });
-                    dp.events.add(e);
-                    
+                    var dp_events = {{ events }};
 
+                    dp_events.forEach(function(evt){
+                        e = new DayPilot.Event({
+                            start: new DayPilot.Date(evt.start),
+                            end: new DayPilot.Date(evt.end),
+                            text: evt.msg
+                        });
+                        dp.events.add(e)
+                    });
+
+                    // var e = new DayPilot.Event({
+                    //     start: new DayPilot.Date("2013-03-25T12:00:00"),
+                    //     end: new DayPilot.Date("2013-03-25T12:00:00").addHours(3),
+                    //     // id: DayPilot.guid(),
+                    //     text: "Special event"
+                    // });
+                    // dp.events.add(e);
+                    
                     submit_button = $("#submit_schedule")[0];
                     if ({{ create_schedule }}) {
                         submit_button.onclick = function(){

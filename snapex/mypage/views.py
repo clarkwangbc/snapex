@@ -185,24 +185,26 @@ def myschedule(req):
 		if project is None:
 			return HttpResponse('invalid pid')
 		
-		if action == 'create': # a survey creating page
+		if action == 'create': # a schedule creating page
+			import datetime
 			return render(req, 'mypage/schedule_create.html', 
-				{'project': project, 'create_schedule': 1, 'raw_schedule': []})
+				{'project': project, 'create_schedule': 1, 
+				'events': [], 'schedule_start': datetime.date.today().isoformat()})
 					
-		elif action == 'view': # a survey displaying page
-			pass
-			# if sid is None:
-			# 	return HttpResponse("sid can't be blank")
-			# survey = db_ops.get_survey_from_pk(int(sid))
-			# if survey is None:
-			# 	return HttpResponse('invalid sid')
-			# import simplejson
-			# survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
-			# from django.utils.safestring import mark_safe
-			# return render(req, 'mypage/survey_create.html',
-			# 	{'project': project, 'create_survey': 0, 
-			# 	'survey_name': survey.name,
-			# 	'raw_survey': mark_safe(survey_content)})	
+		elif action == 'view': # a schedule displaying page
+			if sid is None:
+				return HttpResponse("sid can't be blank")
+			schedule = db_ops.get_schedule_from_pk(int(sid))
+			if schedule is None:
+				return HttpResponse('invalid sid')
+			import simplejson
+			import dateutil.parser
+			schedule_content = simplejson.loads(schedule.content)
+			return render(req, 'mypage/schedule_create.html',
+				{'project': project, 'create_schedule': 0, 
+				'schedule_name': schedule.name,
+				'events': schedule_content,
+				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
 
 	elif req.method == 'POST':
 		# post a survey creating form?
