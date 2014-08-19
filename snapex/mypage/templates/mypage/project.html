@@ -54,6 +54,15 @@
     </div>
 
     <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/snapex/js/jquery.tablesorter.min.js"></script>
+    <script>
+      $(document).ready(function(){ 
+        $("#testee_table").tablesorter();
+        $("#survey_table").tablesorter(); 
+        $("#schedule_table").tablesorter(); 
+        $("#plan_table").tablesorter(); 
+      }); 
+    </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
