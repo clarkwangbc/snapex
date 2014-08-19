@@ -102,4 +102,9 @@ class AnswerEntry(models.Model):
 	qentry = models.ForeignKey(QuestionEntry, related_name='question_aentries')
 	record = models.ForeignKey(Record, related_name='record_aentries')
 	
+	content = models.TextField() # raw content
+
+
+class MediaEntry(models.Model):
+	aentry = models.ForeignKey(AnswerEntry, related_name='answer_media')
 	content = models.TextField() # json

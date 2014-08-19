@@ -173,12 +173,6 @@ def mysurvey(req):
 	elif req.method == 'POST':
 		# post a survey creating form?
 		return HttpResponse('post test')
-	
-	# permission to create survey into project
-	# if not (project.owner == user)):
-	# 	return HttpResponse('permission denied')
-
-	# permission to view a survey
 
 
 def myschedule(req):
@@ -222,6 +216,37 @@ def myschedule(req):
 	elif req.method == 'POST':
 		# post a survey creating form?
 		return HttpResponse('post test')
+
+
+@login_required
+def myrecord(req):
+	rid = req.GET.get('rid', None)
+	if rid is None:
+		return HttpResponse("rid can't be blank")
+
+	# permission: for everyone logged in
+	# TODO: revise permission rule
+
+	record = db_ops.get_record_from_pk(int(rid))
+	if not record:
+		return HttpResponse('invalid rid')
+
+	ret = []
+
+	for ae in record.record_aentries:
+		entry = {}
+		entry['type'] = ae.qentry.qtype
+		import simplejson
+		data = simplejson.loads(ae.qentry.content)
+		entry['question'] = data['label']
+		entry['description'] = data['field_options'].get('description', None)
+		entry['media'] = data['required']
+		reply_data = simplejson.loads(ae.content)
+		entry['reply'] = reply_data['reply']
+
+		ret.append(entry)
+
+	return render(req, 'mypage/record.html', {'record': ret})
 
 
 @login_required

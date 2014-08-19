@@ -46,29 +46,32 @@ def signout(req):
 @utility.expose(rest=True)
 def create_survey(req):
 	if req.method=='POST':
-		json_data = simplejson.loads(req.body)
-		data = json_data['data']
-		project_id = int(data['project_id'])
-		survey_name = data['survey_name']
-		surveys = data['fields']
+		try:
+			json_data = simplejson.loads(req.body)
+			data = json_data['data']
+			project_id = int(data['project_id'])
+			survey_name = data['survey_name']
+			surveys = data['fields']
 
-		# only ownner of the project have permission to create survey
-		user = req.user
-		if not Project.objects.filter(owner=user, pk=project_id).exists():
-			return 400, dict(msg='permission denied')
+			# only ownner of the project have permission to create survey
+			user = req.user
+			if not Project.objects.filter(owner=user, pk=project_id).exists():
+				return 400, dict(msg='permission denied')
 
-		project = db_ops.get_project_from_pk(project_id)
-		# create survey
-		survey = Survey(project=project, name=survey_name, raw_content=req.body)
-		survey.save()
-		# create question entries
-		for rank, s in enumerate(surveys):
-			qe = QuestionEntry(qtype=s['field_type'], content=simplejson.dumps(s))
-			qe.save()
-			sm = SurveyMembership(qentry=qe, survey=survey, entry_order=rank)
-			sm.save()
+			project = db_ops.get_project_from_pk(project_id)
+			# create survey
+			survey = Survey(project=project, name=survey_name, raw_content=req.body)
+			survey.save()
+			# create question entries
+			for rank, s in enumerate(surveys):
+				qe = QuestionEntry(qtype=s['field_type'], content=simplejson.dumps(s))
+				qe.save()
+				sm = SurveyMembership(qentry=qe, survey=survey, entry_order=rank)
+				sm.save()
 
-		return 200, dict(msg='ok')
+			return 200, dict(msg='ok')
+		except Exception as e:
+			return 1001, dict(msg='json format error', verbose=str(e))
 
 
 @csrf_exempt
@@ -76,15 +79,17 @@ def create_survey(req):
 @utility.expose(rest=True)
 def create_schedule(req):
 	if req.method=='POST':
-		json_data = simplejson.loads(req.body)
-		events = json_data['data']
-		schedule_name = json_data['schedule_name']
-		# project_id = int(json_data['project_id']) # in fact, nothing to do with project
-		user = req.user
-		schedule = Schedule(name=schedule_name, content=simplejson.dumps(events), owner=user)
-		schedule.save()
+		try:
+			json_data = simplejson.loads(req.body)
+			events = json_data['data']
+			schedule_name = json_data['schedule_name']
+			user = req.user
+			schedule = Schedule(name=schedule_name, content=simplejson.dumps(events), owner=user)
+			schedule.save()
 
-		return 200, dict(msg='ok')
+			return 200, dict(msg='ok')
+		except Exception as e:
+			return 1001, dict(msg='json format error', verbose=str(e))
 
 
 @csrf_exempt
@@ -137,4 +142,4 @@ def report_record(req):
 			return 200, dict(msg='ok')
 
 		except Exception as e:
-			return 1001, dict(msg='json format error', verbose=str(e))	
+			return 1001, dict(msg='json format error', verbose=str(e))
