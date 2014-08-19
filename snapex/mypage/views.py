@@ -246,7 +246,8 @@ def myrecord(req):
 
 		ret.append(entry)
 
-	return render(req, 'mypage/record.html', {'record': ret})
+	from django.utils.safestring import mark_safe
+	return render(req, 'mypage/record.html', {'record': mark_safe(ret)})
 
 
 @login_required
