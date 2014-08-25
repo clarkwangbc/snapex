@@ -2,3 +2,4 @@ django==1.5.2
 MySQL-python
 simplejson
 python-dateutil
+pycurl
