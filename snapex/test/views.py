@@ -26,17 +26,17 @@ def testcreateTable():
 
 
 def excutecmd():
-    import polls.bd_push as bd_push
-    s = str(bd_push.test_pushMessage_to_user())
-    # from django.core.management import call_command
-    # ret = call_command('syncdb')
+    # import polls.bd_push as bd_push
+    # s = str(bd_push.test_pushMessage_to_user())
+    from django.core.management import call_command
+    ret = call_command('syncdb')
     # import logging
     # log = logging.getLogger(__name__)
     # log.debug(str(ret))
 
     # from django.contrib.auth import authenticate
     # u = authenticate(username='snapex', password='dingxiangyuan')
-    return HttpResponse(s)
+    return HttpResponse("complete")
 
 
 def dbtest(request):
