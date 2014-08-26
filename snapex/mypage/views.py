@@ -13,7 +13,7 @@ from polls.models import *
 def mypage(req):
 	if req.method == 'GET':	
 		# TODO: direct admins to an all plan page?
-		if req.user.user_profile.is_superuser:
+		if req.user.is_superuser:
 			pass
 		# for researchers, display a default page
 		elif req.user.user_profile.is_researcher:
