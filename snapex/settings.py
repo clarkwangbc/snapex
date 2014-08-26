@@ -216,3 +216,4 @@ LOGIN_URL = '/signin/'
 
 # default password for testees and researchers in User model
 DEFAULT_PASSWORD = '9'
+PUSH_ON_TIME = True

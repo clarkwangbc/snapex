@@ -14,7 +14,7 @@ def mypage(req):
 	if req.method == 'GET':	
 		# TODO: direct admins to an all plan page?
 		if req.user.is_superuser:
-			pass
+			return redirect('/mypage/project')
 		# for researchers, display a default page
 		elif req.user.user_profile.is_researcher:
 			ret = {'user_name': req.user.username}
@@ -67,6 +67,13 @@ def myproject(req):
 			return render(req, 'mypage/testee.html', {'plans':plans})
 		else:
 			return HttpResponse('invalid method')
+
+	if req.user.is_superuser:
+		if req.method=='GET':
+			plans = Plan.objects.all()
+			return render(req, 'mypage/testee.html', {'plans':plans})
+		else:
+			return HttpResponse('invalid method')		
 
 	q = req.GET
 	pid = q.get('pid', None)
@@ -139,6 +146,9 @@ def myproject(req):
 					plan = Plan(survey=survey, owner=user, 
 						testee=testee, project=project, schedule=schedule)
 					plan.save()
+					from django.conf import settings
+					if settings.PUSH_ON_TIME:
+						db_ops.send_plan(plan)
 
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	

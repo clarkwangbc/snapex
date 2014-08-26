@@ -2,10 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Config(models.Model):
-	push_on_time = models.BooleanField(default=True)
-
-
+# class Config(models.Model):
+# 	push_on_time = models.BooleanField(default=True)
 class UserProfile(models.Model):
 	device_id = models.CharField(max_length=100)
 	is_admin = models.BooleanField(default=False)
