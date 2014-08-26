@@ -9,7 +9,7 @@ def syncdb(req):
 
 
 def logging(*args):
-    logging example: log to debug.txt
+    # logging example: log to debug.txt
     import logging
     log = logging.getLogger(__name__)
     log.debug('a debug message')
