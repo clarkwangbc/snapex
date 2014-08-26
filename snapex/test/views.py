@@ -28,7 +28,7 @@ def flush():
     return HttpResponse("complete")    
 
 
-def push_all():
+def push_all(*args):
     from polls.models import *
     plans = Plan.objects.filter(is_sent=False).all()
     ret = ''
@@ -39,4 +39,4 @@ def push_all():
         else:
             ret += 'plan %s failed: %s'%(plan.id, msg)
 
-    return HttpResponse(ret)
+    return HttpResponse(str(args) + ret)
