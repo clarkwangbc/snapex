@@ -64,7 +64,6 @@
                 <tr>
                   <th>Project Name</th>
                   <th>User Count</th>
-                  <th>Active User Count</th>
                   <th>Survey Count</th>
                   <th>Plan Count</th>
                 </tr>
@@ -74,16 +73,15 @@
                 {% for project in projects %}
                   <tr>
                     <td>
-                      <a href="{{ project.url }}">
+                      <a href="'/mypage/project?pid={{ project.id }}">
                         <div style="height:100%;width:100%">
                           {{ project.name }}
                         </div>
                       </a>
                     </td>
-                    <td>{{ project.all_user }}</td>
-                    <td>{{ project.active_user }}</td>
-                    <td>{{ project.surveys }}</td>
-                    <td>{{ project.plans }}</td>
+                    <td>{{ project.testees.count }}</td>
+                    <td>{{ project.project_surveys.count }}</td>
+                    <td>{{ project.project_plans.count }}</td>
                   </tr>
                 {% endfor %}
               </tbody>

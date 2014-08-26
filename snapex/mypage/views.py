@@ -19,23 +19,7 @@ def mypage(req):
 		elif req.user.user_profile.is_researcher:
 			ret = {'user_name': req.user.username}
 			projects = db_ops.get_projects_from_researcher(req.user)
-			p = []
-			for project in projects:
-				pinfo = {}
-				testees = db_ops.get_testees_from_project(project)
-				surveys = db_ops.get_surveys_from_project(project)
-				plans = db_ops.get_plans_from_project(project)
-
-				pinfo['name'] = project.name
-				# TODO: using django model filtering
-				pinfo['all_user'] = len(testees)
-				pinfo['active_user'] = sum(x.is_active==True for x in testees)
-				pinfo['surveys'] = len(surveys)
-				pinfo['plans'] = len(plans)
-				pinfo['url'] = '/mypage/project?pid=%s'%(project.id)
-				p.append(pinfo)
-
-			ret['projects'] = p
+			ret['projects'] = projects
 			return render(req, 'mypage/index.html', ret)
 		else:
 			# for testees, direct them to their project page
