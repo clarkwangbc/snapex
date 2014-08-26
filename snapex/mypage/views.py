@@ -12,10 +12,9 @@ from polls.models import *
 @login_required
 def mypage(req):
 	if req.method == 'GET':	
-		# direct admins to an all plan page
+		# TODO: direct admins to an all plan page?
 		if req.user.user_profile.is_superuser:
-
-
+			pass
 		# for researchers, display a default page
 		elif req.user.user_profile.is_researcher:
 			ret = {'user_name': req.user.username}
