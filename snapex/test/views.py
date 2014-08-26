@@ -2,7 +2,7 @@ from django.http import HttpResponse
 import polls.db_ops as db_ops
 
 
-def syncdb():
+def syncdb(req):
     from django.core.management import call_command
     ret = call_command('syncdb')
     return HttpResponse("complete")
@@ -15,20 +15,20 @@ def excutecmd():
     return HttpResponse("complete")
 
 
-def base(request):
+def base(req):
     db_ops.create_admin('admin', 'taoliyuan', '19770707')
     users = db_ops.generate_uids(3)
     s = str(db_ops.create_researcher(users))
     return HttpResponse(s)
 
 
-def flush():
+def flush(req):
     from django.core.management import call_command
     ret = call_command('flush')
     return HttpResponse("complete")    
 
 
-def push_all(*args):
+def push_all(req):
     from polls.models import *
     plans = Plan.objects.filter(is_sent=False).all()
     ret = ''
@@ -39,4 +39,4 @@ def push_all(*args):
         else:
             ret += 'plan %s failed: %s'%(plan.id, msg)
 
-    return HttpResponse(str(args) + ret)
+    return HttpResponse(ret)

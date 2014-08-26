@@ -203,6 +203,7 @@ def send_plan(plan):
 			ret = bd_push.push_msg(user_id, int(channel_id), msg)
 			if ret[0]==0:
 				plan.is_sent = True
+				plan.save()
 			return ret
 		else:
 			return 1, 'need a valid device_id'

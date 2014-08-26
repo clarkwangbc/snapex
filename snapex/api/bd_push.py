@@ -7,6 +7,7 @@ APIKEY = '4vvtke0DV3yR9bIYcGyDvKBC'
 SECRETKEY = '1B65i354OUTyyyVxMhI9IlgBxFztCp84'
 method = 'POST'
 PUSH_TYPE = 1
+MSG_TYPE = 1
 
 def push_msg(user_id, channel_id, msg):
 	'''
@@ -28,6 +29,7 @@ def push_msg(user_id, channel_id, msg):
 		args['messages'] = str(msg)
 		args['msg_keys'] = 'new_plan'
 		args['timestamp'] = int(time.time())
+		args['message_type'] = MSG_TYPE
 		
 		# generate sign
 		gather = method + url
