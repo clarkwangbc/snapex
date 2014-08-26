@@ -281,12 +281,12 @@ def myrecord(req):
 				description['options'], reply) + '<br>'
 		elif entry_type=='l5':
 			i_html += template_l5%(question, description['description'], 
-				description['description']['options'][0], 
-				description['description']['options'][1], reply) + '<br>'
+				description['options'][0], 
+				description['options'][1], reply) + '<br>'
 		elif entry_type=='l7':
 			i_html += template_l7%(question, description['description'], 
-				description['description']['options'][0], 
-				description['description']['options'][1], reply) + '<br>'
+				description['options'][0], 
+				description['options'][1], reply) + '<br>'
 		elif entry_type=='date':
 			i_html += template_date%(question, description['description'], reply) + '<br>'
 
