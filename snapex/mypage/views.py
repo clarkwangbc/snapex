@@ -11,8 +11,12 @@ from polls.models import *
 @csrf_exempt
 @login_required
 def mypage(req):
+	'''
+		/mypage
+	'''
+	# display an all projects page
 	if req.method == 'GET':	
-		# direct superuser to an all plan page
+		# for superuser, direct them to an all plan page
 		if req.user.is_superuser:
 			return redirect('/mypage/project')
 		# for researchers, display a project displaying page
@@ -25,6 +29,7 @@ def mypage(req):
 			# for testees, direct them to their project page
 			return redirect('/mypage/project')
 	
+	# create new project
 	elif req.method == 'POST':
 		if req.user.user_profile.is_researcher:
 			project_name = req.POST.get('project_name', None)
@@ -42,6 +47,10 @@ def mypage(req):
 @csrf_exempt
 @login_required
 def myproject(req):
+	'''
+		/mypage/project
+	'''
+	# project page for testees
 	if not req.user.user_profile.is_researcher:
 		if req.method=='GET':
 			user = req.user
@@ -50,6 +59,7 @@ def myproject(req):
 		else:
 			return HttpResponse('invalid method')
 
+	# project page for superusers
 	if req.user.is_superuser:
 		if req.method=='GET':
 			plans = Plan.objects.all()
@@ -86,13 +96,11 @@ def myproject(req):
 			ret['schedules'] = Schedule.objects.filter(owner=req.user).all()
 			ret['plans'] = Plan.objects.filter(project=project).all()
 			return render(req, 'mypage/project.html', ret)
-		elif action == 'push_plan':
-			# push plan
-			return HttpResponse('create projects')
 		else:
 			return HttpResponse('nothing projects')
 
 	elif req.method=='POST':
+		# handle form submitting: new testees or new plan
 		action_type = req.POST.get('action_type', None)
 		if action_type == 'new_user':
 			user_secret = req.POST.get('user_secret', None)
@@ -129,14 +137,18 @@ def myproject(req):
 						testee=testee, project=project, schedule=schedule)
 					plan.save()
 					from django.conf import settings
+					# push the plan intantly if settings.PUSH_ON_TIME is true
 					if settings.PUSH_ON_TIME:
-						st, msg = db_ops.send_plan(plan)
+						db_ops.send_plan(plan)
 
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	
 
 @login_required
 def mysurvey(req):
+	'''
+		/mypage/survey
+	'''
 	action = req.GET.get('action', None)
 	pid = req.GET.get('pid', None)
 	sid = req.GET.get('sid', None)
@@ -168,15 +180,17 @@ def mysurvey(req):
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/survey_create.html',
 				{'project': project, 'create_survey': 0, 
-				'survey_name': survey.name,
-				'raw_survey': mark_safe(survey_content)})	
+					'survey_name': survey.name,
+					'raw_survey': mark_safe(survey_content)})	
 
 	elif req.method == 'POST':
-		# post a survey creating form?
-		return HttpResponse('post test')
+		return HttpResponse('invalid method')
 
 
 def myschedule(req):
+	'''
+		/mypage/schedule
+	'''
 	action = req.GET.get('action', None)
 	pid = req.GET.get('pid', None)
 	sid = req.GET.get('sid', None)
@@ -196,7 +210,7 @@ def myschedule(req):
 			import datetime
 			return render(req, 'mypage/schedule_create.html', 
 				{'project': project, 'create_schedule': 1, 
-				'events': [], 'schedule_start': datetime.date.today().isoformat()})
+					'events': [], 'schedule_start': (datetime.date.today()+datetime.timedelta(days=2)).isoformat()})
 					
 		elif action == 'view': # a schedule displaying page
 			if sid is None or sid=='':
@@ -210,9 +224,9 @@ def myschedule(req):
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/schedule_create.html',
 				{'create_schedule': 0, 
-				'schedule_name': mark_safe(schedule.name),
-				'events': mark_safe(schedule.content),
-				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
+					'schedule_name': mark_safe(schedule.name),
+					'events': mark_safe(schedule.content),
+					'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
 
 	elif req.method == 'POST':
 		# post a schedule creating form?
@@ -221,17 +235,18 @@ def myschedule(req):
 
 @login_required
 def myrecord(req):
+	'''
+		/mypage/record
+	'''
 	rid = req.GET.get('rid', None)
 	if rid is None or rid=='':
 		return HttpResponse("rid can't be blank")
 
 	# permission: for everyone logged in
-
 	record = db_ops.get_record_from_pk(int(rid))
 	if not record:
 		return HttpResponse('invalid rid')
 
-	# simple_question
 	template_simple_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
 	template_hard_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
 	template_single_choice = '<div>question: %s</div><div>description: %s</div><div>options: %s</div><div>answer: %s</div>'
@@ -247,7 +262,7 @@ def myrecord(req):
 		import simplejson
 		data = simplejson.loads(ae.qentry.content)
 		question = data['label']
-		description = data['field_options']#.get('description', '')
+		description = data['field_options']
 		media = data['required']
 		reply_data = simplejson.loads(ae.content)
 		reply = reply_data['reply']
