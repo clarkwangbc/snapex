@@ -8,10 +8,11 @@ def syncdb(req):
     return HttpResponse("complete")
 
 
-def excutecmd():
-    # import logging
-    # log = logging.getLogger(__name__)
-    # log.debug(str(ret))
+def logging(*args):
+    logging example: log to debug.txt
+    import logging
+    log = logging.getLogger(__name__)
+    log.debug('a debug message')
     return HttpResponse("complete")
 
 
@@ -29,6 +30,9 @@ def flush(req):
 
 
 def push_all(req):
+    '''
+        Not considered for a lot of plans
+    '''
     from polls.models import *
     plans = Plan.objects.filter(is_sent=False).all()
     ret = ''

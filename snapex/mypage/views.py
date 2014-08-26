@@ -12,10 +12,10 @@ from polls.models import *
 @login_required
 def mypage(req):
 	if req.method == 'GET':	
-		# TODO: direct admins to an all plan page?
+		# direct superuser to an all plan page
 		if req.user.is_superuser:
 			return redirect('/mypage/project')
-		# for researchers, display a default page
+		# for researchers, display a project displaying page
 		elif req.user.user_profile.is_researcher:
 			ret = {'user_name': req.user.username}
 			projects = db_ops.get_projects_from_researcher(req.user)
@@ -38,8 +38,7 @@ def mypage(req):
 			ret['projects'] = p
 			return render(req, 'mypage/index.html', ret)
 		else:
-			# for testees, direct them to their user page
-			# return HttpResponse('hi you testees')
+			# for testees, direct them to their project page
 			return redirect('/mypage/project')
 	
 	elif req.method == 'POST':
