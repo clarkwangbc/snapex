@@ -9,8 +9,8 @@ if path not in sys.path:
     sys.path.insert(1, path)
  
 from django.core.management import call_command
-call_command('syncdb', interactive=True)
- 
+call_command('flush')
+
 from django.core.handlers.wsgi import WSGIHandler
 from bae.core.wsgi import WSGIApplication
  
