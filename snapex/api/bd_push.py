@@ -43,7 +43,7 @@ def push_msg(user_id, channel_id, msg):
 	data = response.content
 	import simplejson
 	amount = simplejson.loads(data)['response_params']['success_amount']
-	if amout>0:
+	if amount>0:
 		return 0, 'ok'
 	else:
 		return 1, '0 msg pushed!'
