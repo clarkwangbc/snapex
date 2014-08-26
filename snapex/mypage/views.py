@@ -149,8 +149,6 @@ def myproject(req):
 					from django.conf import settings
 					if settings.PUSH_ON_TIME:
 						st, msg = db_ops.send_plan(plan)
-						if st==0:
-							plan.is_sent = True
 
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	

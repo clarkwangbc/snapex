@@ -193,19 +193,21 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
 
 
 def send_plan(plan):
-	# try:
-	device_id = plan.testee.user_profile.device_id
-	if device_id != '':
-		user_id = device_id.split(',')[0]
-		channel_id = device_id.split(',')[1]
-		msg = {'title':'Snap Experience', 'description': 'You have new plans!'}
-		import api.bd_push as bd_push
-		ret = bd_push.push_msg(user_id, int(channel_id), msg)
-		return ret
-	else:
-		return 1, 'need a valid device_id'
-	# except Exception as e:
-	# 	return 1, str(e)
+	try:
+		device_id = plan.testee.user_profile.device_id
+		if device_id != '':
+			user_id = device_id.split(',')[0]
+			channel_id = device_id.split(',')[1]
+			msg = {'title':'Snap Experience', 'description': 'You have new plans!'}
+			import api.bd_push as bd_push
+			ret = bd_push.push_msg(user_id, int(channel_id), msg)
+			if ret[0]==0:
+				plan.is_sent = True
+			return ret
+		else:
+			return 1, 'need a valid device_id'
+	except Exception as e:
+		return 1, str(e)
 
 #########################
 ### abandon below
