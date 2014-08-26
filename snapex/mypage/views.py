@@ -12,8 +12,12 @@ from polls.models import *
 @login_required
 def mypage(req):
 	if req.method == 'GET':	
+		# direct admins to an all plan page
+		if req.user.user_profile.is_superuser:
+
+
 		# for researchers, display a default page
-		if req.user.user_profile.is_researcher:
+		elif req.user.user_profile.is_researcher:
 			ret = {'user_name': req.user.username}
 			projects = db_ops.get_projects_from_researcher(req.user)
 			p = []
@@ -64,7 +68,6 @@ def myproject(req):
 			return render(req, 'mypage/testee.html', {'plans':plans})
 		else:
 			return HttpResponse('invalid method')
-		# return redirect('/mypage')
 
 	q = req.GET
 	pid = q.get('pid', None)
@@ -221,7 +224,7 @@ def myschedule(req):
 				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
 
 	elif req.method == 'POST':
-		# post a survey creating form?
+		# post a schedule creating form?
 		return HttpResponse('post test')
 
 
@@ -232,7 +235,6 @@ def myrecord(req):
 		return HttpResponse("rid can't be blank")
 
 	# permission: for everyone logged in
-	# TODO: revise permission rule
 
 	record = db_ops.get_record_from_pk(int(rid))
 	if not record:
@@ -276,26 +278,4 @@ def myrecord(req):
 
 	from django.utils.safestring import mark_safe
 	return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})
-
-
-@login_required
-def q_user(req):
-	user = req.user
-	ret = {'user_name': user.username, 'user_plans':[]}
-	if 'secret' in req.GET:
-		user = db_ops.get_user_from_secret(req.GET['secret'])
-		if user:
-			ret['user_name'] = secret
-		else:
-			return render(req, 'mypage/user.html', {'user_name':secret, 'user_plans':[]})
-
-	plans = db_ops.get_plans_from_user(user)
-	for plan in plans:
-		project = db_ops.get_project_from_plan(plan)
-		survey = db_ops.get_survey_from_plan(plan)
-		schedule = db_ops.get_schedule_from_plan(plan)
-		d = dict(survey_name=survey.name, project_name=project.name, schedule_name=schedule.name)
-		ret['user_plans'].append(d)
-
-	return render(req, 'mypage/user.html', ret)
 	
