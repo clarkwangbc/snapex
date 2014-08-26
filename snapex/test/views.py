@@ -18,3 +18,8 @@ def base(request):
     users = db_ops.generate_uids(3)
     s = str(db_ops.create_researcher(users))
     return HttpResponse(s)
+
+def flush():
+    from django.core.management import call_command
+    ret = call_command('flush')
+    return HttpResponse("complete")    
