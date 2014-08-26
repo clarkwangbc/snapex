@@ -41,7 +41,8 @@ def push_msg(user_id, channel_id, msg):
 
 	response = requests.post(url, data=args, timeout=5)
 	data = response.content
-	amount = data['response_params']['success_amount']
+	import simplejson
+	amount = simplejson.loads(data)['response_params']['success_amount']
 	if amout>0:
 		return 0, 'ok'
 	else:
