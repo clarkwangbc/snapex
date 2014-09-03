@@ -14,19 +14,19 @@ import simplejson
 @utility.expose(rest=True)
 def signin(req):
 	if req.method == 'POST':
-		if 'secret' in req.POST:
-			user = None
+		if 'device_id' in req.POST:
+			user = req.POST['device_id']
 			secret = req.POST['secret']
 			if User.objects.filter(username=secret).exists():
 				u = User.objects.get(username=secret)
 				# authenticate admin
 				if u.is_superuser and 'device_id' in req.POST:
-					user = authenticate(username=req.POST['device_id'], password=secret)
+					user = authenticate(username=user, password=secret)
 				# authenticate researcher and testee
 				elif u.is_staff:
-                    user = authenticate(username=req.POST['device_id'], password=secret)
+                    user = authenticate(username=user, password=secret)
                 else:			
-                    user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
+                    user = authenticate(username=user, password=settings.DEFAULT_PASSWORD)
 
 			if user is not None and user.is_active:
 				login(req, user)
