@@ -14,6 +14,7 @@ import simplejson
 @utility.expose(rest=True)
 def signin(req):
 	if req.method == 'POST':
+        return 402, dict(msg="debug 2")
 		if 'device_id' in req.POST:
 			user = req.POST['device_id']
 			secret = req.POST['secret']
