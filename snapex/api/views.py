@@ -17,8 +17,8 @@ def signin(req):
 		if 'device_id' in req.POST:
 			user = req.POST['device_id']
 			secret = req.POST['secret']
-			if User.objects.filter(username=secret).exists():
-				u = User.objects.get(username=secret)
+			if User.objects.filter(username=user).exists():
+				u = User.objects.get(username=user)
 				# authenticate admin
 				if u.is_superuser and 'device_id' in req.POST:
 					user = authenticate(username=user, password=secret)
