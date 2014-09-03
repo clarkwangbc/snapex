@@ -31,6 +31,8 @@ def signin(req):
 			if user is not None and user.is_active:
 				login(req, user)
 				return 200, dict(msg='singin success')
+            else:
+                return 401, dict(msg='debug')
 		else:
 			return 400, dict(msg='no secret in req.POST')
 	return 400, dict(msg='invalid signin')
