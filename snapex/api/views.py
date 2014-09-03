@@ -21,10 +21,12 @@ def signin(req):
 				u = User.objects.get(username=secret)
 				# authenticate admin
 				if u.is_superuser and 'device_id' in req.POST:
-					user = authenticate(username=secret, password=req.POST['device_id'])
+					user = authenticate(username=req.POST['device_id'], password=secret)
 				# authenticate researcher and testee
-				else:
-					user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
+				elif u.is_staff:
+                    user = authenticate(username=req.POST['device_id'], password=secret)
+                else:			
+                    user = authenticate(username=secret, password=settings.DEFAULT_PASSWORD)
 
 			if user is not None and user.is_active:
 				login(req, user)
