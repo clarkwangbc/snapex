@@ -20,7 +20,7 @@ def signin(req):
 			if User.objects.filter(username=user).exists():
 				u = User.objects.get(username=user)
 				# authenticate admin
-				if u.is_superuser and 'device_id' in req.POST:
+				if u.is_superuser:
 					user = authenticate(username=user, password=secret)
 				# authenticate researcher and testee
 				elif u.is_staff:
@@ -35,7 +35,7 @@ def signin(req):
                 return 401, dict(msg='debug')
 		else:
 			return 400, dict(msg='no secret in req.POST')
-	return 400, dict(msg='invalid signin')
+	return 400, dict(msg='invalid signin debug')
 
 
 @csrf_exempt
