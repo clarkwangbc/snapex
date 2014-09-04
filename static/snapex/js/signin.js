@@ -4,7 +4,7 @@ var input_secret,
 
 signin = function(){
 	input_secret = $("#input_secret")[0].value;
-	input_device_id = $("#input_device_id")[0].value;
+	input_device_id = $("#input_account")[0].value;
 	input_remember = $("#input_remember")[0].checked;
 	if (input_secret) {
 		$.ajax({
