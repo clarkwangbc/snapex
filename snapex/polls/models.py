@@ -2,8 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# class Config(models.Model):
+# use settings.PUSH_ON_TIME instead
+# 	push_on_time = models.BooleanField(default=True)
+
+
 class UserProfile(models.Model):
-	device_id = models.CharField(max_length=100)
+	device_id = models.CharField(max_length=100) # 'user_id, channel_id'
 	is_admin = models.BooleanField(default=False)
 	is_researcher = models.BooleanField(default=False)
 	
@@ -18,7 +23,6 @@ class UserProfile(models.Model):
 
 class Project(models.Model):
 	owner = models.ForeignKey(User, related_name='owner_projects')
-	# researchers = models.ManyToManyField(User, related_name='researchers_projects')
 	testees = models.ManyToManyField(User, 
 					through='ProjectTesteeMembership',
 					related_name='testees_projects')
@@ -44,7 +48,6 @@ class QuestionEntry(models.Model):
 
 
 class Survey(models.Model):
-	# creater = models.ForeignKey(User, related_name='creater_surveys')
 	project = models.ForeignKey(Project, related_name='project_surveys')
 	questions = models.ManyToManyField(QuestionEntry, 
 					through='SurveyMembership', 
@@ -106,6 +109,5 @@ class AnswerEntry(models.Model):
 
 
 class MediaEntry(models.Model):
-	# aentry = models.ForeignKey(AnswerEntry, related_name='answer_media')
 	uid = models.CharField(max_length=100)
 	content = models.TextField() # json

@@ -192,101 +192,21 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
 	return 0, p
 
 
-def send_plans():
-	pass
-
-
-#########################
-### abandon below
-#########################
-
-def add_testees_to_project(owner, project, testees):
-	'''
-	owner: string, secret of owner
-	project: int, project_id 
-	testee: iterable of strings, secret of the new testees
-	return: 0 if success; (1,msg) if failed
-	'''
-	if not User.objects.filter(secret=unicode(owner)).exists():
-		return 1, 'owner user not exist'
-
-	if not Project.objects.filter(id=project).exists():
-		return 1, 'project not exist'
-
-	for t in testees:
-		if not User.objects.filter(secret=unicode(t)).exists():
-			return 1, 'some testees not exist'
-
-	p = Project.objects.get(pk=project)
-	p.testees.add(*testees)
-	return 0
-
-# survey
-def create_survey(creater, project, content=''):
-	'''
-	creater: string, secret of a researcher
-	project: string, subject of the project
-	content: string, formatted survey content
-	return: (0,survey_id) if success; (1,msg) if failed
-	'''
-	if not User.objects.filter(secret=unicode(creater)).exists():
-		return 1, 'creater user not exist'
-
-	if not Project.objects.filter(id=project).exists():
-		return 1, 'project not exist'		
-
-	s = Survey(creater=User.objects.get(secret=creater),
-				project=Project.objects.get(pk=project),
-				content=content)
-	s.save()
-	return 0, s.id
-
-
-# record
-def create_record(testee, survey, reply=''):
-	'''
-	testee: string, secret of a testee
-	survey: int, survey_id
-	reply: string, formatted survey reply to the survey
-	return: (0,record_id) if success; (1,msg) if failed
-	'''
-	if not User.objects.filter(secret=unicode(testee)).exists():
-		return 1, 'testee user not exist'
-
-	if not Survey.objects.filter(id=survey).exists():
-		return 1, 'survey not exist'
-
-	r = Record(testee=User.objects.get(secret=testee),
-				survey=Survey.objects.get(pk=survey),
-				reply=reply)
-	r.save()
-	return 0, r.id
-
-
-# plan
-def create_plan(survey, owner, testee, is_sent=False, is_done=False, schedule=''):
-	'''
-	survey: int, survey_id
-	owner: string, secret of the owner researcher
-	testee: string, secret of the testee
-	schedule: string, formatted schedule string
-	return: (0,plan_id) if success; (1,msg) if failed
-	'''
-	if not User.objects.filter(secret=unicode(testee)).exists():
-		return 1, 'testee user not exist'
-
-	if not User.objects.filter(secret=unicode(owner)).exists():
-		return 1, 'owner user not exist'
-
-	if not Survey.objects.filter(id=survey).exists():
-		return 1, 'survey not exist'
-
-	p = Plan(survey=Survey.objects.get(pk=survey),
-			owner=User.objects.get(secret=owner),
-			testee=User.objects.get(secret=testee),
-			is_sent=is_sent,
-			is_done=is_done,
-			schedule=schedule)
-	p.save()
-	return 0, p.id
+def send_plan(plan):
+	try:
+		device_id = plan.testee.user_profile.device_id
+		if device_id != '':
+			user_id = device_id.split(',')[0]
+			channel_id = device_id.split(',')[1]
+			msg = {'title':'Snap Experience', 'description': 'You have new plans!'}
+			import api.bd_push as bd_push
+			ret = bd_push.push_msg(user_id, int(channel_id), msg)
+			if ret[0]==0:
+				plan.is_sent = True
+				plan.save()
+			return ret
+		else:
+			return 1, 'need a valid device_id'
+	except Exception as e:
+		return 1, str(e)
 	

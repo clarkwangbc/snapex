@@ -26,12 +26,10 @@
     
     <div class="container">
       <div class="row">
-        <div class="col-md-10" role="main">
+        <div class="col-md-12" role="main">
           <!-- Header -->
           <div class="page-header">
-            <!-- <h2>Project <small>{{ project.name }} : {{ project.subject }}</small></h2> -->
           </div>
-          
           
           <!-- Plan -->
           {% include "mypage/testee_page.html" %}
@@ -48,6 +46,7 @@
     <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
     <script src="/static/snapex/js/jquery.tablesorter.min.js"></script>
     <script>
+      // table sorter init
       $(document).ready(function(){ 
         $("#testee_table").tablesorter();
         $("#survey_table").tablesorter(); 

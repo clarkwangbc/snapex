@@ -129,7 +129,8 @@ INSTALLED_APPS = (
     'polls',
     'signin',
     'api',
-    'mypage'
+    'mypage',
+    'test'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -215,3 +216,4 @@ LOGIN_URL = '/signin/'
 
 # default password for testees and researchers in User model
 DEFAULT_PASSWORD = '9'
+PUSH_ON_TIME = True

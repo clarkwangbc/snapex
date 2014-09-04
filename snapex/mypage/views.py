@@ -11,35 +11,25 @@ from polls.models import *
 @csrf_exempt
 @login_required
 def mypage(req):
+	'''
+		/mypage
+	'''
+	# display an all projects page
 	if req.method == 'GET':	
-		# for researchers, display a default page
-		if req.user.user_profile.is_researcher:
+		# for superuser, direct them to an all plan page
+		if req.user.is_superuser:
+			return redirect('/mypage/project')
+		# for researchers, display a project displaying page
+		elif req.user.user_profile.is_researcher:
 			ret = {'user_name': req.user.username}
 			projects = db_ops.get_projects_from_researcher(req.user)
-			p = []
-			for project in projects:
-				pinfo = {}
-				testees = db_ops.get_testees_from_project(project)
-				surveys = db_ops.get_surveys_from_project(project)
-				plans = db_ops.get_plans_from_project(project)
-
-				pinfo['name'] = project.name
-				# TODO: using django model filtering
-				pinfo['all_user'] = len(testees)
-				pinfo['active_user'] = sum(x.is_active==True for x in testees)
-				pinfo['surveys'] = len(surveys)
-				pinfo['plans'] = len(plans)
-				pinfo['url'] = '/mypage/project?pid=%s'%(project.id)
-
-				p.append(pinfo)
-
-			ret['projects'] = p
+			ret['projects'] = projects
 			return render(req, 'mypage/index.html', ret)
 		else:
-			# for testees, direct them to their user page
-			# return HttpResponse('hi you testees')
+			# for testees, direct them to their project page
 			return redirect('/mypage/project')
 	
+	# create new project
 	elif req.method == 'POST':
 		if req.user.user_profile.is_researcher:
 			project_name = req.POST.get('project_name', None)
@@ -57,6 +47,10 @@ def mypage(req):
 @csrf_exempt
 @login_required
 def myproject(req):
+	'''
+		/mypage/project
+	'''
+	# project page for testees
 	if not req.user.user_profile.is_researcher:
 		if req.method=='GET':
 			user = req.user
@@ -64,7 +58,14 @@ def myproject(req):
 			return render(req, 'mypage/testee.html', {'plans':plans})
 		else:
 			return HttpResponse('invalid method')
-		# return redirect('/mypage')
+
+	# project page for superusers
+	if req.user.is_superuser:
+		if req.method=='GET':
+			plans = Plan.objects.all()
+			return render(req, 'mypage/testee.html', {'plans':plans})
+		else:
+			return HttpResponse('invalid method')		
 
 	q = req.GET
 	pid = q.get('pid', None)
@@ -95,13 +96,11 @@ def myproject(req):
 			ret['schedules'] = Schedule.objects.filter(owner=req.user).all()
 			ret['plans'] = Plan.objects.filter(project=project).all()
 			return render(req, 'mypage/project.html', ret)
-		elif action == 'push_plan':
-			# push plan
-			return HttpResponse('create projects')
 		else:
 			return HttpResponse('nothing projects')
 
 	elif req.method=='POST':
+		# handle form submitting: new testees or new plan
 		action_type = req.POST.get('action_type', None)
 		if action_type == 'new_user':
 			user_secret = req.POST.get('user_secret', None)
@@ -137,12 +136,19 @@ def myproject(req):
 					plan = Plan(survey=survey, owner=user, 
 						testee=testee, project=project, schedule=schedule)
 					plan.save()
+					from django.conf import settings
+					# push the plan intantly if settings.PUSH_ON_TIME is true
+					if settings.PUSH_ON_TIME:
+						db_ops.send_plan(plan)
 
 		return redirect('/mypage/project?pid=%s'%(pid))		
 	
 
 @login_required
 def mysurvey(req):
+	'''
+		/mypage/survey
+	'''
 	action = req.GET.get('action', None)
 	pid = req.GET.get('pid', None)
 	sid = req.GET.get('sid', None)
@@ -174,15 +180,17 @@ def mysurvey(req):
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/survey_create.html',
 				{'project': project, 'create_survey': 0, 
-				'survey_name': survey.name,
-				'raw_survey': mark_safe(survey_content)})	
+					'survey_name': survey.name,
+					'raw_survey': mark_safe(survey_content)})	
 
 	elif req.method == 'POST':
-		# post a survey creating form?
-		return HttpResponse('post test')
+		return HttpResponse('invalid method')
 
 
 def myschedule(req):
+	'''
+		/mypage/schedule
+	'''
 	action = req.GET.get('action', None)
 	pid = req.GET.get('pid', None)
 	sid = req.GET.get('sid', None)
@@ -202,7 +210,7 @@ def myschedule(req):
 			import datetime
 			return render(req, 'mypage/schedule_create.html', 
 				{'project': project, 'create_schedule': 1, 
-				'events': [], 'schedule_start': datetime.date.today().isoformat()})
+					'events': [], 'schedule_start': (datetime.date.today()+datetime.timedelta(days=2)).isoformat()})
 					
 		elif action == 'view': # a schedule displaying page
 			if sid is None or sid=='':
@@ -216,35 +224,35 @@ def myschedule(req):
 			from django.utils.safestring import mark_safe
 			return render(req, 'mypage/schedule_create.html',
 				{'create_schedule': 0, 
-				'schedule_name': mark_safe(schedule.name),
-				'events': mark_safe(schedule.content),
-				'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
+					'schedule_name': mark_safe(schedule.name),
+					'events': mark_safe(schedule.content),
+					'schedule_start': min([dateutil.parser.parse(x['start']) for x in schedule_content]).date().isoformat()})	
 
 	elif req.method == 'POST':
-		# post a survey creating form?
+		# post a schedule creating form?
 		return HttpResponse('post test')
 
 
 @login_required
 def myrecord(req):
+	'''
+		/mypage/record
+	'''
 	rid = req.GET.get('rid', None)
 	if rid is None or rid=='':
 		return HttpResponse("rid can't be blank")
 
 	# permission: for everyone logged in
-	# TODO: revise permission rule
-
 	record = db_ops.get_record_from_pk(int(rid))
 	if not record:
 		return HttpResponse('invalid rid')
 
-	# simple_question
 	template_simple_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
 	template_hard_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
-	template_single_choice = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
-	template_multi_choice = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
-	template_l5 = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
-	template_l7 = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+	template_single_choice = '<div>question: %s</div><div>description: %s</div><div>options: %s</div><div>answer: %s</div>'
+	template_multi_choice = '<div>question: %s</div><div>description: %s</div><div>options: %s</div><div>answer: %s</div>'
+	template_l5 = '<div>question: %s</div><div>description: %s</div><div>1 option: %s</div><div>5 option: %s</div><div>answer: %s</div>'
+	template_l7 = '<div>question: %s</div><div>description: %s</div><div>1 option: %s</div><div>7 option: %s</div><div>answer: %s</div>'
 	template_date = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
 
 	i_html = ''
@@ -254,48 +262,32 @@ def myrecord(req):
 		import simplejson
 		data = simplejson.loads(ae.qentry.content)
 		question = data['label']
-		description = data['field_options']#.get('description', '')
+		description = data['field_options']
 		media = data['required']
 		reply_data = simplejson.loads(ae.content)
 		reply = reply_data['reply']
 		
 		if entry_type=='simple_question':
-			i_html += template_simple_question%(question, description, reply) + '<br>'
+			i_html += template_simple_question%(question, description['description'], reply) + '<br>'
 		elif entry_type=='hard_question':
-			i_html += template_hard_question%(question, description, reply) + '<br>'
+			i_html += template_hard_question%(question, description['description'], reply) + '<br>'
 		elif entry_type=='single_choice':
-			i_html += template_single_choice%(question, description, reply) + '<br>'
+			i_html += template_single_choice%(question, description['description'],
+				description['options'], reply) + '<br>'
 		elif entry_type=='multi_choice':
-			i_html += template_multi_choice%(question, description, reply) + '<br>'
+			i_html += template_multi_choice%(question, description['description'],
+				description['options'], reply) + '<br>'
 		elif entry_type=='l5':
-			i_html += template_l5%(question, description, reply) + '<br>'
+			i_html += template_l5%(question, description['description'], 
+				description['options'][0], 
+				description['options'][1], reply) + '<br>'
 		elif entry_type=='l7':
-			i_html += template_l7%(question, description, reply) + '<br>'
+			i_html += template_l7%(question, description['description'], 
+				description['options'][0], 
+				description['options'][1], reply) + '<br>'
 		elif entry_type=='date':
-			i_html += template_date%(question, description, reply) + '<br>'
+			i_html += template_date%(question, description['description'], reply) + '<br>'
 
 	from django.utils.safestring import mark_safe
 	return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})
-
-
-@login_required
-def q_user(req):
-	user = req.user
-	ret = {'user_name': user.username, 'user_plans':[]}
-	if 'secret' in req.GET:
-		user = db_ops.get_user_from_secret(req.GET['secret'])
-		if user:
-			ret['user_name'] = secret
-		else:
-			return render(req, 'mypage/user.html', {'user_name':secret, 'user_plans':[]})
-
-	plans = db_ops.get_plans_from_user(user)
-	for plan in plans:
-		project = db_ops.get_project_from_plan(plan)
-		survey = db_ops.get_survey_from_plan(plan)
-		schedule = db_ops.get_schedule_from_plan(plan)
-		d = dict(survey_name=survey.name, project_name=project.name, schedule_name=schedule.name)
-		ret['user_plans'].append(d)
-
-	return render(req, 'mypage/user.html', ret)
 	

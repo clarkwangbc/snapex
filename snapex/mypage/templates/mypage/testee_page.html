@@ -9,6 +9,7 @@
     <table class="table" id="plan_table">
       <thead>
         <tr>
+          <th>Project Name</th>
           <th>Survey Name</th>
           <th>Schedule Name</th>
           <th>Username</th>
@@ -21,7 +22,10 @@
         {% for plan in plans %}
           <tr>
             <td>
-              <a href="/mypage/survey?action=view&pid={{ project.id }}&sid={{ plan.survey.id }}">
+              {{ plan.project.name }}
+            </td>
+            <td>
+              <a href="/mypage/survey?action=view&pid={{ plan.project.id }}&sid={{ plan.survey.id }}">
                 {{ plan.survey.name }}
               </a>
             </td>

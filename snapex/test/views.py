@@ -1,54 +1,46 @@
 from django.http import HttpResponse
+import polls.db_ops as db_ops
 
 
-def testcreateTable():
-    dbname = "beXsKRIOGfKKTwkkcTkh"
-    import MySQLdb
-    mydb = MySQLdb.connect(
-        host   = 'sqld.duapp.com',
-        port   = 4050,
-        user   = '4vvtke0DV3yR9bIYcGyDvKBC',
-        passwd = '1B65i354OUTyyyVxMhI9IlgBxFztCp84',
-        db = 'beXsKRIOGfKKTwkkcTkh')
-
-    cursor = mydb.cursor()
-
-    cmd = '''create table employee (
-             id int(4) auto_increment,
-             name char(20) not null,
-             age int(2),
-             sex char(8) default 'man',
-             primary key (id))'''
-
-    cursor.execute(cmd)
-
-    mydb.close()
-
-
-def excutecmd():
-    # import polls.bd_push as bd_push
-    # s = str(bd_push.test_pushMessage_to_user())
+def syncdb(req):
     from django.core.management import call_command
     ret = call_command('syncdb')
-    # import logging
-    # log = logging.getLogger(__name__)
-    # log.debug(str(ret))
-
-    # from django.contrib.auth import authenticate
-    # u = authenticate(username='snapex', password='dingxiangyuan')
     return HttpResponse("complete")
 
 
-def dbtest(request):
-    ret = ''
+def logging(*args):
+    # logging example: log to debug.txt
+    import logging
+    log = logging.getLogger(__name__)
+    log.debug('a debug message')
+    return HttpResponse("complete")
 
-    from django.contrib.auth.models import User
-    u = User(username='test')
-    u.save()
-    ret = str(u.user_profile) if hasattr(u,'user_profile') else 'None'
+
+def base(req):
+    db_ops.create_admin('admin', 'taoliyuan', '19770707')
+    users = db_ops.generate_uids(3)
+    s = str(db_ops.create_researcher(users))
+    return HttpResponse(s)
+
+
+def flush(req):
+    from django.core.management import call_command
+    ret = call_command('flush')
+    return HttpResponse("complete")    
+
+
+def push_all(req):
+    '''
+        Not considered for a lot of plans
+    '''
+    from polls.models import *
+    plans = Plan.objects.filter(is_sent=False).all()
+    ret = ''
+    for plan in plans:
+        st, msg = db_ops.send_plan(plan)
+        if st==0:
+            ret += 'plan %s success\n'%(plan.id)
+        else:
+            ret += 'plan %s failed: %s'%(plan.id, msg)
 
     return HttpResponse(ret)
-
-
-def runcmd(request):
-    return excutecmd()
