@@ -38,7 +38,7 @@ def create_researcher(user):
         ret = []
         for one_user in user:
             if type(one_user) == type(str()):
-                one_user = ["user": one_user]
+                one_user = {"user": one_user}
             if type(one_user) != type(dict()):
                 ret.append(None)
             elif "user" not in one_user:
