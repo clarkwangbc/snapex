@@ -9,7 +9,7 @@ def syncdb(req):
     from django.core.management import call_command
     ret = call_command('syncdb', stdout=content)
     content.seek(0)
-    return HttpResponse(str(content))
+    return HttpResponse(content.getvalue())
 
 def logging(*args):
     # logging example: log to debug.txt
