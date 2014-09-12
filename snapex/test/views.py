@@ -3,10 +3,13 @@ import polls.db_ops as db_ops
 
 
 def syncdb(req):
+    from StringIO import StringIO
+    content = StringIO()
+    
     from django.core.management import call_command
-    ret = call_command('syncdb')
-    return HttpResponse(str(ret))
-
+    ret = call_command('syncdb', stdout=content)
+    content.seek(0)
+    return HttpResponse(str(content))
 
 def logging(*args):
     # logging example: log to debug.txt
