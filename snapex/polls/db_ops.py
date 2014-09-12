@@ -31,7 +31,7 @@ def create_researcher(user):
     '''
         user: string / tuple or list of string / tuple
     '''
-    if type(user) == type(str()) or type(user) == type(str())
+    if type(user) == type(str()) or type(user) == type(str()):
         user = [user]
         
     if type(user) == type(list()):
