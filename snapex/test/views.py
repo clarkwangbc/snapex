@@ -5,7 +5,7 @@ import polls.db_ops as db_ops
 def syncdb(req):
     from django.core.management import call_command
     ret = call_command('syncdb')
-    return HttpResponse("complete")
+    return HttpResponse(str(ret))
 
 
 def logging(*args):
