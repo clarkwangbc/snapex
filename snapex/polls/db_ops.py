@@ -3,16 +3,19 @@ from django.conf import settings
 import uuid
 from django.contrib.auth.models import User
 
-
+'''
+    Utilies
+'''
 def generate_uid():
     return str(uuid.uuid4())[:30]
-
 
 def generate_uids(number):
     return [generate_uid() for x in range(number)]
 
-
-def create_admin(username, password, device_id):
+'''
+    Create Administration
+'''
+def create_admin(username, password, device_id = None):
     u = User.objects.filter(username=username).exists()
     if u:
         return 1, 'username already exist'
@@ -22,29 +25,43 @@ def create_admin(username, password, device_id):
         u.save()
         up = UserProfile(user=u, is_admin=True, is_researcher=True, device_id=device_id)
         up.save()
-        return 0, 'success'
-
+        return 0, 'admin creation succeeded'
 
 def create_researcher(user):
     '''
-        user: string or list of string
+        user: string / tuple or list of string / tuple
     '''
-    if type(user) == type(str()):
+    if type(user) == type(str()) or type(user) == type(str())
         user = [user]
+        
     if type(user) == type(list()):
         ret = []
         for one_user in user:
-            if type(one_user) != type(str()):
-                return 1, 'invalid input'
-            if User.objects.filter(username=one_user).exists():
-                return 1, 'username already exists'
+            if type(one_user) == type(str()):
+                one_user = ["user": user]
+            if type(one_user) != type(dict()):
+                ret.append(None)
+            elif "user" not in one_user:
+                ret.append(None)
             else:
-                u = User(username=one_user, is_active=False, is_staff=False, is_superuser=False)
-                u.set_password(settings.DEFAULT_PASSWORD)
-                u.save()
-                up = UserProfile(user=u, is_admin=False, is_researcher=True, device_id='')
-                up.save()
-                ret.append(u)
+                if User.objects.filter(username=one_user).exists():
+                    ret.append(None)
+                else:
+                    u = User(username=one_user["user"], is_active=False, is_staff=False, is_superuser=False)
+                    if "password" in user:
+                        u.set_password(user["password"])
+                    else:
+                        u.set_password(settings.DEFAULT_PASSWORD)
+                    u.save()
+                    up = UserProfile(user=u, is_admin=False, is_researcher=True, device_id='')
+                    if "email" in user:
+                        up.set_telephone(user["email"])
+                    if "telephone" in user:
+                        up.set_telephone(user["telephone"])
+                    if "organization" in user:
+                        up.set_organization(user["organization"])
+                    up.save()
+                    ret.append(u)
         return 0, ret
     return 1, 'invalid input, string or list of string required'
     

@@ -8,17 +8,22 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
+    user = models.OneToOneField(User, related_name='user_profile')
     device_id = models.CharField(max_length=100) # 'user_id, channel_id'
     is_admin = models.BooleanField(default=False)
     is_researcher = models.BooleanField(default=False)
     
-    user = models.OneToOneField(User, related_name='user_profile')
-
+    telephone = models.CharField(max_length=15)
+    organization = models.CharField(max_length=100)
+    others = models.TextField()
+    remarks = models.CharField(max_length=100)
+    
     def __unicode__(self):
-        return u'%s'%(secret) if secret is not None else u'None'
+#        return u'%s'%(secret) if secret is not None else u'None'
+        return u"%s's profile" % self.user
 
     def __str__(self):
-        return "%s's profile" % self.user  
+        return "%s's profile" % self.user
 
 
 class Project(models.Model):

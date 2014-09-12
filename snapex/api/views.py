@@ -22,9 +22,10 @@ def signin(req):
                 # authenticate admin
                 if u.is_superuser:
                     user = authenticate(username=user, password=secret)
-                # authenticate researcher and testee
+                # authenticate researcher
                 elif u.is_staff:
                     user = authenticate(username=user, password=secret)
+                # authenticate testee
                 else:
                     user = authenticate(username=user, password=settings.DEFAULT_PASSWORD)
 
