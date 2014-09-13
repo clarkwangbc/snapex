@@ -18,11 +18,12 @@ def logging(*args):
     log.debug('a debug message')
     return HttpResponse("complete")
 
-
 def base(req):
     db_ops.create_admin('admin', 'taoliyuan', '19770707')
-    users = db_ops.generate_uids(3)
+    users = ["Sudo Researcher 1", "Sudo Researcher 2", "Sudo Researcher "]
     s = str(db_ops.create_researcher(users))
+    testees = db_ops.generate_uids(10)
+    
     return HttpResponse(s)
 
 
