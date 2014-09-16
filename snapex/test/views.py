@@ -33,7 +33,7 @@ def create_testees(req):
 def flush(req):
     from django.core.management import call_command
     ret = call_command('flush')
-    return HttpResponse("complete")    
+    return HttpResponse("complete")
 
 def push_all(req):
     '''
