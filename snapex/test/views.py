@@ -26,12 +26,14 @@ def base(req):
     
     return HttpResponse(s)
 
+def create_testees(req):
+    d, testees = db_ops.create_new_testees(10)
+    return HttpResponse(str(testees))
 
 def flush(req):
     from django.core.management import call_command
     ret = call_command('flush')
     return HttpResponse("complete")    
-
 
 def push_all(req):
     '''
