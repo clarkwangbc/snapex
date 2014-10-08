@@ -33,7 +33,7 @@ class Project(models.Model):
                     through='ProjectTesteeMembership',
                     related_name='testees_projects')
     name = models.CharField(max_length=50)
-    code = model.CharField(max_length=4)
+    code = models.CharField(max_length=4)
     subject = models.CharField(default='', max_length=100)
     date_created = models.DateTimeField(auto_now=True)
 
