@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='user_profile')
     device_id = models.CharField(max_length=100) # 'user_id, channel_id'
+    qr_code = models.CharField(max_length=200)
     is_admin = models.BooleanField(default=False)
     is_researcher = models.BooleanField(default=False)
     
@@ -31,8 +32,8 @@ class Project(models.Model):
     testees = models.ManyToManyField(User, 
                     through='ProjectTesteeMembership',
                     related_name='testees_projects')
-    
     name = models.CharField(max_length=50)
+    code = model.CharField(max_length=4)
     subject = models.CharField(default='', max_length=100)
     date_created = models.DateTimeField(auto_now=True)
 
