@@ -2,6 +2,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+TESTING_ON_LOCAL = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -21,6 +22,19 @@ DATABASES = {
         'PORT': '4050',                      # Set to empty string for default.
     }
 }
+
+if TESTING_ON_LOCAL:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'beXsKRIOGfKKTwkkcTkh',                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': 'snapex',
+            'PASSWORD': 'snapex',
+            'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '3306',                      # Set to empty string for default.
+        }
+    }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -75,6 +89,18 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+if TESTING_ON_LOCAL:
+    STATICFILES_DIRS = (
+        # Put strings here, like "/home/html/static" or "C:/www/django/static".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        '/Users/Yuming/Codes/BAE/appid282gcboc93/static',
+    )
+    #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
+
+
+
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -202,6 +228,31 @@ LOGGING = {
         },
     }
 }
+
+if TESTING_ON_LOCAL:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse'
+            }
+        },
+        'handlers': {
+            'mail_admins': {
+                'level': 'ERROR',
+                'filters': ['require_debug_false'],
+                'class': 'django.utils.log.AdminEmailHandler'
+            }
+        },
+        'loggers': {
+            'django.request': {
+                'handlers': ['mail_admins'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        }
+    }
 
 # FOR sessions
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)

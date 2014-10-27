@@ -9,3 +9,4 @@ urlpatterns = [
     url(r'^push_all$', views.push_all, name='test_push_all_plan'),
     url(r'^create_testees$', views.create_testees, name='test_create_testees')
 ]
+
