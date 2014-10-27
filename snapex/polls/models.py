@@ -42,6 +42,15 @@ class Project(models.Model):
     def __unicode__(self):
         return u'%s by %s'%(subject, owner)
 
+class QuestionEntry(models.Model):
+    qtype = models.CharField(max_length=20)
+    required = models.BooleanField(default=False)
+    description = models.CharField(max_length=100)
+    options = models.CharField(max_length=200)
+    question = models.CharField(max_length=50)
+    code = models.CharField(max_length=4)
+    content = models.TextField() # json
+    others = models.TextField() # other information
 
 class Survey(models.Model):
     sid = models.CharField(max_length=20)
@@ -60,18 +69,6 @@ class Survey(models.Model):
     
     def __unicode__(self):
         return u'%s @ %s'%(creater, date_created)
-
-
-class QuestionEntry(models.Model):
-    qtype = models.CharField(max_length=20)
-    required = models.BooleanField(default=False)
-    description = models.CharField(max_length=100)
-    options = models.CharField(max_length=200)
-    question = models.CharField(max_length=50)
-    code = models.CharField(max_length=4)
-    content = models.TextField() # json
-    others = models.TextField() # other information
-
 
 class ProjectTesteeMembership(models.Model):
     project = models.ForeignKey(Project, related_name='project_testee_memberships')
