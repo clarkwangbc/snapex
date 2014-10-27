@@ -45,7 +45,7 @@ class Project(models.Model):
 
 class Survey(models.Model):
     sid = models.CharField(max_length=20)
-    project = models.ForeignKey(Project, related_namQuee='project_surveys')
+    project = models.ForeignKey(Project, related_name='project_surveys')
     code = models.CharField(max_length=4)
     logo = models.CharField(max_length=100)
     questions = models.ManyToManyField(QuestionEntry, 
