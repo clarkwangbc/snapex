@@ -44,10 +44,10 @@ class Project(models.Model):
 
 
 class Survey(models.Model):
-    sid = CharField(max_length=20)
+    sid = models.CharField(max_length=20)
     project = models.ForeignKey(Project, related_namQuee='project_surveys')
-    code = CharField(max_length=4)
-    logo = CharField(max_length=100)
+    code = models.CharField(max_length=4)
+    logo = models.CharField(max_length=100)
     questions = models.ManyToManyField(QuestionEntry, 
                     through='SurveyMembership', 
                     related_name='questions_surveys')
