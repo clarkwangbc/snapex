@@ -17,7 +17,7 @@ class UserProfile(models.Model):
     telephone = models.CharField(max_length=15)
     organization = models.CharField(max_length=100)
     others = models.TextField()
-    remarks = models.CharField(max_length=100) # 备注信息
+    remarks = models.CharField(max_length=100) # Remarks
     
     def __unicode__(self):
 #        return u'%s'%(secret) if secret is not None else u'None'
