@@ -1,3 +1,4 @@
 snapex/wsgi.py
-
+snapex/manage.py
+snapex/settings.py
 *.pyc
