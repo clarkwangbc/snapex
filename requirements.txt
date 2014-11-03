@@ -3,3 +3,6 @@ MySQL-python
 simplejson
 python-dateutil
 requests
+django-crispy-forms
+xlwt
+django-xadmin
