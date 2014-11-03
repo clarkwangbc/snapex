@@ -169,6 +169,16 @@ def get_projects_from_researcher(rs):
         return []
     #return rs.owner_projects.all()
 
+def get_participated_projects_from_researcher(rs):
+    if type(rs) == Researcher:
+        return rs.participated_projects.all()
+    elif type(rs) == User:
+        try:
+            return rs.researcher.participated_projects.all()
+        except Exception as e:
+            return Project.objects.filter(coordinator=rs)
+    else:
+        return [] #
 
 def get_testees_from_project(project):
     return project.testees.all()
@@ -202,6 +212,9 @@ def get_record_from_pk(pk):
 
 
 def add_testee_to_project(testee, project):
+    if type(testee) == User:
+        testee = testee.testee
+    
     if ProjectTesteeMembership.objects.filter(project=project, testee=testee).exists():
         return 1, 'testee already in project'
     else:
@@ -239,7 +252,8 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
     st, new_testees = create_new_testees(init)
     if not type(new_testees) == type(list()):
         return 1, 'create_testee failed'
-
+    if type(owner) == User:
+        owner = owner.researcher
     p = Project(owner=owner, name=name, subject=subject)
     p.save()
 
