@@ -4,13 +4,14 @@ from django.views.generic import RedirectView
 import snapex.settings
 
 import views
+import xadmin
 
-admin.autodiscover()
+xadmin.autodiscover()
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='mypage/')),
     url(r'^polls/', include('polls.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(xadmin.site.urls)),
     url(r'^test/', include('test.urls')),
     url(r'^signin/', include('signin.urls')),
     url(r'^api/v0/', include('api.urls')),

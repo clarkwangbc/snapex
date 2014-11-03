@@ -256,6 +256,16 @@ def easy_login(req, user):
     login(req, user)
 
 
+class CJsonEncoder(json.JSONEncoder):
+    def default(self, datetime):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%dT%H:%M%S')
+        elif isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self.obj)
+
+
 @expose()
 def dummy_web(req, **kw):
     print "URL: %s" % req.build_absolute_uri()

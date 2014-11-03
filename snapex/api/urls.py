@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^report$', views.report_record, name='api_report_survey'),
     url(r'^report_media$', views.report_media, name='api_report_media'),
     url(r'^pull_plans$', views.pull_plans, name='api_pull_plans'),
-    url(r'^auth$', views.auth, name='api_auth')
+    url(r'^auth$', views.auth, name='api_auth'),
+    url(r'^pull_project$', views.pull_project, name='api_pull_project')
 ]

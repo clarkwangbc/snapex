@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 import polls.db_ops as db_ops
 import simplejson
 
-
 @csrf_exempt
 @utility.expose(rest=True)
 def signin(req):
@@ -233,6 +232,149 @@ def pull_plans(req):
         except Exception as e:
             return 1000, dict(msg='json format error')
 
+
+@csrf_exempt
+@utility.expose(rest=True)
+def pull_project(req):
+    if req is None:
+        secret = "b45fd4c0-17f9-45e1-8719-8d160c"
+        user = db_ops.get_testee_from_secret(secret)
+        if user is None:
+            return 1002, dict(msg='secret invalid')
+        if not user.is_active:
+            return 1001, dict(msg='secret has not been activated')
+        
+        ret = get_dict_with_testee(user)
+
+        return 200, dict(msg='ok', project=ret)
+    
+    if req.method=='POST':
+        try:   
+            print req.body
+            json_data = simplejson.loads(req.body)
+            print json_data
+            secret = json_data['testee']
+            print secret
+            user = db_ops.get_testee_from_secret(secret)
+            if user is None:
+                return 1002, dict(msg='secret invalid')
+            if not user.is_active:
+                return 1001, dict(msg='secret has not been activated')
+            
+            ret = get_dict_with_testee(user)
+
+            return 200, dict(msg='ok', project=ret)
+        except Exception as e:
+            print e
+            return 1000, dict(msg='json format error')
+    
+    secret = "b45fd4c0-17f9-45e1-8719-8d160c"
+    user = db_ops.get_testee_from_secret(secret)
+    if user is None:
+        return 1002, dict(msg='secret invalid')
+    if not user.is_active:
+        return 1001, dict(msg='secret has not been activated')
+    
+    ret = get_dict_with_testee(user)
+
+    return 200, dict(msg='ok', project=ret)
+            
+
+
+def get_dict_with_testee(testee):
+    projects = testee.testees_projects.all()
+    
+    if len(projects) == 0:
+    # The testee belongs to no project
+        return None
+    aProject = projects[0]
+    surveys = aProject.project_surveys.all()
+    schedules = aProject.project_schedules.all()
+    
+    ret = {}
+    ret['id'] = aProject.id
+    ret['md5'] = aProject.md5
+    ret['code'] = aProject.code
+    if aProject.date_start:
+        ret['date_start'] = aProject.date_start.strftime('%Y-%m-%dT%H:%M%S')
+    else:
+        ret['date_start'] = ""
+    
+    if aProject.date_end:
+        ret['date_end'] = aProject.date_end.strftime('%Y-%m-%dT%H:%M%S')
+    else:
+        ret['date_end'] = ""
+        
+    ret['name'] = aProject.name
+    ret['organization'] = aProject.organization
+    ret['subject'] = aProject.subject
+    ret['surveys'] = []
+    ret['schedules'] = []
+    
+    for survey in surveys:
+        survey_dict = {}
+        survey_dict['id'] = survey.id
+        survey_dict['md5'] = survey.md5
+        survey_dict['code'] = survey.code
+        survey_dict['logo'] = survey.logo
+        survey_dict['name'] = survey.name
+        survey_dict['raw_contents'] = survey.raw_content
+        survey_dict['others'] = survey.others
+        pages_list = []
+        pages = survey.survey_pages.all()
+        
+        for page in pages:
+            page_dict = {}
+            page_dict['type'] = page.ptype
+            page_dict['page_no'] = page.page_no
+            questions = page.questions.all()
+            questions_list = []
+            
+            for question in questions:
+                question_dict = {}
+                question_dict['code'] = question.code
+                question_dict['description'] = question.description
+                question_dict['options'] = question.options
+                question_dict['type'] = question.qtype
+                question_dict['required'] = question.required
+                question_dict['content'] = question.content
+                question_dict['orderNumber'] = 0
+                question_dict['question'] = question.question
+                question_dict['others'] = question.others
+                questions_list.append(question_dict)
+            
+            page_dict['items']=questions_list
+            pages_list.append(page_dict)
+            
+        survey_dict['pages']=pages_list
+        ret['surveys'].append(survey_dict)
+    
+    for schedule in schedules:
+        schedule_dict={}
+        schedule_dict['id']=schedule.cid
+        schedule_dict['md5']=schedule.md5
+        schedule_dict['name']=schedule.name
+        plans = schedule.schedule_plans.filter(testee=testee)
+        plans_list = []
+        
+        for plan in plans:
+            plan_dict = {}
+            plan_dict['start']=plan.date_start.strftime('%Y-%m-%dT%H:%M%S')
+            plan_dict['end']=plan.date_end.strftime('%Y-%m-%dT%H:%M%S')
+            plan_dict['entries_required']=plan.entries_required
+            plan_dict['entries_allowed']=plan.entries_allowed
+            plan_dict['is_done']=plan.is_done
+            if plan.date_created:
+                plan_dict['date_created']=plan.date_created.strftime('%Y-%m-%dT%H:%M%S')
+            else:
+                plan_dict['date_created']=""
+            
+            plans_list.append(plan_dict)
+            
+        schedule_dict["plans"]=plans_list
+        ret['schedules'].append(schedule_dict)
+    
+    return ret
 
 @csrf_exempt
 @utility.expose(rest=True)

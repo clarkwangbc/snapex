@@ -47,19 +47,18 @@ def create_researcher(user):
                 if User.objects.filter(username=one_user).exists():
                     ret.append(None)
                 else:
-                    u = User(username=one_user["user"], is_active=False, is_staff=False, is_superuser=False)
+                    u = Researcher(username=one_user["user"], is_active=False, is_staff=False, is_superuser=False)
                     if "password" in user:
                         u.set_password(user["password"])
                     else:
                         u.set_password(settings.DEFAULT_PASSWORD)
                     u.save()
-                    up = UserProfile(user=u, is_admin=False, is_researcher=True, device_id='')
+                    uid = generate_uid()
+                    up = UserProfile(user=u, is_admin=False, is_researcher=True, device_id='', uid=uid, qr_code=uid)
                     if "email" in user:
                         up.set_telephone(user["email"])
                     if "telephone" in user:
                         up.set_telephone(user["telephone"])
-                    if "organization" in user:
-                        up.set_organization(user["organization"])
                     up.save()
                     ret.append(u)
         return 0, ret
@@ -80,18 +79,41 @@ def create_testee(user):
             if User.objects.filter(username=one_user).exists():
                 return 1, 'username already exists'
             else:
-                u = User(username=one_user, is_active=False, is_staff=False, is_superuser=False)
+                u = Testee(username=one_user, is_active=False, is_staff=False, is_superuser=False)
                 u.set_password(settings.DEFAULT_PASSWORD)
                 u.save()
-                up = UserProfile(user=u, is_admin=False, is_researcher=False, device_id='')
+                up = UserProfile(user=u, uid = one_user, is_admin=False, is_researcher=False, device_id='')
+                # For the momement QR_CODE is the same as testee username
+                up.qr_code=one_user
                 up.save()
                 ret.append(u)
         return 0, ret
     return 1, 'invalid input, string or list of string required'
 
+def create_testee_to_project(user, project):
+    '''
+        user: string or list of string
+        project: a project object
+    '''
+    stat, users = create_testee(user)
+    if stat == 0:
+        for aUser in users:
+            project.add_testee(aUser)
+            aUser.save()
+    return stat, users
+
+def create_testees(number=1):
+    return create_testee(generate_uids(number))
+
+def create_testees_to_project(number, project):
+    return create_testee_to_project(generate_uids(number), project)
 
 def get_user_from_secret(secret):
     objs = User.objects.filter(username=secret)
+    return objs[0] if objs.exists() else None
+
+def get_testee_from_secret(secret):
+    objs = Testee.objects.filter(username=secret)
     return objs[0] if objs.exists() else None
             
 
