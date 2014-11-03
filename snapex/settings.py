@@ -11,6 +11,7 @@ PROJECT_ROOT = os.path.join(
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+TESTING_ON_LOCAL = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -45,6 +46,11 @@ TIME_ZONE = None
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = (
+    ('en', gettext('English')),
+    ('zh_CN', gettext('Chinese'))
+)
 
 SITE_ID = 1
 
@@ -132,15 +138,23 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
+    #'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    
+    'xadmin',
+    'crispy_forms',
     'polls',
     'signin',
     'api',
     'mypage',
-    'test'
+    'test',
+
 )
+
+DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:i'
+TIME_FORMAT = 'H:i'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -224,5 +238,55 @@ SESSION_COOKIE_SECURE = False
 LOGIN_URL = '/signin/'
 
 # default password for testees and researchers in User model
-DEFAULT_PASSWORD = '9'
+DEFAULT_PASSWORD = SECRET_KEY
 PUSH_ON_TIME = True
+
+### IF TESTING ON LOCAL #####
+TESTING_ON_LOCAL = False ## DEBUGGING ON LOCAL
+if TESTING_ON_LOCAL:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse'
+            }
+        },
+        'handlers': {
+            'mail_admins': {
+                'level': 'ERROR',
+                'filters': ['require_debug_false'],
+                'class': 'django.utils.log.AdminEmailHandler'
+            }
+        },
+        'loggers': {
+            'django.request': {
+                'handlers': ['mail_admins'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        }
+    }
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            #'NAME': 'beXsKRIOGfKKTwkkcTkh',                      # Or path to database file if using sqlite3.
+            'NAME':'pre_production',
+            # The following settings are not used with sqlite3:
+            'USER': 'snapex',
+            'PASSWORD': 'snapex',
+            'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '3306',                      # Set to empty string for default.
+        }
+    }
+
+if TESTING_ON_LOCAL:
+    #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
+    STATICFILES_DIRS = (
+        # Put strings here, like "/home/html/static" or "C:/www/django/static".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        '/Users/Yuming/Codes/BAE/appid282gcboc93/static',
+    )
+    #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
