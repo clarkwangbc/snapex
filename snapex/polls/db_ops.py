@@ -253,9 +253,13 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
     if not type(new_testees) == type(list()):
         return 1, 'create_testee failed'
     if type(owner) == User:
-        owner = owner.researcher
-    p = Project(owner=owner, name=name, subject=subject)
-    p.save()
+        p = Project(owner=owner.researcher, name=name, subject=subject)
+        p.save()
+    elif type(owner) == Researcher:
+        p = Project(owner=owner, name=name, subject=subject)
+        p.save()
+    else:
+        return 1, "Owner is not a valid type"
 
     for testee in new_testees:
         add_testee_to_project(testee, p)
