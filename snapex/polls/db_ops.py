@@ -133,7 +133,16 @@ def get_schedule_from_pk(pk):
 
 
 def get_plans_from_user(user):
-    return user.testee_plans.all()
+    if type(user) == Testee:
+        return user.testee_plans.all()
+    elif type(user) == User:
+        try:
+            return user.testee.testee_plans.all()
+        except Exception as e:
+            return Plans.objects.filter(testee=user) #User is not a testee
+    else:
+        return [] # Invalid Input Type
+    #return user.testee_plans.all()
 
 
 def get_schedule_from_plan(plan):
@@ -149,7 +158,16 @@ def get_survey_from_plan(plan):
 
 
 def get_projects_from_researcher(rs):
-    return rs.owner_projects.all()
+    if type(rs) == Researcher:
+        return rs.owner_projects.all()
+    elif type(rs) == User:
+        try:
+            return rs.researcher.owner_projects.all()
+        except Exception as e:
+            return Project.objects.filter(owner=rs)
+    else:
+        return []
+    #return rs.owner_projects.all()
 
 
 def get_testees_from_project(project):
