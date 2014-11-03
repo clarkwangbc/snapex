@@ -124,9 +124,11 @@ class Project(models.Model):
                     ) # orgnization
     date_created = models.DateTimeField(auto_now=True) # creation date and time
     date_start = models.DateField(
+                    blank=True,
                     help_text='Start date of the project'
                     ) # date in which the project starts
     date_end = models.DateField(
+                    blank=True,
                     help_text='End date of the project'
                     ) # date in which the project ends
     others = models.TextField(

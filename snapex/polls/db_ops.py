@@ -158,27 +158,14 @@ def get_survey_from_plan(plan):
 
 
 def get_projects_from_researcher(rs):
-    if type(rs) == Researcher:
-        return rs.owner_projects.all()
-    elif type(rs) == User:
-        try:
-            return rs.researcher.owner_projects.all()
-        except Exception as e:
-            return Project.objects.filter(owner=rs)
-    else:
-        return []
-    #return rs.owner_projects.all()
+    if hasattr(rs, 'researcher'):
+        rs = rs.researcher
+    return rs.owner_projects.all()
 
 def get_participated_projects_from_researcher(rs):
-    if type(rs) == Researcher:
-        return rs.participated_projects.all()
-    elif type(rs) == User:
-        try:
-            return rs.researcher.participated_projects.all()
-        except Exception as e:
-            return Project.objects.filter(coordinator=rs)
-    else:
-        return [] #
+    if hasattr(rs, 'researcher'):
+        rs = rs.researcher
+    return rs.researcher.participated_projects.all()
 
 def get_testees_from_project(project):
     return project.testees.all()
@@ -212,7 +199,7 @@ def get_record_from_pk(pk):
 
 
 def add_testee_to_project(testee, project):
-    if type(testee) == User:
+    if hasattr(testee, 'testee'):
         testee = testee.testee
     
     if ProjectTesteeMembership.objects.filter(project=project, testee=testee).exists():
@@ -252,14 +239,11 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
     st, new_testees = create_new_testees(init)
     if not type(new_testees) == type(list()):
         return 1, 'create_testee failed'
-    if type(owner) == User:
-        p = Project(owner=owner.researcher, name=name, subject=subject)
-        p.save()
-    elif type(owner) == Researcher:
-        p = Project(owner=owner, name=name, subject=subject)
-        p.save()
-    else:
-        return 1, "Owner is not a valid type"
+    if hasattr(owner, 'researcher'):
+        owner = owner.researcher
+        
+    p = Project(owner=owner.researcher, name=name, subject=subject, date_start="2014-10-31", date_end="2014-11-30")
+    p.save()
 
     for testee in new_testees:
         add_testee_to_project(testee, p)

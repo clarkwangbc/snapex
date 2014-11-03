@@ -93,7 +93,7 @@ def myproject(req):
                 t.append(tinfo)
             ret['testees'] = t
             ret['surveys'] = Survey.objects.filter(project=project).all()
-            ret['schedules'] = Schedule.objects.filter(owner=req.user).all()
+            ret['schedules'] = Schedule.objects.filter(project=project).all()
             ret['plans'] = Plan.objects.filter(project=project).all()
             return render(req, 'mypage/project.html', ret)
         else:
