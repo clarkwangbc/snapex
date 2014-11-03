@@ -6,3 +6,5 @@ requests
 django-crispy-forms
 xlwt
 django-xadmin
+pil
+qrcode
