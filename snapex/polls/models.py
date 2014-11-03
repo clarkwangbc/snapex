@@ -11,7 +11,7 @@ GENDER_TYPES=(
     ("F", "Female"),
 )
 
-QUESTION_TYPES=(
+PAGE_TYPES=(
     ("TextField", "Text Field Input Page"), # Page contains one textfield for maximum
     ("LikertScale", "Likert-Scale Questions Page"), # Page contains 3 likerscale questions for maximum
     ("SimpleText", "Simple Text Input Page"), # Support for multiple choices, date/time pickers, simple textbox, etc. 3/page maximum
@@ -19,7 +19,7 @@ QUESTION_TYPES=(
     ("AudioInput", "Audio Input Page"), # You can take an audio clip. 1/page
 )
 
-PAGE_TYPES=(
+QUESTION_TYPES=(
     # Text Field Input Page Held Question Type
     ("TextField", "Text Field Input"), # Textfield
     
