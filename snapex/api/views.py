@@ -296,12 +296,12 @@ def get_dict_with_testee(testee):
     ret['md5'] = aProject.md5
     ret['code'] = aProject.code
     if aProject.date_start:
-        ret['date_start'] = aProject.date_start.strftime('%Y-%m-%dT%H:%M%S')
+        ret['date_start'] = aProject.date_start.strftime('%Y-%m-%dT%H:%M:%S')
     else:
         ret['date_start'] = ""
     
     if aProject.date_end:
-        ret['date_end'] = aProject.date_end.strftime('%Y-%m-%dT%H:%M%S')
+        ret['date_end'] = aProject.date_end.strftime('%Y-%m-%dT%H:%M:%S')
     else:
         ret['date_end'] = ""
         
@@ -359,13 +359,14 @@ def get_dict_with_testee(testee):
         
         for plan in plans:
             plan_dict = {}
-            plan_dict['start']=plan.date_start.strftime('%Y-%m-%dT%H:%M%S')
-            plan_dict['end']=plan.date_end.strftime('%Y-%m-%dT%H:%M%S')
+            plan_dict['start']=plan.date_start.strftime('%Y-%m-%dT%H:%M:%S')
+            plan_dict['end']=plan.date_end.strftime('%Y-%m-%dT%H:%M:%S')
             plan_dict['entries_required']=plan.entries_required
             plan_dict['entries_allowed']=plan.entries_allowed
             plan_dict['is_done']=plan.is_done
+            plan_dict['survey_id']=plan.survey.pk
             if plan.date_created:
-                plan_dict['date_created']=plan.date_created.strftime('%Y-%m-%dT%H:%M%S')
+                plan_dict['date_created']=plan.date_created.strftime('%Y-%m-%dT%H:%M:%S')
             else:
                 plan_dict['date_created']=""
             

@@ -269,8 +269,8 @@ class Plan(models.Model):
     is_sent = models.BooleanField(default=False)
     is_done = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now=True)
-    date_start = models.DateField()
-    date_end = models.DateField()
+    date_start = models.DateTimeField()
+    date_end = models.DateTimeField()
     entries_allowed = models.IntegerField(default=1)
     entries_required = models.IntegerField(default=1)
     
