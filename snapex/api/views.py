@@ -359,6 +359,7 @@ def get_dict_with_testee(testee):
         
         for plan in plans:
             plan_dict = {}
+            plan_dict['id']=plan.id
             plan_dict['start']=plan.date_start.strftime('%Y-%m-%dT%H:%M:%S')
             plan_dict['end']=plan.date_end.strftime('%Y-%m-%dT%H:%M:%S')
             plan_dict['entries_required']=plan.entries_required
