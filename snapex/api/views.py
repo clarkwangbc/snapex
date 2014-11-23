@@ -451,7 +451,7 @@ def report_record(req):
             plan = db_ops.get_plan_from_pk(int(pid))
             user = db_ops.get_user_from_secret(user_secret)
 
-            if not plan.testee==user:
+            if not plan.testee==user.testee:
                 return 1002, dict(msg='permission denied')
 
             reply_entries = json_data['data']['fields']
