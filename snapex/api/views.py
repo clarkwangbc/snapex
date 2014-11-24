@@ -422,17 +422,15 @@ def report_record(req):
         {    
             pid: plan_id, 
             testee: 'testee_secret',
-            data: {
-                fields: [ // order counts!
-                    {
-                        field_type: 'field_type',
-                        reply: 'reply' // a string
-                        // simple/hard question: just the reply, e.g. 'text'
-                        // single/multi choice: number with spaces, e.g. '2 4 7'
-                        // l5/l7: the number choosed, e.g. '3' for l5; '7' for l7
-                        // if media included then: 'reply@@media:uid'
-                    },
-                ]
+            fields: [ // order counts!
+                {
+                    field_type: 'field_type',
+                    reply: 'reply' // a string
+                    // simple/hard question: just the reply, e.g. 'text'
+                    // single/multi choice: number with spaces, e.g. '2 4 7'
+                    // l5/l7: the number choosed, e.g. '3' for l5; '7' for l7
+                    // if media included then: 'reply@@media:uid'
+                },
             }
         }
         output:
@@ -454,7 +452,7 @@ def report_record(req):
             if not plan.testee==user.testee:
                 return 1002, dict(msg='permission denied')
 
-            reply_entries = json_data['data']['fields']
+            reply_entries = json_data['data']
             qms = plan.survey.survey_memberships.order_by('entry_order')
 
             if len(reply_entries) != len(qms):
