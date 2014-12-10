@@ -388,7 +388,7 @@ def report_media(req):
             uid: 'unique media id with max length of 100, may use device_id as a prefix',
             content: [
                 {
-                    type: 'image' or 'sound or 'video',
+                    type: 'image' or 'audio' or 'video',
                     url: 'url of the media'
                 }, // one media
             ]
@@ -410,6 +410,39 @@ def report_media(req):
             me = MediaEntry(uid=uid, content=simplejson.dumps(content))
             me.save()
             return 200, dict(msg='ok')
+        except Exception as e:
+            return 1000, dict(msg='json format error', verbose=str(e))
+            
+
+@csrf_exempt
+@utility.expose(rest=True)
+def report_media_list(req):
+    '''
+        Report a media url to server
+        input:
+        [{
+            {
+                    type: 'image' or 'audio' or 'video',
+                    url: 'url of the media'
+            }, // one media
+        }]
+        output:
+        {status: status, msg: 'msg'}
+        200: ok
+        else: error
+        test:
+        curl "http://snapex.duapp.com/api/v0/report_media" -d @body.txt
+    '''
+    if req.method=='POST':
+        try:
+            json_data = simplejson.loads(req.body)
+            uid_lists = []
+            for aMedia in json_data:
+                uid = generate_uid()
+                me = MediaEntry(uid=uid, content=simplejson.dumps(content))
+                me.save()
+                uid_lists.append(uid)
+            return 200, dict(msg='ok', media_ids=uid_lists)
         except Exception as e:
             return 1000, dict(msg='json format error', verbose=str(e))
 
