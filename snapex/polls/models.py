@@ -206,8 +206,8 @@ class Survey(models.Model):
         
     def questions(self):
         array = []
-        for page in self.survey_pages:
-            array.extend(page.questions)
+        for page in self.survey_pages.all():
+            array.extend(page.questions.all())
         return array
 
 
