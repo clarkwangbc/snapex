@@ -492,7 +492,7 @@ def report_record(req):
             qms = plan.survey.survey_memberships.order_by('entry_order')
 
             if len(reply_entries) != len(qms):
-                return 1003, dict(msg='record not matching survey')
+                return 1003, dict(msg='record not matching survey', replied=len(reply_entries), qms=len(qms))
             for re, qm in zip(reply_entries, qms):
                 # check if their types
                 if re['field_type'] != qm.qentry.qtype:
