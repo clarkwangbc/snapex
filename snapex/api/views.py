@@ -9,9 +9,10 @@ from django.contrib.auth.decorators import login_required
 import polls.db_ops as db_ops
 import simplejson
 import base64
+import tempfile
 from datetime import datetime
 
-from bae.api import bcs
+import pybcs
 
 @csrf_exempt
 @utility.expose(rest=True)
@@ -504,13 +505,17 @@ def report_record(req):
                 if(re['field_type'] == "photoInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
+                    tempMediaFile = tempfile.TemporaryFile()
+                    temp.write(data)
                     filename = '/photo_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".png"
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
-                    bbcs = bcs.BaeBCS(HOST, AK, SK)
+                    bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
                     bucketName = "snapex-photo"
-                    bbcs.put_object(bucketName, fileName, data)
+                    bucket = bcs.bucket(bucketName)
+                    bucketObject = bucket.object(filename)
+                    bucketObject.post_file(tempMediaFile)
                     url = HOST + bucketName + fileName
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
@@ -522,8 +527,9 @@ def report_record(req):
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
-                    bbcs = bcs.BaeBCS(HOST, AK, SK)
+                    bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
                     bucketName = "snapex-audio"
+                    bucket = bcs.bucket(bucketName)
                     bbcs.put_object(bucketName, fileName, data)
                     url = HOST + bucketName + fileName
                     re['reply'] = "media@url:" + url
