@@ -496,7 +496,7 @@ def report_record(req):
                 return 1003, dict(msg='record not matching survey', replied=len(reply_entries), qms=len(qms))
             for re, qm in zip(reply_entries, qms):
                 # check if their types
-                if re['field_type'] != qm.qentry.qtype:
+                if re['field_type'] != qm.qtype:
                     return 1003, dict(msg='record not matching survey', field_type=re['field_type'], field_type_on_server=qm.qentry.qtype)
 
             record = Record(testee=user, plan=plan)
@@ -534,10 +534,10 @@ def report_record(req):
                     bbcs.put_object(bucketName, fileName, data)
                     url = HOST + bucketName + fileName
                     re['reply'] = "media@url:" + url
-                    ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re))
                     
                 else:
-                    ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re))
                     ae.save()
 
             plan.is_done = True
