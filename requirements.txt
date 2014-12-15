@@ -8,3 +8,4 @@ xlwt
 django-xadmin
 pil
 qrcode
+pybcs
