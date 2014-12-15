@@ -8,6 +8,10 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import polls.db_ops as db_ops
 import simplejson
+import base64
+from datetime import datetime
+
+from bae.api import bcs
 
 @csrf_exempt
 @utility.expose(rest=True)
@@ -278,8 +282,6 @@ def pull_project(req):
     ret = get_dict_with_testee(user)
 
     return 200, dict(msg='ok', project=ret)
-            
-
 
 def get_dict_with_testee(testee):
     projects = testee.testees_projects.all()
@@ -493,14 +495,43 @@ def report_record(req):
             for re, qm in zip(reply_entries, qms):
                 # check if their types
                 if re['field_type'] != qm.qentry.qtype:
-                    return 1003, dict(msg='record not matching survey')
+                    return 1003, dict(msg='record not matching survey', field_type=re['field_type'], field_type_on_server=qm.qentry.qtype)
 
             record = Record(testee=user, plan=plan)
             record.save()
 
             for re, qm in zip(reply_entries, qms):
-                ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
-                ae.save()
+                if(re['field_type'] == "photoInput"):
+                    rawb64str = re['reply']
+                    data = base64.b64decode(rawb64str)
+                    filename = '/photo_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".png"
+                    HOST = "http://bcs.duapp.com/"
+                    AK = "4vvtke0DV3yR9bIYcGyDvKBC"
+                    SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
+                    bbcs = bcs.BaeBCS(HOST, AK, SK)
+                    bucketName = "snapex-photo"
+                    bbcs.put_object(bucketName, fileName, data)
+                    url = HOST + bucketName + fileName
+                    re['reply'] = "media@url:" + url
+                    ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
+                    
+                elif(re['field_type'] == "audioInput"):
+                    rawb64str = re['reply']
+                    data = base64.b64decode(rawb64str)
+                    filename = '/audio_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".acc"
+                    HOST = "http://bcs.duapp.com/"
+                    AK = "4vvtke0DV3yR9bIYcGyDvKBC"
+                    SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
+                    bbcs = bcs.BaeBCS(HOST, AK, SK)
+                    bucketName = "snapex-audio"
+                    bbcs.put_object(bucketName, fileName, data)
+                    url = HOST + bucketName + fileName
+                    re['reply'] = "media@url:" + url
+                    ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
+                    
+                else:
+                    ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
+                    ae.save()
 
             plan.is_done = True
 
