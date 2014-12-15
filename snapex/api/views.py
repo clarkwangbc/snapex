@@ -489,7 +489,7 @@ def report_record(req):
                 return 1002, dict(msg='permission denied')
 
             reply_entries = json_data['data']
-            qms = plan.survey.questions
+            qms = plan.survey.questions()
             #qms = plan.survey.survey_memberships.order_by('entry_order')
 
             if len(reply_entries) != len(qms):
