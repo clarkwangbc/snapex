@@ -203,6 +203,12 @@ class Survey(models.Model):
     
     def __unicode__(self):
         return u'%s @ %s' % (self.project, self.date_created)
+        
+    def questions(self):
+        array = []
+        for page in self.survey_pages:
+            array.extend(page.questions)
+        return array
 
 
 class Page(models.Model):

@@ -489,7 +489,8 @@ def report_record(req):
                 return 1002, dict(msg='permission denied')
 
             reply_entries = json_data['data']
-            qms = plan.survey.survey_memberships.order_by('entry_order')
+            qms = plan.survey.questions
+            #qms = plan.survey.survey_memberships.order_by('entry_order')
 
             if len(reply_entries) != len(qms):
                 return 1003, dict(msg='record not matching survey', replied=len(reply_entries), qms=len(qms))
