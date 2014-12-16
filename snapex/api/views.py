@@ -508,7 +508,7 @@ def report_record(req):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
                     tempMediaFile = tempfile.TemporaryFile()
-                    temp.write(data)
+                    tempMediaFile.write(data)
                     filename = '/photo_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".png"
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
