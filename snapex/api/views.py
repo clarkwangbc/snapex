@@ -499,7 +499,7 @@ def report_record(req):
                 if re['field_type'] != qm.qtype:
                     return 1003, dict(msg='record not matching survey', field_type=re['field_type'], field_type_on_server=qm.qentry.qtype)
 
-            record = Record(testee=user, plan=plan)
+            record = Record(testee=user.testee, plan=plan)
             record.save()
 
             for re, qm in zip(reply_entries, qms):
