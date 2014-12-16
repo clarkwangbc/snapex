@@ -509,7 +509,7 @@ def report_record(req):
                     data = base64.b64decode(rawb64str)
                     tempMediaFile = tempfile.NamedTemporaryFile()
                     tempMediaFile.write(data)
-                    filename = '/photo_' + user_secret + "/" + "photo_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace("_","T") +".jpg"
+                    filename = '/photo_' + user_secret + "/" + "photo_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".jpg"
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
@@ -526,15 +526,17 @@ def report_record(req):
                 elif(re['field_type'] == "AudioInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
-                    filename = '/audio_' + user_secret + "/" + "audio_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace("_","T") +".acc"
+                    filename = '/audio_' + user_secret + "/" + "audio_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".acc"
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
                     bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
-                    bucketName = "snapex-audios"
-                    bucket = bcs.bucket(bucketName)
-                    bbcs.put_object(bucketName, fileName, data)
-                    url = HOST + bucketName + fileName
+                    bucketName = "snapex-photos"
+                    bucket = bbcs.bucket(bucketName)
+                    bucketObject = bucket.object(filename)
+                    #bucketObject.post_file(data)
+                    bucketObject.put_file(tempMediaFile.name)
+                    url = HOST + bucketName + filename
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re))
                     
