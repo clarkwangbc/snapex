@@ -517,7 +517,8 @@ def report_record(req):
                     bucketName = "snapex-photo"
                     bucket = bbcs.bucket(bucketName)
                     bucketObject = bucket.object(filename)
-                    bucketObject.post_file(tempMediaFile)
+                    bucketObject.post_file(data)
+                    #bucketObject.post_file(tempMediaFile)
                     url = HOST + bucketName + fileName
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
