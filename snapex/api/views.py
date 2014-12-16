@@ -499,7 +499,7 @@ def report_record(req):
                 if re['field_type'] != qm.qtype:
                     return 1003, dict(msg='record not matching survey', field_type=re['field_type'], field_type_on_server=qm.qentry.qtype)
 
-            record = create_record_to_plan(user.testee, plan, json_data['date_created'])
+            record = db_ops.create_record_to_plan(user.testee, plan, json_data['date_created'])
             #Record(testee=user.testee, plan=plan, date_created=json_data['date_created'])
             record.save()
 
