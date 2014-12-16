@@ -503,7 +503,7 @@ def report_record(req):
             record.save()
 
             for re, qm in zip(reply_entries, qms):
-                if(re['field_type'] == "photoInput"):
+                if(re['field_type'] == "PhotoInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
                     tempMediaFile = tempfile.TemporaryFile()
@@ -521,7 +521,7 @@ def report_record(req):
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
                     
-                elif(re['field_type'] == "audioInput"):
+                elif(re['field_type'] == "AudioInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
                     filename = '/audio_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".acc"
