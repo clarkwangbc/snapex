@@ -108,6 +108,11 @@ def create_testees(number=1):
 def create_testees_to_project(number, project):
     return create_testee_to_project(generate_uids(number), project)
 
+def create_record_to_plan(testee, plan, date_created):
+    rid = generate_uid()
+    record = Record(testee=testee, plan=plan, date_created=date_created, rid=rid)
+    return record
+
 def get_user_from_secret(secret):
     objs = User.objects.filter(username=secret)
     return objs[0] if objs.exists() else None
