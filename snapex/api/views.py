@@ -526,6 +526,8 @@ def report_record(req):
                 elif(re['field_type'] == "AudioInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
+                    tempMediaFile = tempfile.NamedTemporaryFile()
+                    tempMediaFile.write(data)
                     filename = '/audio_' + user_secret + "/" + "audio_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".acc"
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
