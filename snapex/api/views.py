@@ -515,7 +515,7 @@ def report_record(req):
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
                     bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
                     bucketName = "snapex-photo"
-                    bucket = bcs.bucket(bucketName)
+                    bucket = bbcs.bucket(bucketName)
                     bucketObject = bucket.object(filename)
                     bucketObject.post_file(tempMediaFile)
                     url = HOST + bucketName + fileName
