@@ -509,7 +509,7 @@ def report_record(req):
                     data = base64.b64decode(rawb64str)
                     tempMediaFile = tempfile.NamedTemporaryFile()
                     tempMediaFile.write(data)
-                    filename = '/photo_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".png"
+                    filename = '/photo_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".jpg"
                     HOST = "http://bcs.duapp.com/"
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
@@ -519,7 +519,7 @@ def report_record(req):
                     bucketObject = bucket.object(filename)
                     #bucketObject.post_file(data)
                     bucketObject.put_file(tempMediaFile.name)
-                    url = HOST + bucketName + fileName
+                    url = HOST + bucketName + filename
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
                     
