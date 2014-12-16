@@ -533,7 +533,7 @@ def report_record(req):
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
                     bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
-                    bucketName = "snapex-photos"
+                    bucketName = "snapex-audios"
                     bucket = bbcs.bucket(bucketName)
                     bucketObject = bucket.object(filename)
                     #bucketObject.post_file(data)
