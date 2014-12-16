@@ -507,7 +507,7 @@ def report_record(req):
                 if(re['field_type'] == "PhotoInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
-                    tempMediaFile = tempfile.TemporaryFile()
+                    tempMediaFile = tempfile.NamedTemporaryFile()
                     tempMediaFile.write(data)
                     filename = '/photo_' + str(plan.survey.id) + "_" + user_secret + "_" + str(datetime.now()).replace("_","T") +".png"
                     HOST = "http://bcs.duapp.com/"
@@ -518,7 +518,7 @@ def report_record(req):
                     bucket = bbcs.bucket(bucketName)
                     bucketObject = bucket.object(filename)
                     #bucketObject.post_file(data)
-                    bucketObject.put_file(tempMediaFile)
+                    bucketObject.put_file(tempMediaFile.name)
                     url = HOST + bucketName + fileName
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm.qentry, record=record, content=simplejson.dumps(re))
