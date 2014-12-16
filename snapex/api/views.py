@@ -514,7 +514,7 @@ def report_record(req):
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
                     bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
-                    bucketName = "snapex-photo"
+                    bucketName = "snapex-photos"
                     bucket = bbcs.bucket(bucketName)
                     bucketObject = bucket.object(filename)
                     #bucketObject.post_file(data)
@@ -531,7 +531,7 @@ def report_record(req):
                     AK = "4vvtke0DV3yR9bIYcGyDvKBC"
                     SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
                     bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
-                    bucketName = "snapex-audio"
+                    bucketName = "snapex-audios"
                     bucket = bcs.bucket(bucketName)
                     bbcs.put_object(bucketName, fileName, data)
                     url = HOST + bucketName + fileName
