@@ -129,7 +129,10 @@ def auth(req):
             if user is None:
                 return 1002, dict(msg='secret invalid')
             if user.is_active:
-                return 1001, dict(msg='secret has been used')
+                if user.user_profile.device_id == device_id:
+                    return 200, dict(msg='welcome back')
+                else:
+                    return 1001, dict(msg='secret has been used')
 
             user.is_active = True
             if device_id != '':
