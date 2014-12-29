@@ -523,8 +523,8 @@ def report_record(req):
                     #media = MediaEntry(bucket_name=bucketName, object_name=filename)
                     #media.save()
                     media = bc_ops.put_photo(filename, data)
-                    re['reply'] = "media@uid:" + media.pk 
-                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+media.pk)
+                    re['reply'] = "media@uid:" + str(media.pk)
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
                     ae.save()
                     
                 elif(re['field_type'] == "AudioInput"):
