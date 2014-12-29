@@ -9,10 +9,7 @@ from django.contrib.auth.decorators import login_required
 import polls.db_ops as db_ops
 import simplejson
 import base64
-import tempfile
 from datetime import datetime
-
-import pybcs
 import bc_ops
 
 @csrf_exempt

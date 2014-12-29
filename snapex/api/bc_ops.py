@@ -1,4 +1,5 @@
 import pybcs
+import tempfile
 import polls.db_ops as db_ops
 
 HOST = "http://bcs.duapp.com/"
