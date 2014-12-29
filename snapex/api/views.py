@@ -545,8 +545,8 @@ def report_record(req):
                     bucketObject.put_file(tempMediaFile.name)
                     media = MediaEntry(bucket_name=bucketName, object_name=filename)
                     media.save()
-                    re['reply'] = "media@uid:" + media.pk 
-                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+media.pk)
+                    re['reply'] = "media@uid:" + str(media.pk)
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
                     ae.save()
                     
                 else:
