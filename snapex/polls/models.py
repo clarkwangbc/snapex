@@ -305,4 +305,6 @@ class AnswerEntry(models.Model):
 
 class MediaEntry(models.Model):
     uid = models.CharField(max_length=100)
+    bucket_name = models.CharField(max_length=20)
+    object_name = models.CharField(max_length=100)
     content = models.TextField() # json

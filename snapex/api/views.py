@@ -522,9 +522,10 @@ def report_record(req):
                     bucketObject = bucket.object(filename)
                     #bucketObject.post_file(data)
                     bucketObject.put_file(tempMediaFile.name)
-                    url = HOST + bucketName + filename
-                    re['reply'] = "media@url:" + url
-                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@url:"+url)
+                    media = MediaEntry(bucket_name=bucketName, object_name=filename)
+                    media.save()
+                    re['reply'] = "media@uid:" + media.pk 
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+media.pk)
                     ae.save()
                     
                 elif(re['field_type'] == "AudioInput"):
@@ -542,9 +543,10 @@ def report_record(req):
                     bucketObject = bucket.object(filename)
                     #bucketObject.post_file(data)
                     bucketObject.put_file(tempMediaFile.name)
-                    url = HOST + bucketName + filename
-                    re['reply'] = "media@url:" + url
-                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@url:"+url)
+                    media = MediaEntry(bucket_name=bucketName, object_name=filename)
+                    media.save()
+                    re['reply'] = "media@uid:" + media.pk 
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+media.pk)
                     ae.save()
                     
                 else:
