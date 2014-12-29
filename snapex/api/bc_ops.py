@@ -1,6 +1,7 @@
 import pybcs
 import tempfile
 import polls.db_ops as db_ops
+from polls.models import *
 
 HOST = "http://bcs.duapp.com/"
 AK = "4vvtke0DV3yR9bIYcGyDvKBC"
