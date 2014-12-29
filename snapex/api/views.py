@@ -525,6 +525,7 @@ def report_record(req):
                     url = HOST + bucketName + filename
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@url:"+url)
+                    ae.save()
                     
                 elif(re['field_type'] == "AudioInput"):
                     rawb64str = re['reply']
@@ -544,6 +545,7 @@ def report_record(req):
                     url = HOST + bucketName + filename
                     re['reply'] = "media@url:" + url
                     ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@url:"+url)
+                    ae.save()
                     
                 else:
                     ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply=re['reply'])
