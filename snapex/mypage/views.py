@@ -92,7 +92,9 @@ def myproject(req):
                 tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
                 if testee.qr_image:
                     tinfo['qr_code'] = testee.qr_image.url
-                    
+                else:
+                    db_ops.create_qrcode(testee.username)
+                    tinfo['qr_code'] = testee.qr_image.url
                 t.append(tinfo)
             ret['testees'] = t
             ret['surveys'] = Survey.objects.filter(project=project).all()
