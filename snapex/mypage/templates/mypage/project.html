@@ -61,6 +61,10 @@
         $("#survey_table").tablesorter(); 
         $("#schedule_table").tablesorter(); 
         $("#plan_table").tablesorter(); 
+        $("img.qrcode-thumb").tooltip({
+            var src = $(this).attr("src");
+            return "<img src='" + src +"'>";
+        })
       }); 
     </script>
     <!-- Bootstrap core JavaScript
