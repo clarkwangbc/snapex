@@ -118,6 +118,7 @@ def create_qrcode(username):
 def create_qrcode_for_testee(testee):
     image = create_qrcode(testee.username)
     testee.qr_image = image
+    testee.save()
     return
 
 def create_testee_to_project(user, project):
