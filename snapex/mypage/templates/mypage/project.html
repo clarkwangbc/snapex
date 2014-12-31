@@ -55,6 +55,7 @@
 
     <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
     <script src="/static/snapex/js/jquery.tablesorter.min.js"></script>
+    <script src="/static/jquery-ui/jquery-ui.min.js"></script>
     <script>
       $(document).ready(function(){ 
         $("#testee_table").tablesorter();
@@ -64,7 +65,7 @@
         $("img.qrcode-thumb").tooltip({
             var src = $(this).attr("src");
             return "<img src='" + src +"'>";
-        })
+        });
       }); 
     </script>
     <!-- Bootstrap core JavaScript
