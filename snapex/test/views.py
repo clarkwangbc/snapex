@@ -60,8 +60,9 @@ def create_qr_for_all_testee(req):
     from polls.models import Testee
     testees = Testee.objects.all()
     for testee in testees:
-        testee.qr_image = db_ops.create_qrcode(testee.username)
-        testee.save()
+        if testee.qr_image == None:
+            testee.qr_image = db_ops.create_qrcode(testee.username)
+            testee.save()
 
     return HttpResponse("Succeeded")
     
