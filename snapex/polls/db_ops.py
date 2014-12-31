@@ -115,6 +115,11 @@ def create_qrcode(username):
     suf = SimpleUploadedFile(username+".png", f.read(), content_type="image/png")
     return suf
 
+def create_qrcode_for_testee(testee):
+    image = create_qrcode(testee.username)
+    testee.qr_image = image
+    return
+
 def create_testee_to_project(user, project):
     '''
         user: string or list of string
