@@ -93,7 +93,7 @@ def myproject(req):
                 if testee.qr_image:
                     tinfo['qr_code'] = testee.qr_image.url
                 else:
-                    db_ops.create_qrcode(testee.username)
+                    db_ops.create_qrcode_for_testee(testee)
                     tinfo['qr_code'] = testee.qr_image.url
                 t.append(tinfo)
             ret['testees'] = t
