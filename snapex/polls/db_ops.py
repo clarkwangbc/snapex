@@ -2,6 +2,9 @@ from models import *
 from django.conf import settings
 import uuid
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import *
+import qrcode
+from cStringIO import StringIO
 
 '''
     Utilies
@@ -79,7 +82,18 @@ def create_testee(user):
             if User.objects.filter(username=one_user).exists():
                 return 1, 'username already exists'
             else:
-                u = Testee(username=one_user, is_active=False, is_staff=False, is_superuser=False)
+                qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4,)
+                qr.add_data("uuid:"+one_user)
+                qr.make(fit=True)
+                image=qr.make_image()
+                f = StringIO()
+                image.save(f, 'PNG')
+                f.seek(0)
+
+                suf = SimpleUploadedFile(one_user+".png", f.read(), content_type="image/png")
+                #qr_image_file = TemporaryUploadedFile(name=one_user+".png", content_type='image/png', size=None, charset=None)
+                #image.save(qr_image_file.temporary_file_path())
+                u = Testee(username=one_user, is_active=False, is_staff=False, is_superuser=False, qr_image=suf)
                 u.set_password(settings.DEFAULT_PASSWORD)
                 u.save()
                 up = UserProfile(user=u, uid = one_user, is_admin=False, is_researcher=False, device_id='')
@@ -89,6 +103,17 @@ def create_testee(user):
                 ret.append(u)
         return 0, ret
     return 1, 'invalid input, string or list of string required'
+
+def create_qrcode(username):
+    qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4,)
+    qr.add_data("uuid:" + username)
+    qr.make(fit=True)
+    image=qr.make_image()
+    f = StringIO()
+    image.save(f, 'PNG')
+    f.seek(0)
+    suf = SimpleUploadedFile(username+".png", f.read(), content_type="image/png")
+    return suf
 
 def create_testee_to_project(user, project):
     '''
@@ -246,8 +271,8 @@ def create_project(owner, name, subject='', init=0, researchers=[]):
         return 1, 'create_testee failed'
     if hasattr(owner, 'researcher'):
         owner = owner.researcher
-        
-    p = Project(owner=owner.researcher, name=name, subject=subject, date_start="2014-10-31", date_end="2014-11-30")
+    pid = generate_uid()
+    p = Project(pid=pid, owner=owner.researcher, name=name, subject=subject, date_start="2014-10-31", date_end="2014-11-30")
     p.save()
 
     for testee in new_testees:

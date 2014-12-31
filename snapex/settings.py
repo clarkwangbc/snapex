@@ -241,8 +241,24 @@ LOGIN_URL = '/signin/'
 DEFAULT_PASSWORD = SECRET_KEY
 PUSH_ON_TIME = True
 
+
+#### BCS BUCKET RELATED SETTINGS #####
+BCS_SETTINGS = {
+    "HOST" : "http://bcs.duapp.com/",
+    "BUCKET_LIST" : {
+        "default" : "snapex-others",
+        "image"   : "snapex-images",
+        "photo"   : "snapex-photos",
+        "audio"   : "snapex-audios"
+    },
+    "AK" : "4vvtke0DV3yR9bIYcGyDvKBC",
+    "SK" : "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
+}
+
+
+
 ### IF TESTING ON LOCAL #####
-TESTING_ON_LOCAL = False ## DEBUGGING ON LOCAL
+TESTING_ON_LOCAL = 'SERVER_SOFTWARE' not in os.environ ## DEBUGGING ON LOCAL
 if TESTING_ON_LOCAL:
     LOGGING = {
         'version': 1,
@@ -272,7 +288,7 @@ if TESTING_ON_LOCAL:
         'default': {
             'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             #'NAME': 'beXsKRIOGfKKTwkkcTkh',                      # Or path to database file if using sqlite3.
-            'NAME':'pre_production',
+            'NAME':'pre_production2',
             # The following settings are not used with sqlite3:
             'USER': 'snapex',
             'PASSWORD': 'snapex',
@@ -290,3 +306,16 @@ if TESTING_ON_LOCAL:
         '/Users/Yuming/Codes/BAE/appid282gcboc93/static',
     )
     #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
+
+
+    BCS_SETTINGS = {
+        "HOST" : "http://bcs.duapp.com/",
+        "BUCKET_LIST" : {
+            "default" : "snapex-others-test",
+            "image"   : "snapex-images-test",
+            "photo"   : "snapex-photos-test",
+            "audio"   : "snapex-audios-test"
+        },
+        "AK" : "4vvtke0DV3yR9bIYcGyDvKBC",
+        "SK" : "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
+    }

@@ -30,4 +30,12 @@ def put_object(bucket_name, object_name, data, db_store = True):
         return
 
 def get_object_url(bucket_name, object_name):
-    return
+    bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
+    bucket = bbcs.bucket(bucket_name)
+    bucketObject = bucket.object(object_name)
+    return bucketObject.get_url
+
+def get_media_url(media):
+    bucket_name = media.bucket_name
+    object_name = media.object_name
+    return get_object_url(bucket_name, object_name)

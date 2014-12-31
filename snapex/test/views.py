@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 import polls.db_ops as db_ops
+import qrcode
+
 
 
 def syncdb(req):
@@ -39,7 +41,7 @@ def push_all(req):
     '''
         Not considered for a lot of plans
     '''
-    from polls.models import *
+    from polls.models import Plan
     plans = Plan.objects.filter(is_sent=False).all()
     ret = ''
     for plan in plans:
@@ -50,3 +52,16 @@ def push_all(req):
             ret += 'plan %s failed: %s'%(plan.id, msg)
 
     return HttpResponse(ret)
+
+def create_qr_for_all_testee(req):
+    '''
+        Manually create QRCode for all testee if doesn't exist
+    '''
+    from polls.models import Testee
+    testees = Testee.objects.all()
+    for testee in testees:
+        testee.qr_image = db_ops.create_qrcode(testee.username)
+        testee.save()
+
+    return HttpResponse("Succeeded")
+    

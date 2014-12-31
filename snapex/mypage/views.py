@@ -90,6 +90,7 @@ def myproject(req):
                 pls = Plan.objects.filter(testee=testee, project=project)
                 tinfo['plan_count'] = pls.count()
                 tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
+                tinfo['qr_code'] = testee.qr_image.url
                 t.append(tinfo)
             ret['testees'] = t
             ret['surveys'] = Survey.objects.filter(project=project).all()
@@ -247,13 +248,14 @@ def myrecord(req):
     if not record:
         return HttpResponse('invalid rid')
 
-    template_simple_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
-    template_hard_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+    template_simpletext_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+    template_textfield_question = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
     template_single_choice = '<div>question: %s</div><div>description: %s</div><div>options: %s</div><div>answer: %s</div>'
     template_multi_choice = '<div>question: %s</div><div>description: %s</div><div>options: %s</div><div>answer: %s</div>'
     template_l5 = '<div>question: %s</div><div>description: %s</div><div>1 option: %s</div><div>5 option: %s</div><div>answer: %s</div>'
     template_l7 = '<div>question: %s</div><div>description: %s</div><div>1 option: %s</div><div>7 option: %s</div><div>answer: %s</div>'
     template_date = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
+    template_photo = '<div>question: %s</div><div>description: %s</div><div><img src="%s"></div>'
 
     i_html = ''
 
@@ -267,11 +269,11 @@ def myrecord(req):
         reply_data = simplejson.loads(ae.content)
         reply = reply_data['reply']
         
-        if entry_type=='simple_question':
-            i_html += template_simple_question%(question, description['description'], reply) + '<br>'
-        elif entry_type=='hard_question':
-            i_html += template_hard_question%(question, description['description'], reply) + '<br>'
-        elif entry_type=='single_choice':
+        if entry_type=='SimpleText':
+            i_html += template_simpletext_question%(question, description['description'], reply) + '<br>'
+        elif entry_type=='TextField':
+            i_html += template_textfield_question%(question, description['description'], reply) + '<br>'
+        elif entry_type=='single_choice': #warning: TODO
             i_html += template_single_choice%(question, description['description'],
                 description['options'], reply) + '<br>'
         elif entry_type=='multi_choice':
@@ -287,6 +289,10 @@ def myrecord(req):
                 description['options'][1], reply) + '<br>'
         elif entry_type=='date':
             i_html += template_date%(question, description['description'], reply) + '<br>'
+        elif entry_type=='PhotoInput':
+            i_html += template_date%(question, description['description'], reply) + '<br>'
+        else:
+            i_html += template_simpletext_question%(question, description['description'], reply) + '<br>'
 
     from django.utils.safestring import mark_safe
     return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})

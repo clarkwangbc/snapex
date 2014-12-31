@@ -508,20 +508,7 @@ def report_record(req):
                 if(re['field_type'] == "PhotoInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
-                    #tempMediaFile = tempfile.NamedTemporaryFile()
-                    #tempMediaFile.write(data)
                     filename = '/photo_' + user_secret + "/" + "photo_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".jpg"
-                    #HOST = "http://bcs.duapp.com/"
-                    #AK = "4vvtke0DV3yR9bIYcGyDvKBC"
-                    #SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
-                    #bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
-                    #bucketName = "snapex-photos"
-                    #bucket = bbcs.bucket(bucketName)
-                    #bucketObject = bucket.object(filename)
-                    #bucketObject.post_file(data)
-                    #bucketObject.put_file(tempMediaFile.name)
-                    #media = MediaEntry(bucket_name=bucketName, object_name=filename)
-                    #media.save()
                     media = bc_ops.put_photo(filename, data)
                     re['reply'] = "media@uid:" + str(media.pk)
                     ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
@@ -530,19 +517,7 @@ def report_record(req):
                 elif(re['field_type'] == "AudioInput"):
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
-                    #tempMediaFile = tempfile.NamedTemporaryFile()
-                    #tempMediaFile.write(data)
                     filename = '/audio_' + user_secret + "/" + "audio_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".aac"
-                    #HOST = "http://bcs.duapp.com/"
-                    #AK = "4vvtke0DV3yR9bIYcGyDvKBC"
-                    #SK = "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
-                    #bbcs = pybcs.BCS(HOST, AK, SK, pybcs.HttplibHTTPC)
-                    #bucketName = "snapex-audios"
-                    #bucket = bbcs.bucket(bucketName)
-                    #bucketObject = bucket.object(filename)
-                    #bucketObject.post_file(data)
-                    #bucketObject.put_file(tempMediaFile.name)
-                    #media = MediaEntry(bucket_name=bucketName, object_name=filename)
                     media = bc_ops.put_audio(filename, data)
                     re['reply'] = "media@uid:" + str(media.pk)
                     ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from store import BAEStorage
+from snapex.settings import BCS_SETTINGS
 
 # class Config(models.Model):
 # use settings.PUSH_ON_TIME instead
@@ -82,7 +83,8 @@ class Testee(User):
     occupation = models.CharField(max_length=40, blank=True, null=True) # Maximum 40 Characters
     education = models.CharField(max_length=40, blank=True, null=True, 
         verbose_name='Level of Education') # Level of Education for example High School, Bachelor, Master, Doctor, etc
-    
+    qr_image = models.ImageField(upload_to="/qr_code", storage=BAEStorage(bucket=BCS_SETTINGS["BUCKET_LIST"]["image"]))
+
     def __unicode__(self):
         return u"Testee: %s" % self.username
 
@@ -307,4 +309,8 @@ class MediaEntry(models.Model):
     uid = models.CharField(max_length=100)
     bucket_name = models.CharField(max_length=20)
     object_name = models.CharField(max_length=100)
-    content = models.TextField() # json
+    #content = models.FileField(storage=BAEStorage())
+
+class Test(models.Model):
+    photo = models.FileField(upload_to = "/", storage=BAEStorage())
+
