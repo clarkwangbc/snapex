@@ -1,4 +1,4 @@
-django==1.5.2
+django==1.5.6
 MySQL-python
 simplejson
 python-dateutil
