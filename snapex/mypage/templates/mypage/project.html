@@ -53,6 +53,9 @@
       </div>
     </div>
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
     <script src="/static/snapex/js/jquery.tablesorter.min.js"></script>
     <script src="/static/jquery-ui/jquery-ui.min.js"></script>
@@ -62,14 +65,21 @@
         $("#survey_table").tablesorter(); 
         $("#schedule_table").tablesorter(); 
         $("#plan_table").tablesorter(); 
-        $("img.qrcode-thumb").tooltip({
-            var src = $(this).attr("src");
-            return "<img src='" + src +"'>";
+        $(document).tooltip({
+            items: 'td.qrcode-thumb-td',
+            track: true,
+            position: { my: "center left", at: "center right+10" , collision: "flipfit"},
+            content: function(){
+              var element = $(this);
+              if (element.is("td")){
+                var img_src = element.attr("src");
+                //return "TEST";
+                return "<img class='qrcode-thumb-large' alt='Not available' src='" + img_src + "'>";
+              }
+            },
         });
       }); 
     </script>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    
   </body>
 </html>

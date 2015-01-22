@@ -161,7 +161,7 @@ class Project(models.Model):
             return 1 # Invalid Input
     
     def __unicode__(self):
-        return u'%s' % (self.code)
+        return u'Project %s' % (self.code)
     
 
 
@@ -297,6 +297,9 @@ class Record(models.Model):
     def __unicode__(self):
         return u'%s @ %s'%(self.testee, self.date_created)
 
+def content_file_name(instance, filename):
+    return '/'.join(['', instance.record.testee.username,
+        instance.record.plan.survey.code + "_" + str(instance.record.date_created), filename])
 
 class AnswerEntry(models.Model):
     qentry = models.ForeignKey(QuestionEntry, related_name='question_aentries')
@@ -304,13 +307,7 @@ class AnswerEntry(models.Model):
     reply = models.CharField(max_length=1000)
     content = models.TextField() # raw content @depreciated
 
-
 class MediaEntry(models.Model):
-    uid = models.CharField(max_length=100)
-    bucket_name = models.CharField(max_length=20)
-    object_name = models.CharField(max_length=100)
-    #content = models.FileField(storage=BAEStorage())
-
-class Test(models.Model):
-    photo = models.FileField(upload_to = "/", storage=BAEStorage())
+    owner = models.ForeignKey(User, related_name="media")
+    content = models.FileField(upload_to = content_file_name, storage=BAEStorage(), blank=True, null=True)
 

@@ -141,9 +141,9 @@ INSTALLED_APPS = (
     #'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    
     'xadmin',
     'crispy_forms',
+    'rest_framework',
     'polls',
     'signin',
     'api',
@@ -246,10 +246,11 @@ PUSH_ON_TIME = True
 BCS_SETTINGS = {
     "HOST" : "http://bcs.duapp.com/",
     "BUCKET_LIST" : {
-        "default" : "snapex-others",
+        "other" : "snapex-others",
         "image"   : "snapex-images",
         "photo"   : "snapex-photos",
-        "audio"   : "snapex-audios"
+        "audio"   : "snapex-audios",
+        "default" : "snapex-user-media"
     },
     "AK" : "4vvtke0DV3yR9bIYcGyDvKBC",
     "SK" : "1B65i354OUTyyyVxMhI9IlgBxFztCp84"
@@ -288,7 +289,7 @@ if TESTING_ON_LOCAL:
         'default': {
             'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             #'NAME': 'beXsKRIOGfKKTwkkcTkh',                      # Or path to database file if using sqlite3.
-            'NAME':'pre_production2',
+            'NAME':'pre_production',
             # The following settings are not used with sqlite3:
             'USER': 'snapex',
             'PASSWORD': 'snapex',
@@ -303,7 +304,7 @@ if TESTING_ON_LOCAL:
         # Put strings here, like "/home/html/static" or "C:/www/django/static".
         # Always use forward slashes, even on Windows.
         # Don't forget to use absolute paths, not relative paths.
-        '/Users/Yuming/Codes/BAE/appid282gcboc93/static',
+        '/Users/Yuming/Codes/BAE-v2/appid282gcboc93/static',
     )
     #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
 
@@ -311,10 +312,11 @@ if TESTING_ON_LOCAL:
     BCS_SETTINGS = {
         "HOST" : "http://bcs.duapp.com/",
         "BUCKET_LIST" : {
-            "default" : "snapex-others-test",
+            "other" : "snapex-others-test",
             "image"   : "snapex-images-test",
             "photo"   : "snapex-photos-test",
-            "audio"   : "snapex-audios-test"
+            "audio"   : "snapex-audios-test",
+            "default" : "snapex-user-media-test"
         },
         "AK" : "4vvtke0DV3yR9bIYcGyDvKBC",
         "SK" : "1B65i354OUTyyyVxMhI9IlgBxFztCp84"

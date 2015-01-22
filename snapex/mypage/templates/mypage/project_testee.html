@@ -65,7 +65,7 @@
         {% for testee in testees %}
           <tr>
             <td>{{ testee.name }}</td>
-            <td><img class="qrcode-thumb" src="{{ testee.qr_code }}" style="width: 40px; height: 40px"></td>
+            <td class="qrcode-thumb-td"><img class="qrcode-thumb" src="{{ testee.qr_code }}" style="width: 40px; height: 40px"></td>
             <td>{{ testee.is_active }}</td>
             <td>{{ testee.plan_count }}</td>
             <td>{{ testee.record_count }}</td>

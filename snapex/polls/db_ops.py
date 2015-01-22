@@ -121,6 +121,14 @@ def create_qrcode_for_testee(testee):
     testee.save()
     return
 
+def copy_plan_for_testee(source_testee, target_testee):
+    plans = Plan.objects.filter(testee=source_testee);
+    for plan in plans:
+        plan.pk = None
+        plan.testee = target_testee
+        plan.save()
+    return
+
 def create_testee_to_project(user, project):
     '''
         user: string or list of string

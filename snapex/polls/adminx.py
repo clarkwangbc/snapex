@@ -41,12 +41,14 @@ class SurveyAdmin(object):
     batch_fields = ('create_time',)
     pass
 
-xadmin.site.register(Project)    
-xadmin.site.register(Survey, SurveyAdmin)
+#xadmin.site.register(Test)
+xadmin.site.register(AnswerEntry)
+#xadmin.site.register(Survey, SurveyAdmin)
 #xadmin.site.register(User)
-xadmin.site.register(Page)
-xadmin.site.register(QuestionEntry)
-xadmin.site.register(Schedule)
-xadmin.site.register(Plan)
-xadmin.site.register(Record)
-xadmin.site.register(Test)
+
+#xadmin.site.register(Testee)
+#xadmin.site.register(Page)
+#xadmin.site.register(QuestionEntry)
+#xadmin.site.register(Schedule)
+#xadmin.site.register(Plan)
+#xadmin.site.register(Record)
