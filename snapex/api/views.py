@@ -493,7 +493,7 @@ def report_record(req):
 def update_userinfo(req):
     if req.method=='POST':
         try:
-            json_data = (req.body)
+            json_data = simplejson.loads(req.body)
             secret = json_data['testee']
             testee = db_ops.get_testee_from_secret(secret)
             if testee is None:
@@ -501,6 +501,8 @@ def update_userinfo(req):
             if not testee.is_active:
                 return 1001, dict(msg='secret has not been activated')
             name = json_data['name']
+
+            print json_data
             #if only one part of name is given, name is stored entirely in auth_user's last_name field
             #or split into first_name and last_name
             splitted_name_array = name.split(" ", 2)
