@@ -319,6 +319,90 @@ def report_media(req):
         except Exception as e:
             return 1000, dict(msg='json format error', verbose=str(e))
             
+            
+@csrf_exempt
+@utility.expose(rest=True)
+def report_record_with_file_attachment(req):
+    '''
+        Report a survey record
+        input:
+        {    
+            pid: plan_id, 
+            testee: 'testee_secret',
+            fields: [ // order counts!
+                {
+                    field_type: 'field_type',
+                    reply: 'reply' // a string
+                    // simple/hard question: just the reply, e.g. 'text'
+                    // single/multi choice: number with spaces, e.g. '2 4 7'
+                    // l5/l7: the number choosed, e.g. '3' for l5; '7' for l7
+                    // if media included then: 'reply@@media:uid'
+                },
+            }
+        }
+        output:
+        {status: status, msg: 'msg'}
+        200: ok
+        else: error
+        test:
+        curl "http://snapex.duapp.com/api/v0/report" -d @body.txt
+    '''
+    if req.method=='POST':
+        try:
+            json_data = simplejson.loads(req.body)
+            pid = json_data['pid']
+            user_secret = json_data['testee']
+
+            plan = db_ops.get_plan_from_pk(int(pid))
+            user = db_ops.get_user_from_secret(user_secret)
+
+            if not plan.testee==user.testee:
+                return 1002, dict(msg='permission denied')
+
+            reply_entries = json_data['data']
+            qms = plan.survey.questions()
+            #qms = plan.survey.survey_memberships.order_by('entry_order')
+
+            if len(reply_entries) != len(qms):
+                return 1003, dict(msg='record not matching survey', replied=len(reply_entries), qms=len(qms))
+            for re, qm in zip(reply_entries, qms):
+                # check if their types
+                if re['field_type'] != qm.qtype:
+                    return 1003, dict(msg='record not matching survey', field_type=re['field_type'], field_type_on_server=qm.qentry.qtype)
+
+            record = db_ops.create_record_to_plan(user.testee, plan, json_data['date_created'])
+            #Record(testee=user.testee, plan=plan, date_created=json_data['date_created'])
+            record.save()
+
+            for re, qm in zip(reply_entries, qms):
+                if(re['field_type'] == "PhotoInput"):
+                    rawb64str = re['reply']
+                    data = base64.b64decode(rawb64str)
+                    filename = '/photo_' + user_secret + "/" + "photo_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".jpg"
+                    media = bc_ops.put_photo(filename, data)
+                    re['reply'] = "media@uid:" + str(media.pk)
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
+                    ae.save()
+                    
+                elif(re['field_type'] == "AudioInput"):
+                    rawb64str = re['reply']
+                    data = base64.b64decode(rawb64str)
+                    filename = '/audio_' + user_secret + "/" + "audio_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".aac"
+                    media = bc_ops.put_audio(filename, data)
+                    re['reply'] = "media@uid:" + str(media.pk)
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
+                    ae.save()
+                    
+                else:
+                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply=re['reply'])
+                    ae.save()
+
+            plan.is_done = True
+
+            return 200, dict(msg='ok')
+
+        except Exception as e:
+            return 1000, dict(msg='json format error', verbose=str(e))
 
 @csrf_exempt
 @utility.expose(rest=True)
@@ -403,3 +487,54 @@ def report_record(req):
 
         except Exception as e:
             return 1000, dict(msg='json format error', verbose=str(e))
+
+@csrf_exempt
+@utility.expose(rest=True)
+def update_userinfo(req):
+    if req.method=='POST':
+        try:
+            json_data = (req.body)
+            secret = json_data['testee']
+            testee = db_ops.get_testee_from_secret(secret)
+            if testee is None:
+                return 1002, dict(msg='secret invalid')
+            if not testee.is_active:
+                return 1001, dict(msg='secret has not been activated')
+            name = json_data['name']
+            #if only one part of name is given, name is stored entirely in auth_user's last_name field
+            #or split into first_name and last_name
+            splitted_name_array = name.split(" ", 2)
+
+            if len(splitted_name_array) == 2:
+                testee.first_name = splitted_name_array[0]
+                testee.last_name = splitted_name_array[1]
+            else:
+                testee.last_name = name
+
+            testee.occupation = json_data['occupation']
+            testee.age = json_data['age']
+            testee.gender = json_data['gender']
+            testee.user_profile.telephone = json_data['telephone']
+            testee.email = json_data['email']
+            other_info_dict = {}
+            wechat = json_data.get("wechat")
+            facebook = json_data.get("facebook")
+            if wechat != None and wechat != "":
+                other_info_dict['WECHAT_ID'] = wechat
+            if facebook != None and facebook != "":
+                other_info_dict['FACEBOOK_ID'] = facebook
+            db_ops.update_other_info(testee.user_profile, other_info_dict)
+            testee.save()
+            return 200, dict(msg='ok')
+        except Exception as e:
+            return 1000, dict(msg='json format error', verbose=str(e))
+    else:
+        return 1000, dict(msg='only POST method will be accepted')
+
+
+
+            
+             
+
+
+

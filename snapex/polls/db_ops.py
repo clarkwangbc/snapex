@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import *
 import qrcode
 from cStringIO import StringIO
+import json
 
 '''
     Utilies
@@ -312,4 +313,19 @@ def send_plan(plan):
             return 1, 'need a valid device_id'
     except Exception as e:
         return 1, str(e)
+
+def update_other_info(obj, dictionary):
+    try:
+        if obj.others != None and obj.others != "":
+            original_dict = json.loads(obj.others)
+            final_dict = original_dict.update(dictionary)
+            obj.others = json.dump(final_dict)
+            obj.save()
+        else:
+            obj.others = json.dump(dictionary)
+            obj.save()
+        return 0, str(obj)
+    except Exception as e:
+        return 1, str(e)
+    pass
     
