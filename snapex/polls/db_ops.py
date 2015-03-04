@@ -319,10 +319,10 @@ def update_other_info(obj, dictionary):
         if obj.others != None and obj.others != "":
             original_dict = json.loads(obj.others)
             final_dict = original_dict.update(dictionary)
-            obj.others = json.dump(final_dict)
+            obj.others = json.dumps(final_dict)
             obj.save()
         else:
-            obj.others = json.dump(dictionary)
+            obj.others = json.dumps(dictionary)
             obj.save()
         return 0, str(obj)
     except Exception as e:
