@@ -460,21 +460,27 @@ def report_record(req):
 
             for re, qm in zip(reply_entries, qms):
                 if(re['field_type'] == "PhotoInput"):
+                    ae = AnswerEntry(qentry=qm, record=record, content="", reply="")
+                    ae.save()
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
                     filename = '/photo_' + user_secret + "/" + "photo_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".jpg"
-                    media = bc_ops.put_photo(filename, data)
+                    media = bc_ops.put_photo_for_answer(filename, data, ae)
                     re['reply'] = "media@uid:" + str(media.pk)
-                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
+                    ae.content = simplejson.dumps(re)
+                    ae.reply = "media@uid:" + str(media.pk)
                     ae.save()
-                    
+
                 elif(re['field_type'] == "AudioInput"):
+                    ae = AnswerEntry(qentry=qm, record=record, content="", reply="")
+                    ae.save()
                     rawb64str = re['reply']
                     data = base64.b64decode(rawb64str)
                     filename = '/audio_' + user_secret + "/" + "audio_" + str(plan.survey.id) + "_" + plan.survey.code + "_" + str(datetime.now()).replace(" ","T") +".aac"
-                    media = bc_ops.put_audio(filename, data)
+                    media = bc_ops.put_audio_for_answer(filename, data, ae)
                     re['reply'] = "media@uid:" + str(media.pk)
-                    ae = AnswerEntry(qentry=qm, record=record, content=simplejson.dumps(re), reply="media@uid:"+str(media.pk))
+                    ae.content = simplejson.dumps(re)
+                    ae.reply = "media@uid:" + str(media.pk)
                     ae.save()
                     
                 else:
@@ -482,6 +488,7 @@ def report_record(req):
                     ae.save()
 
             plan.is_done = True
+            plan.save()
 
             return 200, dict(msg='ok')
 

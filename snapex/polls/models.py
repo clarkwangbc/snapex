@@ -346,8 +346,10 @@ class Record(models.Model):
         return u'%s @ %s'%(self.testee, self.date_created)
 
 def content_file_name(instance, filename):
-    return '/'.join(['', instance.record.testee.username,
-        instance.record.plan.survey.code + "_" + str(instance.record.date_created), filename])
+    if instance.answer != None:
+        return '/'.join(['', instance.answer.record.plan.survey.project.code + "_" + str(instance.answer.record.plan.survey.project.pk) ,instance.answer.record.plan.survey.code + "_" + str(instance.answer.record.plan.survey.pk), instance.answer.record.testee.username, filename])
+    else:
+        return '/temp/' + filename
 
 class AnswerEntry(models.Model):
     qentry = models.ForeignKey(QuestionEntry, related_name='question_aentries')
@@ -356,6 +358,9 @@ class AnswerEntry(models.Model):
     content = models.TextField() # raw content @depreciated
 
 class MediaEntry(models.Model):
-    owner = models.ForeignKey(User, related_name="media")
+    answer = models.ForeignKey(AnswerEntry, related_name="media", blank=True, null=True)
+    uid = models.CharField(max_length = 100, null=True)
+    bucket_name = models.CharField(max_length=100)
+    object_name = models.CharField(max_length=100)
     content = models.FileField(upload_to = content_file_name, storage=BAEStorage(), blank=True, null=True)
 
