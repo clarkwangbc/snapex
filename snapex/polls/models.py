@@ -88,9 +88,57 @@ class Testee(User):
     def __unicode__(self):
         return u"Testee: %s" % self.username
 
+    def profileAttrSetter(attr):
+        def set_any(self, value):
+            return setattr(self.user_profile, attr, value)
+        return set_any
+
+    def profileAttrGetter(attr):
+        def get_any(self):
+            return getattr(self.user_profile, attr)
+        return get_any
+
+    uid = property(fget=profileAttrGetter('uid'), fset=profileAttrSetter('uid'))
+    device_id = property(fget=profileAttrGetter('device_id'), fset=profileAttrSetter('device_id'))
+    qr_code = property(fget=profileAttrGetter('qr_code'), fset=profileAttrSetter('qr_code'))
+    telephone = property(fget=profileAttrGetter('telephone'), fset=profileAttrSetter('telephone'))
+    others = property(fget=profileAttrGetter('others'), fset=profileAttrSetter('others'))
+    remarks = property(fget=profileAttrGetter('remarks'), fset=profileAttrSetter('remarks'))
+
+    def save(self, *args, **kwargs):
+        super(Testee, self).save(*args, **kwargs)
+        if hasattr(self, "user_profile") and self.user_profile is not None:
+            self.user_profile.save()
+
+
+
 class Researcher(User):
     # Researcher extra information
     organiztion = models.CharField(max_length=80, blank=True, null=True) # Organization of the researcher
+
+    def profileAttrSetter(attr):
+        def set_any(self, value):
+            return setattr(self.user_profile, attr, value)
+        return set_any
+
+    def profileAttrGetter(attr):
+        def get_any(self):
+            return getattr(self.user_profile, attr)
+        return get_any
+
+    uid = property(fget=profileAttrGetter('uid'), fset=profileAttrSetter('uid'))
+    device_id = property(fget=profileAttrGetter('device_id'), fset=profileAttrSetter('device_id'))
+    qr_code = property(fget=profileAttrGetter('qr_code'), fset=profileAttrSetter('qr_code'))
+    telephone = property(fget=profileAttrGetter('telephone'), fset=profileAttrSetter('telephone'))
+    others = property(fget=profileAttrGetter('others'), fset=profileAttrSetter('others'))
+    remarks = property(fget=profileAttrGetter('remarks'), fset=profileAttrSetter('remarks'))
+    is_admin = property(fget=profileAttrGetter('is_admin'), fset=profileAttrSetter('is_admin'))
+    is_researcher = property(fget=profileAttrGetter('is_researcher'), fset=profileAttrSetter('is_researcher'))
+    
+    def save(self, *args, **kwargs):
+        super(Testee, self).save(*args, **kwargs)
+        if hasattr(self, "user_profile") and self.user_profile is not None:
+            self.user_profile.save()
     
     def __unicode__(self):
         return u"%s" % (self.username)
