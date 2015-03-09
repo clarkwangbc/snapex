@@ -78,7 +78,7 @@ def create_survey(req):
                         option_label = option["label"]
                         options_plain_array.append(option_label)
                     options = simplejson.dumps(options_plain_array)
-                else:
+                except Exception as e:
                     options = ""
                 qe = QuestionEntry(qtype=s['field_type'], description=s['field_options']['description'], options=options, required=s['required'], question=s['label'], content=simplejson.dumps(s))
                 qe.save()
