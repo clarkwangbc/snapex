@@ -181,11 +181,15 @@ def mysurvey(req):
             if survey is None:
                 return HttpResponse('invalid sid')
             import simplejson
-            survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)['data']['fields'])
+            if survey.raw_content == None or survey.raw_content == "":
+                survey_content = simplejson.dumps(survey.to_raw_content()["fields"])
+            else:
+                survey_content = simplejson.dumps(simplejson.loads(survey.raw_content)["data"]["fields"])
             from django.utils.safestring import mark_safe
             return render(req, 'mypage/survey_create.html',
                 {'project': project, 'create_survey': 0, 
                     'survey_name': survey.name,
+                    'survey': survey,
                     'raw_survey': mark_safe(survey_content)})    
 
     elif req.method == 'POST':
@@ -259,44 +263,31 @@ def myrecord(req):
     template_l5 = '<div>question: %s</div><div>description: %s</div><div>1 option: %s</div><div>5 option: %s</div><div>answer: %s</div>'
     template_l7 = '<div>question: %s</div><div>description: %s</div><div>1 option: %s</div><div>7 option: %s</div><div>answer: %s</div>'
     template_date = '<div>question: %s</div><div>description: %s</div><div>answer: %s</div>'
-    template_photo = '<div>question: %s</div><div>description: %s</div><div><img src="%s"></div>'
+    template_photo = '<div>question: %s</div><div>description: %s</div><div><img src="%s" style="width:480px;"></div>'
+    template_audio = '<div>question: %s</div><div>description: %s</div><div><audio controls style="width:480px;"><source src="%s" type="audio/aac" /><p>Your browser does not support HTML5 audio.</p></audio></div>'
 
     i_html = ''
 
     for ae in record.record_aentries.all():
         entry_type = ae.qentry.qtype
+        print entry_type
         import simplejson
         data = simplejson.loads(ae.qentry.content)
-        question = data['label']
-        description = data['field_options']
-        media = data['required']
-        reply_data = simplejson.loads(ae.content)
-        reply = reply_data['reply']
+        question = ae.qentry.question
+        description = ae.qentry.description
+        required = ae.qentry.required
+        reply = ae.reply
         
         if entry_type=='SimpleText':
-            i_html += template_simpletext_question%(question, description['description'], reply) + '<br>'
+            i_html += template_simpletext_question%(question, description, reply) + '<br>'
         elif entry_type=='TextField':
-            i_html += template_textfield_question%(question, description['description'], reply) + '<br>'
-        elif entry_type=='single_choice': #warning: TODO
-            i_html += template_single_choice%(question, description['description'],
-                description['options'], reply) + '<br>'
-        elif entry_type=='multi_choice':
-            i_html += template_multi_choice%(question, description['description'],
-                description['options'], reply) + '<br>'
-        elif entry_type=='l5':
-            i_html += template_l5%(question, description['description'], 
-                description['options'][0], 
-                description['options'][1], reply) + '<br>'
-        elif entry_type=='l7':
-            i_html += template_l7%(question, description['description'], 
-                description['options'][0], 
-                description['options'][1], reply) + '<br>'
-        elif entry_type=='date':
-            i_html += template_date%(question, description['description'], reply) + '<br>'
+            i_html += template_textfield_question%(question, description, reply) + '<br>'
         elif entry_type=='PhotoInput':
-            i_html += template_date%(question, description['description'], reply) + '<br>'
+            i_html += template_photo%(question, description, ae.media.all()[0].content.url) + '<br>'
+        elif entry_type=='AudioInput':
+            i_html += template_audio%(question, description, ae.media.all()[0].content.url) + '<br>'
         else:
-            i_html += template_simpletext_question%(question, description['description'], reply) + '<br>'
+            i_html += template_simpletext_question%(question, description, reply) + '<br>'
 
     from django.utils.safestring import mark_safe
     return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})

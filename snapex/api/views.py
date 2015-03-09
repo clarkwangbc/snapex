@@ -71,6 +71,47 @@ def create_survey(req):
             survey.save()
             # create question entries
             for rank, s in enumerate(surveys):
+                try:
+                    options_array = s['field_options']['options']
+                    options_plain_array = []
+                    for option in options_array:
+                        option_label = option["label"]
+                        options_plain_array.append(option_label)
+                    options = simplejson.dumps(options_plain_array)
+                else:
+                    options = ""
+                qe = QuestionEntry(qtype=s['field_type'], description=s['field_options']['description'], options=options, required=s['required'], question=s['label'], content=simplejson.dumps(s))
+                qe.save()
+                sm = SurveyMembership(qentry=qe, survey=survey, entry_order=rank)
+                sm.save()
+
+            return 200, dict(msg='ok')
+        except Exception as e:
+            return 1001, dict(msg='json format error', verbose=str(e))
+
+@csrf_exempt
+@login_required
+@utility.expose(rest=True)
+def update_survey(req):
+    if req.method=='POST':
+        try:
+            json_data = simplejson.loads(req.body)
+            data = json_data['data']
+            project_id = int(data['project_id'])
+            survey_name = data['survey_name']
+            surveys = data['fields']
+
+            # only ownner of the project have permission to create survey
+            user = req.user
+            if not Project.objects.filter(owner=user, pk=project_id).exists():
+                return 400, dict(msg='permission denied')
+
+            project = db_ops.get_project_from_pk(project_id)
+            # create survey
+            survey = Survey(project=project, name=survey_name, raw_content=req.body)
+            survey.save()
+            # create question entries
+            for rank, s in enumerate(surveys):
                 qe = QuestionEntry(qtype=s['field_type'], content=simplejson.dumps(s))
                 qe.save()
                 sm = SurveyMembership(qentry=qe, survey=survey, entry_order=rank)

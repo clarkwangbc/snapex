@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from store import BAEStorage
 from snapex.settings import BCS_SETTINGS
+import simplejson
 
 # class Config(models.Model):
 # use settings.PUSH_ON_TIME instead
@@ -260,6 +261,25 @@ class Survey(models.Model):
             array.extend(page.questions.all())
         return array
 
+    # To be used for web app
+    def to_raw_content(self):
+        ret = {}
+        ret["survey_name"] = self.name
+        ret["fields"] =[]
+        for question in self.questions():
+            question_dict = {}
+            question_dict["label"] = question.question
+            question_dict["field_type"] = question.qtype
+            question_dict["field_options"] = {}
+            question_dict["field_options"]["description"] = question.description
+            if question.options != None and question.options != "":
+                question_dict["field_options"]["options"] = []
+                options_array = simplejson.loads(question.options)
+                for option in options_array:
+                    question_dict["field_options"]["options"].append({"label":option})
+                    pass
+            ret["fields"].append(question_dict)
+        return ret
 
 class Page(models.Model):
     ptype = models.CharField(max_length=20,
