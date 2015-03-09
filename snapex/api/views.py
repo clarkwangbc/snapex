@@ -67,7 +67,8 @@ def create_survey(req):
 
             project = db_ops.get_project_from_pk(project_id)
             # create survey
-            survey = Survey(project=project, name=survey_name, raw_content=req.body)
+            sid = db_ops.generate_uid()
+            survey = Survey(sid=sid, project=project, name=survey_name, raw_content=req.body)
             survey.save()
             # create question entries
             for rank, s in enumerate(surveys):
@@ -80,7 +81,11 @@ def create_survey(req):
                     options = simplejson.dumps(options_plain_array)
                 except Exception as e:
                     options = ""
-                qe = QuestionEntry(qtype=s['field_type'], description=s['field_options']['description'], options=options, required=s['required'], question=s['label'], content=simplejson.dumps(s))
+                try:
+                    description = s['field_options']['description']
+                except Exception as e:
+                    description = ""
+                qe = QuestionEntry(qtype=s['field_type'], description=description, options=options, required=s['required'], question=s['label'], content=simplejson.dumps(s))
                 qe.save()
                 sm = SurveyMembership(qentry=qe, survey=survey, entry_order=rank)
                 sm.save()

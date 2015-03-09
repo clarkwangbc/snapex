@@ -172,7 +172,7 @@ def mysurvey(req):
         
         if action == 'create': # a survey creating page
             return render(req, 'mypage/survey_create.html', 
-                {'project': project, 'create_survey': 1, 'raw_survey': []})
+                {'project': project, 'create_survey': 1, 'raw_survey': [], 'survey_id': 0})
                     
         elif action == 'view': # a survey displaying page
             if sid is None or sid=='':
@@ -189,7 +189,7 @@ def mysurvey(req):
             return render(req, 'mypage/survey_create.html',
                 {'project': project, 'create_survey': 0, 
                     'survey_name': survey.name,
-                    'survey': survey,
+                    'survey_id': survey.id,
                     'raw_survey': mark_safe(survey_content)})    
 
     elif req.method == 'POST':

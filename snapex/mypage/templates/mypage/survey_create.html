@@ -50,7 +50,6 @@
     $(function(){
       var fb,
           project_id = {{ project.id }},
-          survey_id = {{ survey.id }}
           submit_button,
           survey_name;
 
@@ -68,7 +67,7 @@
       $("#fb_main").prepend($(tmp));
       submit_button = $("#submit_survey")[0];
       changes_saved_button = $("button.js-save-form")[0];
-      changes_saved_button.style.display = "none"
+      //changes_saved_button.style.display = "none"
       if ({{ create_survey }}) {
         submit_button.onclick = function() {
           name = $("#survey_name")[0].value;
@@ -93,13 +92,15 @@
           }
         }
       } else {
-        $("#survey_name")[0].value = "{{ survey_name }}"
+        $("#survey_name")[0].value = "{{ survey_name }}";
         submit_button.onclick = function() {
           name = $("#survey_name")[0].value;
           if (name) {
-            window.fb_output.survey_name = name;
+            window.fb_output.survey_name = survey_name;
             window.fb_output.project_id = project_id;
-            window.fb_output.survey_id = survey_id;
+            if ( {{ survey_id }} ){
+                window.fb_output.survey_id = {{ survey_id }};
+            }
             $.ajax({
               url: "/api/v0/update_survey",
               type: "post",
@@ -115,9 +116,11 @@
                 console.log(data)
               }
             });
+        }
       }
 
-    });
+    }
+  });
   </script>
 
 </body>
