@@ -328,4 +328,14 @@ def update_other_info(obj, dictionary):
     except Exception as e:
         return 1, str(e)
     pass
+
+def get_other_info(obj):
+    try:
+        if obj.others != None and obj.others != "":
+            return json.loads(obj.others)
+        else:
+            return {}
+    except Exception as e:
+        return None
+    pass
     

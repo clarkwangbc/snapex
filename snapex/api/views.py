@@ -11,6 +11,8 @@ import simplejson
 import base64
 from datetime import datetime
 import bc_ops
+from polls.qentry_type_map import *
+from django.db.models import Q
 
 @csrf_exempt
 @utility.expose(rest=True)
@@ -71,6 +73,10 @@ def create_survey(req):
             survey = Survey(sid=sid, project=project, name=survey_name, raw_content=req.body)
             survey.save()
             # create question entries
+            previous_page_type = ""
+            previous_page_items_count = 0
+            page = None
+            page_no = 0
             for rank, s in enumerate(surveys):
                 try:
                     options_array = s['field_options']['options']
@@ -89,6 +95,22 @@ def create_survey(req):
                 qe.save()
                 sm = SurveyMembership(qentry=qe, survey=survey, entry_order=rank)
                 sm.save()
+
+                current_page_type = ptype_for_qtype(s['field_type'])
+
+                if previous_page_type == current_page_type and previous_page_items_count < max_items_for_ptype(current_page_type):
+                    pm = PageMembership(qentry=qe, page=page, entry_order=previous_page_items_count * 10)
+                    pm.save()
+                    previous_page_items_count += 1
+
+                else:
+                    page_no += 10
+                    page = Page(ptype=current_page_type, page_no=page_no, survey=survey)
+                    page.save()
+                    pm = PageMembership(qentry=qe, page=page, entry_order=0)
+                    pm.save()
+                    previous_page_type = current_page_type
+                    previous_page_items_count = 1
 
             return 200, dict(msg='ok')
         except Exception as e:
@@ -139,6 +161,8 @@ def create_schedule(req):
             user = req.user
             schedule = Schedule(name=schedule_name, content=simplejson.dumps(events), owner=user)
             schedule.save()
+
+            # Create Plan for each event
 
             return 200, dict(msg='ok')
         except Exception as e:
@@ -306,7 +330,7 @@ def get_dict_with_testee(testee):
         schedule_dict['id']=schedule.cid
         schedule_dict['md5']=schedule.md5
         schedule_dict['name']=schedule.name
-        plans = schedule.schedule_plans.filter(testee=testee)
+        plans = schedule.schedule_plans.filter(Q(testee=testee) | Q(testee=None))
         plans_list = []
         
         for plan in plans:
@@ -486,7 +510,7 @@ def report_record(req):
             plan = db_ops.get_plan_from_pk(int(pid))
             user = db_ops.get_user_from_secret(user_secret)
 
-            if not plan.testee==user.testee:
+            if not (plan.testee == None or plan.testee == user.testee):
                 return 1002, dict(msg='permission denied')
 
             reply_entries = json_data['data']
@@ -585,6 +609,46 @@ def update_userinfo(req):
             return 1000, dict(msg='json format error', verbose=str(e))
     else:
         return 1000, dict(msg='only POST method will be accepted')
+
+@csrf_exempt
+@utility.expose(rest=True)
+def get_userinfo(req):
+    if req.method=='POST':
+        try:
+            json_data = simplejson.loads(req.body)
+            secret = json_data['testee']
+            testee = db_ops.get_testee_from_secret(secret)
+            if testee is None:
+                return 1002, dict(msg='secret invalid')
+            if not testee.is_active:
+                return 1001, dict(msg='secret has not been activated')
+            
+            ret = {'testee': secret}
+            if (testee.first_name and test.first_name != ""):
+                ret['name'] = testee.first_name + " " + testee.last_name
+            else:
+                ret['name'] = testee.last_name
+            ret['occupation'] = testee.occupation
+            ret['age'] = testee.age
+            ret['gender'] = testee.gender
+            ret['telephone'] = testee.user_profile.telephone
+            ret['email'] = testee.email
+            other_info_dict = db_ops.get_other_info(testee)
+            if 'WECHAT_ID' in other_info_dict:
+                ret['wechat'] = other_info_dict['WECHAT_ID']
+            else:
+                ret['wechat'] = None
+
+            if 'FACEBOOK_ID' in other_info_dict:
+                ret['facebook'] = other_info_dict['FACEBOOK_ID']
+            else:
+                ret['facebook'] = None           
+            return 200, dict(msg='ok', testee=ret)
+        except Exception as e:
+            return 1000, dict(msg='json format error', verbose=str(e))
+    else:
+        return 1000, dict(msg='only POST method will be accepted')
+
 
 
 
