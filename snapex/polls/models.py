@@ -338,7 +338,7 @@ class Schedule(models.Model):
 class Plan(models.Model):
     survey = models.ForeignKey(Survey, related_name='survey_plans')
     owner = models.ForeignKey(Researcher, related_name='owner_plans')
-    testee = models.ForeignKey(Testee, related_name='testee_plans')
+    testee = models.ForeignKey(Testee, related_name='testee_plans',null=True,blank=True)
     project = models.ForeignKey(Project, related_name='project_plans')
     schedule = models.ForeignKey(Schedule, related_name='schedule_plans')
 
