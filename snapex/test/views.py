@@ -75,108 +75,108 @@ def auto_create_plans(req):
     plan_example_2 = Plan.objects.filter(pk=108)[0]
     for i in range(6):
         plan_example_0.pk = None
-        plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+        plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
         plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
         plan_example_0.save()
         plan_example_1.pk = None
-        plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+        plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
         plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
         plan_example_1.save()
         plan_example_2.pk = None
-        plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+        plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
     schedule_w2 = Schedule.objects.filter(pk=5)
     plan_example_0.pk = None
     plan_example_0.schedule = schedule_w2
-    plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+    plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
     plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
     plan_example_0.save()
     plan_example_1.pk = None
     plan_example_1.schedule = schedule_w2
-    plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+    plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
     plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
     plan_example_1.save()
     plan_example_2.pk = None
     plan_example_2.schedule = schedule_w2
-    plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+    plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
     plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
     plan_example_2.save()
 
     for i in range(6):
         plan_example_0.pk = None
-        plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+        plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
         plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
         plan_example_0.save()
         plan_example_1.pk = None
-        plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+        plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
         plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
         plan_example_1.save()
         plan_example_2.pk = None
-        plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+        plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
     schedule_w3 = Schedule.objects.filter(pk=6)
     plan_example_0.pk = None
     plan_example_0.schedule = schedule_w2
-    plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+    plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
     plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
     plan_example_0.save()
     plan_example_1.pk = None
     plan_example_1.schedule = schedule_w2
-    plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+    plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
     plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
     plan_example_1.save()
     plan_example_2.pk = None
     plan_example_2.schedule = schedule_w2
-    plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+    plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
     plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
     plan_example_2.save()
 
     for i in range(6):
         plan_example_0.pk = None
-        plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+        plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
         plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
         plan_example_0.save()
         plan_example_1.pk = None
-        plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+        plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
         plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
         plan_example_1.save()
         plan_example_2.pk = None
-        plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+        plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
     schedule_w4 = Schedule.objects.filter(pk=7)
     plan_example_0.pk = None
     plan_example_0.schedule = schedule_w2
-    plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+    plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
     plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
     plan_example_0.save()
     plan_example_1.pk = None
     plan_example_1.schedule = schedule_w2
-    plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+    plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
     plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
     plan_example_1.save()
     plan_example_2.pk = None
     plan_example_2.schedule = schedule_w2
-    plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+    plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
     plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
     plan_example_2.save()
 
     for i in range(6):
         plan_example_0.pk = None
-        plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
+        plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
         plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)
         plan_example_0.save()
         plan_example_1.pk = None
-        plan_example_1.date_start = plan_example_1.date_start + datatime.timedelta(days=1)
+        plan_example_1.date_start = plan_example_1.date_start + datetime.timedelta(days=1)
         plan_example_1.date_end = plan_example_1.date_end + datetime.timedelta(days=1)
         plan_example_1.save()
         plan_example_2.pk = None
-        plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
+        plan_example_2.date_start = plan_example_2.date_start + datetime.timedelta(days=1)
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
