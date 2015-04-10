@@ -208,7 +208,7 @@ def auth(req):
             user.save()
             return 200, dict(msg='ok')
         except Exception as e:
-            return 1000, dict(msg='json format error')
+            return 1000, dict(msg='json format error', error=str(e))
 
 
 @csrf_exempt
