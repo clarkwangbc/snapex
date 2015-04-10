@@ -214,18 +214,7 @@ def auth(req):
 @csrf_exempt
 @utility.expose(rest=True)
 def pull_project(req):
-    if req is None:
-        secret = "b45fd4c0-17f9-45e1-8719-8d160c"
-        user = db_ops.get_testee_from_secret(secret)
-        if user is None:
-            return 1002, dict(msg='secret invalid')
-        if not user.is_active:
-            return 1001, dict(msg='secret has not been activated')
-        
-        ret = get_dict_with_testee(user)
 
-        return 200, dict(msg='ok', project=ret)
-    
     if req.method=='POST':
         try:   
             print req.body
@@ -246,17 +235,6 @@ def pull_project(req):
             print e
             return 1000, dict(msg='json format error')
     
-    secret = "b45fd4c0-17f9-45e1-8719-8d160c"
-    user = db_ops.get_testee_from_secret(secret)
-    if user is None:
-        return 1002, dict(msg='secret invalid')
-    if not user.is_active:
-        return 1001, dict(msg='secret has not been activated')
-    
-    ret = get_dict_with_testee(user)
-
-    return 200, dict(msg='ok', project=ret)
-
 def get_dict_with_testee(testee):
     projects = testee.testees_projects.all()
     
