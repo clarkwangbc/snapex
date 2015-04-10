@@ -54,6 +54,10 @@
       <thead>
         <tr>
           <th>Username</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Telephone</th>
+          <th>Email</th>
           <th>QRCode</th>
           <th>Active</th>
           <th>Plan Count</th>
@@ -65,6 +69,10 @@
         {% for testee in testees %}
           <tr>
             <td>{{ testee.name }}</td>
+            <td>{{ testee.last_name }}</td>
+            <td>{{ testee.age }} </td>
+            <td>{{ testee.telephone }} </td>
+            <td>{{ testee.email }} </td>
             <td class="qrcode-thumb-td"><img class="qrcode-thumb" src="{{ testee.qr_code }}" style="width: 40px; height: 40px"></td>
             <td>{{ testee.is_active }}</td>
             <td>{{ testee.plan_count }}</td>

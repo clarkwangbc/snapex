@@ -86,10 +86,15 @@ def myproject(req):
             for testee in testees:
                 tinfo = {}
                 tinfo['name'] = testee.username
+                tinfo['last_name'] = testee.last_name
+                tinfo['telephone'] = testee.telephone
+                tinfo['email'] = testee.email
+                tinfo['age'] = testee.age
                 tinfo['is_active'] = testee.is_active
                 pls = Plan.objects.filter(testee=testee, project=project)
                 tinfo['plan_count'] = pls.count()
-                tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
+                #tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
+                tinfo['record_count'] = Record.objects.filter(testee=testee).count()
                 if testee.qr_image:
                     tinfo['qr_code'] = testee.qr_image.url
                 else:
