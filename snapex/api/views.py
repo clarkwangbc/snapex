@@ -233,7 +233,7 @@ def pull_project(req):
             return 200, dict(msg='ok', project=ret)
         except Exception as e:
             print e
-            return 1000, dict(msg='json format error')
+            return 1000, dict(msg='json format error', error=str(e))
     
 def get_dict_with_testee(testee):
     projects = testee.testees_projects.all()
