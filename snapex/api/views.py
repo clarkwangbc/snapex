@@ -214,7 +214,7 @@ def auth(req):
 @csrf_exempt
 @utility.expose(rest=True)
 def pull_project(req):
-    if req.method=='POST' or req.method=='GET':
+    if (req.method=='POST' or req.method=='GET'):
         try:   
             print req.body
             json_data = simplejson.loads(req.body)
