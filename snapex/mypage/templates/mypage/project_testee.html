@@ -81,5 +81,24 @@
         {% endfor %}
       </tbody>
     </table>
+
+    For Print
+    <div>
+      {% for testee in testees %}
+      <span>
+        <div style="width: 600px; height: 240px; display:inline">
+          <img class="qrcode-large" src="{{ testee.qr_code }}" style="width: 120px; height: 120px; left:30px">
+          
+          {{ testee.name }}
+          
+        </div>
+      </span>
+      {% endfor %}
+    </div>
+
+
+
+
+
   </div>
 </div>
