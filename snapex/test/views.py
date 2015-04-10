@@ -87,7 +87,7 @@ def auto_create_plans(req):
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
-    schedule_w2 = Schedule.objects.filter(pk=5)
+    schedule_w2 = Schedule.objects.filter(pk=5)[0]
     plan_example_0.pk = None
     plan_example_0.schedule = schedule_w2
     plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
@@ -118,7 +118,7 @@ def auto_create_plans(req):
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
-    schedule_w3 = Schedule.objects.filter(pk=6)
+    schedule_w3 = Schedule.objects.filter(pk=6)[0]
     plan_example_0.pk = None
     plan_example_0.schedule = schedule_w2
     plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
@@ -149,7 +149,7 @@ def auto_create_plans(req):
         plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
         plan_example_2.save()
 
-    schedule_w4 = Schedule.objects.filter(pk=7)
+    schedule_w4 = Schedule.objects.filter(pk=7)[0]
     plan_example_0.pk = None
     plan_example_0.schedule = schedule_w2
     plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
