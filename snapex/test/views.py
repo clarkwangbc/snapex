@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 import polls.db_ops as db_ops
 import qrcode
-import datetime
 
 
 
@@ -70,6 +69,7 @@ def create_qr_for_all_testee(req):
 def auto_create_plans(req):
     from polls.models import Plan
     from polls.models import Schedule
+    import datetime
     plan_example_0 = Plan.objects.filter(pk=106)[0]
     plan_example_1 = Plan.objects.filter(pk=107)[0]
     plan_example_2 = Plan.objects.filter(pk=108)[0]
@@ -165,7 +165,7 @@ def auto_create_plans(req):
     plan_example_2.date_start = plan_example_2.date_start + datatime.timedelta(days=1)
     plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
     plan_example_2.save()
-    
+
     for i in range(6):
         plan_example_0.pk = None
         plan_example_0.date_start = plan_example_0.date_start + datatime.timedelta(days=1)
