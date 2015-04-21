@@ -166,7 +166,7 @@ def auto_create_plans(req):
     plan_example_2.date_end = plan_example_2.date_end + datetime.timedelta(days=1)
     plan_example_2.save()
 
-    for i in range(6):
+    for i in range(10):
         plan_example_0.pk = None
         plan_example_0.date_start = plan_example_0.date_start + datetime.timedelta(days=1)
         plan_example_0.date_end = plan_example_0.date_end + datetime.timedelta(days=1)

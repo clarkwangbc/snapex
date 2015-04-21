@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/snapex/css/mypage.css" rel="stylesheet">
+    <link href="/static/snapex/css/base.css" rel="stylesheet">
+
+    <script src="/static/snapex/js/mypage.js">
+    </script>
+
+  </head>
+  <body>
+        <!-- Nav Bar -->
+        {% include "mypage/project_navbar.html" %}
+
+        {% for stat in stats %}
+        <h2> {{ stat.schedule.name }}</h2>
+        <table>
+        <thead> 
+            <th> Date </th>
+            {% for date in stat.date_list %}
+            <th>
+                {{ date }}
+            </th>
+
+            {% endfor %}
+            <th>
+                Total
+            </th>
+        </thead>
+        <tbody>
+            {% for testee_stat in stat.count_matrix %}
+            <tr>
+
+            <td> {{ testee_stat.0 }} </td>
+            {% for array in testee_stat.1 %}
+            <td> 
+            {{ array | join:'/' }}
+            </td>
+            {% endfor %}
+            </tr>
+
+            {% endfor %}
+        </tbody>
+        </table>
+        {% endfor %}
+      
+  </body>
+  </html>

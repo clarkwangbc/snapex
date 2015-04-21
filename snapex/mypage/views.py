@@ -6,6 +6,10 @@ import polls.db_ops as db_ops
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from polls.models import *
+from django.db.models import Q
+from django.db.models import Min, Max, Count
+from datetime import date
+from datetime import timedelta
 
 
 @csrf_exempt
@@ -42,7 +46,6 @@ def mypage(req):
                                         name=project_name, 
                                         init=init_testees)
         return redirect('/mypage')
-
 
 @csrf_exempt
 @login_required
@@ -103,11 +106,69 @@ def myproject(req):
                 t.append(tinfo)
             ret['testees'] = t
             ret['surveys'] = Survey.objects.filter(project=project).all()
+            today = date.today()
+            yesterday = today - timedelta(days=1)
+            ret['surveys_summary'] = []
+            ret['date'] = today
+            for survey in ret['surveys']:
+                total_number_today = db_ops.get_records_from_survey_and_date(survey, today).count()
+                total_number_yesterday = db_ops.get_records_from_survey_and_date(survey, yesterday).count()
+                total = Record.objects.filter(plan__survey=survey).count()
+                ret['surveys_summary'].append({
+                    "name": survey.name,
+                    "total_today": total_number_today,
+                    "total_yesterday": total_number_yesterday,
+                    "total": total
+                    })
             ret['schedules'] = Schedule.objects.filter(project=project).all()
             ret['plans'] = Plan.objects.filter(project=project).all()
             return render(req, 'mypage/project.html', ret)
+        
+
+        elif action == "stats":
+            ret = {}
+            project = Project.objects.get(pk=int(pid))
+            ret['project'] = project
+            schedules = Schedule.objects.filter(project=project).all()
+            #ret['surveys'] = Survey.objects.filter(project=project).all()
+            #ret['testees'] = db_ops.get_testees_from_project(project)
+            ret['stats'] = []
+            for schedule in schedules:
+                #print schedule
+                result = Plan.objects.filter(schedule=schedule).all().aggregate(Min('date_start'), Max('date_end'))
+                #print result
+                date_start__min = result['date_start__min'].date()
+                date_end__max = result['date_end__max'].date()
+                number_of_days = (date_end__max - date_start__min).days + 1
+                #print number_of_days
+                date_list = [date_start__min + timedelta(days=x) for x in range(number_of_days)]
+                #print date_list
+                testee_list = list(db_ops.get_testees_from_project(project))
+                testee_id_list = [testee.pk for testee in testee_list]
+                testee_name_list = [testee.last_name for testee in testee_list]
+                survey_list = Survey.objects.filter(project=project).all()
+                survey_id_list = [survey.pk for survey in survey_list]
+                number_of_surveys = Survey.objects.filter(project=project).count()
+                count_matrix = [[[0 for z in range(number_of_surveys)] for y in range(number_of_days + 1)] for x in range(len(testee_list))]
+
+                stats_raw = Record.objects.filter(plan__schedule=schedule).all().extra({'date': 'date(polls_record.date_created)'
+                    }).values('testee', 'testee__last_name', 'date', 'plan__survey').annotate(count=Count('id')).order_by('testee', 'date')
+                for row in stats_raw:
+                    x = testee_id_list.index(row['testee'])
+                    y = date_list.index(row['date'])
+                    z = survey_id_list.index(row['plan__survey'])
+                    count_matrix[x][y][z] = row['count']
+                    count_matrix[x][number_of_days][z] += row['count']
+
+
+                ret['stats'].append({'schedule': schedule, 'testee_list': testee_list, 'date_list': date_list, 'survey_list': survey_list, 'count_matrix': zip(testee_name_list, count_matrix)})
+            return render(req, 'mypage/project_stats.html', ret)
+            
         else:
-            return HttpResponse('nothing projects')
+            return HttpResponse('nothing projects')      
+
+
+
 
     elif req.method=='POST':
         # handle form submitting: new testees or new plan

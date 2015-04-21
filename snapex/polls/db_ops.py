@@ -6,6 +6,8 @@ from django.core.files.uploadedfile import *
 import qrcode
 from cStringIO import StringIO
 import json
+import datetime
+from django.db.models import Q
 
 '''
     Utilies
@@ -242,6 +244,9 @@ def get_record_from_pk(pk):
     objs = Record.objects.filter(pk=pk)
     return objs[0] if objs.exists() else None
 
+def get_records_from_survey_and_date(survey, date):
+    objs = Record.objects.filter(Q(plan__survey=survey)&Q(date_created__range=(datetime.datetime.combine(date, datetime.time.min), datetime.datetime.combine(date, datetime.time.max))))
+    return objs
 
 def add_testee_to_project(testee, project):
     if hasattr(testee, 'testee'):
