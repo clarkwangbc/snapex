@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from store import BAEStorage
 from snapex.settings import BCS_SETTINGS
 import simplejson
+from datetime import date
 
 # class Config(models.Model):
 # use settings.PUSH_ON_TIME instead
@@ -192,6 +193,10 @@ class Project(models.Model):
                     editable=False,
                     help_text='md5 to compare two versions of projects'
                     ) # support maximum MD5 128
+    stopped = models.BooleanField(
+                    editable=False,
+                    help_text='if the project is stopped manually by researcher'
+                    )
     
     def add_testee(self, testee):
         if type(testee) == Testee:
@@ -211,8 +216,25 @@ class Project(models.Model):
     
     def __unicode__(self):
         return u'Project %s' % (self.code)
-    
 
+    def is_active(self):
+        if self.stopped:
+            return 0
+        today = date.today()
+        return today <= self.date_end and today >= self.date_start
+
+    def status(self):
+        if self.stopped:
+            return 'stopped'
+        today = date.today() 
+        if today < self.date_start:
+            return 'prepared'
+        elif today >= self.date_start & today >= self.date_end:
+            return 'in-progress'
+        elif today > self.date_end:
+            return 'terminated'
+        else:
+            return 'unknown'
 
 class QuestionEntry(models.Model):
     qtype = models.CharField(max_length=20,

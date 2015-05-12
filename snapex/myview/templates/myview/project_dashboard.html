@@ -1,0 +1,203 @@
+{% extends "myview/project_base.html" %}
+
+{% block title %}
+  <title>SnapEx | Researcher's Dashboard</title>
+{% endblock %}
+
+{% block external-css %}
+  <link href="/static/snapex-new/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="/static/snapex-new/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/static/snapex-new/css/owl.carousel.css" type="text/css">
+<!--<link href="css/navbar-fixed-top.css" rel="stylesheet">-->
+{% endblock %}
+
+{% block sidebar-dash %}
+  <a class='active' href="/myview/project/{{ project.id }}">
+              <i class="icon-dashboard"></i>
+              <span>Dashboard</span>
+          </a>
+{% endblock %}
+
+{% block main-content %}
+<section id="main-content">
+  <section class="wrapper">
+    <div class="col-lg-8">
+      <section class="panel">
+        <div class="panel-body">
+          <form class="form-horizontal tasi-form">
+            <div class="form-group">
+              <label class="col-lg-4 col-sm-4 control-label">Project Name</label>
+              <div class="col-lg-8">
+                <p class="form-control-static">{{ project.name }}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-sm-4 control-label">Project Subject</label>
+              <div class="col-lg-8">
+                <p class="form-control-static">{{ project.subject }}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-4 col-sm-4 control-label">Project Type</label>
+              <div class="col-lg-8">
+                <p class="form-control-static">问卷调查</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="panel">
+        <header class="panel-heading">Project Introduction
+          <span class="tools pull-right">
+            <a href="javascript:;" class="icon-chevron-down"></a>
+            <a href="javascript:;" class="icon-remove"></a>
+          </span>
+        </header>
+        <div class="panel-body">
+          <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+            non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+            put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+            wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+            raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
+          <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
+            non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor</p>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="panel-body">
+          <ul class="summary-list">
+            <li>
+              <a href="/myview/project/{{ project.id }}/testees">
+                                            <i class=" icon-user text-primary"></i>
+                                            {{ testees | length }} Testees
+                                        </a>
+            </li>
+            <li>
+              <a href="/myview/project/{{ project.id }}/questionaires">
+                                            <i class="icon-file text-info"></i>
+                                            {{ surveys | length }} Questionaries
+                                        </a>
+            </li>
+            <li>
+              <a href="/myview/project/{{ project.id }}/records">
+                                            <i class="icon-book text-success"></i>
+                                            {{ records | length }} Records
+                                        </a>
+            </li>
+            <li>
+              <a href="/myview/project/{{ project.id }}/schedules">
+                                            <i class="icon-calendar text-danger"></i>
+                                            {{ schedules | length }} Schedules
+                                        </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <div class="col-lg-4">
+      <!--widget start-->
+      <div class="panel">
+        <div class="panel-body">
+          <div class="bio-chart">
+            <input class="knob" data-width="101" data-height="101" data-displayPrevious=true data-thickness=".2" value="{{ project_progress }}" data-fgColor="#4CC5CD"
+            data-bgColor="#e8e8e8">
+          </div>
+          <div class="bio-desk">
+            <h4 class="terques">Project Progress</h4>
+            <p>Started : {{ project.date_start }}</p>
+            <p>Deadline : {{ project.date_end }} </p>
+          </div>
+        </div>
+      </div>
+      <!--widget end-->
+      <div class="panel terques-chart">
+        <div class="panel-body chart-texture">
+          <div class="chart">
+            <div class="heading">
+              <span>Friday</span>
+              <strong>$ 57,00 | 15%</strong>
+            </div>
+            <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff"
+            data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
+          </div>
+        </div>
+        <div class="chart-tittle">
+          <span class="title">New Earning</span>
+          <span class="value">
+            <a href="#" class="active">Market</a>|
+            <a href="#">Referal</a>|
+            <a href="#">Online</a>
+          </span>
+        </div>
+      </div>
+      <div class="panel green-chart">
+        <div class="panel-body">
+          <div class="chart">
+            <div class="heading">
+              <span>June</span>
+              <strong>23 Days | 65%</strong>
+            </div>
+            <div id="barchart"></div>
+          </div>
+        </div>
+        <div class="chart-tittle">
+          <span class="title">Questionair Fill</span>
+          <span class="value">199</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock %}
+
+
+{% block scripts %}   
+    <script src="/static/snapex-new/js/jquery.js"></script>
+    <script src="/static/snapex-new/js/jquery-1.8.3.min.js"></script>
+    <script src="/static/snapex-new/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/static/snapex-new/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/static/snapex-new/js/jquery.scrollTo.min.js"></script>
+    <script src="/static/snapex-new/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/static/snapex-new/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="/static/snapex-new/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/static/snapex-new/js/owl.carousel.js"></script>
+    <script src="/static/snapex-new/js/jquery.customSelect.min.js"></script>
+    <script src="/static/snapex-new/js/respond.min.js"></script>
+    <script class="include" type="text/javascript" src="/static/snapex-new/js/jquery.dcjqaccordion.2.7.js"></script>
+    <!--common script for all pages-->
+    <script src="/static/snapex-new/js/common-scripts.js"></script>
+    <!--script for this page-->
+    <script src="/static/snapex-new/js/sparkline-chart.js"></script>
+    <script src="/static/snapex-new/js/easy-pie-chart.js"></script>
+    <script src="/static/snapex-new/js/count.js"></script>
+    <script src="/static/snapex-new/js/jquery.js"></script>
+    <script src="/static/snapex-new/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/static/snapex-new/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/static/snapex-new/js/jquery.scrollTo.min.js"></script>
+    <script src="/static/snapex-new/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/static/snapex-new/assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="/static/snapex-new/js/respond.min.js"></script>
+    <script>
+      //owl carousel
+
+      $(document).ready(function() {
+          $("#owl-demo").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true,
+        autoPlay:true
+
+          });
+      });
+
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+      //knob
+      $(".knob").knob();
+    </script>
+{% endblock %}

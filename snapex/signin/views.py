@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 
 def index(req):
     if req.user.is_authenticated():
-        return redirect('/mypage/')
+        return redirect('/myview/project')
     
     if req.method == 'GET':
-        return render(req, 'signin/index.html', {})
+        return render(req, 'signin/login.html', {})

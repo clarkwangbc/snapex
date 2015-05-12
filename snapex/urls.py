@@ -9,11 +9,14 @@ import xadmin
 xadmin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='mypage/')),
+    #url(r'^$', RedirectView.as_view(url='mypage/')),
+    url(r'^$', include('myview.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', include(xadmin.site.urls)),
     url(r'^test/', include('test.urls')),
+    url(r'^login/', include('signin.urls')),
     url(r'^signin/', include('signin.urls')),
     url(r'^api/v0/', include('api.urls')),
-    url(r'^mypage/', include('mypage.urls'))
+    url(r'^myview/', include('myview.urls')),
+    url(r'^mypage/', include('mypage.urls')),
 ]

@@ -1,0 +1,138 @@
+{% extends "myview/authenticated_base.html" %}
+
+{% block navbar-projects %}
+<li class='active'><a href = "/myview/project"> Projects </a></li>
+{% endblock %}
+
+{% block body %}
+
+  <body>
+
+  <section id="container" class="">
+      <!--header start-->
+      <header class="header white-bg">
+        <!--
+        <div class="sidebar-toggle-box">
+          <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+        </div>
+        -->
+        <!--logo start-->
+        <a href="/" class="logo">SNAP<span>EXPERIENCE</span></a>
+        <!--logo end-->
+        <div class="horizontal-menu navbar-collapse collapse ">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="/myview/profile">Profile</a>
+            </li>
+            <li class='active'>
+              <a href="/myview/project">Projects</a>
+            </li>
+          </ul>
+        </div>
+        {% block login %}
+        <div class="top-nav ">
+            <ul class="nav pull-right top-menu">
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <img alt="" src="/static/snapex-new/img/avatar1_small.jpg">
+                        <span class="username"> {{ user_name }} </span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                        <li><a href="#"><i class="icon-suitcase"></i>Profile</a></li>
+                        <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                        <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                        <li><a href="#signout" onclick="signout()"><i class="icon-key"></i> Log Out</a></li>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+        </div>
+        {% endblock %}
+      </header>
+      <!--header end-->
+      <!--sidebar start-->
+      {% block sidebar %}
+      <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+            <p> Research Topic </p>
+            <h1> {{ project.name }}</h1>
+            <li>
+            {% block sidebar-dash %}
+              <a href="/myview/project/{{ project.id }}">
+                          <i class="icon-dashboard"></i>
+                          <span>Dashboard</span>
+                      </a>
+            {% endblock %}
+            </li>
+            <li>
+            {% block sidebar-testees %}
+              <a href="/myview/project/{{ project.id }}/testees">
+                          <i class="icon-user"></i>
+                          <span>Testees</span>
+                      </a>
+            {% endblock %}
+            </li>
+            <li>
+            {% block sidebar-records %}
+              <a href="/myview/project/{{ project.id }}/records">
+                          <i class="icon-calendar"></i>
+                          <span>Records</span>
+                      </a>
+            {% endblock %}
+            </li>
+            <li>
+            {% block sidebar-questionaires %}
+              <a href="/myview/project/{{ project.id }}/questionaires">
+                          <i class="icon-file"></i>
+                          <span>Questionaire</span>
+                      </a>
+            {% endblock %}
+            </li>
+          </ul>
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      {% endblock %}
+      <!--sidebar end-->
+
+      <!--main content start-->
+      {% block main-content %}
+      {% endblock %}
+      <!--main content end-->
+
+      <!--footer start-->
+      {% block footer %}
+      <footer class="site-footer">
+          <div class="text-center">
+              2015 &copy; SnapExperience by IHFE Lab @Tsinghua University.
+              <a href="#" class="go-top">
+                  <i class="icon-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      {% endblock %}
+      <!--footer end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    {% block scripts %}
+    <script src="/static/snapex-new/js/jquery.js"></script>
+    <script src="/static/snapex-new/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/static/snapex-new/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script type="text/javascript" src="/static/snapex-new/js/hover-dropdown.js"></script>
+    <script src="/static/snapex-new/js/jquery.scrollTo.min.js"></script>
+    <script src="/static/snapex-new/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/static/snapex-new/js/respond.min.js" ></script>
+    {% endblock scripts %}
+
+    <!--common script for all pages-->
+    <script src="/static/snapex-new/js/common-scripts.js"></script>
+
+  </body>
+
+{% endblock %}

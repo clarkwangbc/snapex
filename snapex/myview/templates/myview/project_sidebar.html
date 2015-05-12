@@ -1,0 +1,36 @@
+<!--sidebar start-->
+<aside>
+  <div id="sidebar" class="nav-collapse ">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p>研究题目</p>
+      <h1> {{ project.name }}</h1>
+      <li>
+        <a class="active" href="/myview/project/{{ project.id }}">
+                    <i class="icon-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+      </li>
+      <li>
+        <a href="/myview/project/{{ project.id }}/testees">
+                    <i class="icon-user"></i>
+                    <span>Testees</span>
+                </a>
+      </li>
+      <li>
+        <a href="/myview/project/{{ project.id }}/records">
+                    <i class="icon-calendar"></i>
+                    <span>Record</span>
+                </a>
+      </li>
+      <li>
+        <a href="/myview/project/{{ project.id }}/questionaires">
+                    <i class="icon-file"></i>
+                    <span>Questionaire</span>
+                </a>
+      </li>
+    </ul>
+    <!-- sidebar menu end-->
+  </div>
+</aside>
+<!--sidebar end-->

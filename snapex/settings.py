@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'api',
     'mypage',
     'test',
+    'myview',
 
 )
 
@@ -289,7 +290,7 @@ if TESTING_ON_LOCAL:
         'default': {
             'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             #'NAME': 'beXsKRIOGfKKTwkkcTkh',                      # Or path to database file if using sqlite3.
-            'NAME':'test_production',
+            'NAME':'production_copy',
             # The following settings are not used with sqlite3:
             'USER': 'snapex',
             'PASSWORD': 'snapex',
@@ -297,6 +298,7 @@ if TESTING_ON_LOCAL:
             'PORT': '3306',                      # Set to empty string for default.
         }
     }
+
 
 if TESTING_ON_LOCAL:
     #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
@@ -308,6 +310,9 @@ if TESTING_ON_LOCAL:
     )
     #STATIC_ROOT = '/Users/Yuming/Codes/BAE/appid282gcboc93/static'
 
+USE_TEST_BUCKETS = False
+
+if TESTING_ON_LOCAL & USE_TEST_BUCKETS:
 
     BCS_SETTINGS = {
         "HOST" : "http://bcs.duapp.com/",
