@@ -17,5 +17,5 @@ urlpatterns = [
     #url(r'^project_testess/(\d+)/w{30}$', views.mytestees, name='myview_project_testees'),
     url(r'^survey/(\d+)', views.mysurvey, name="myview_survey"),
     url(r'^schedule$', views.myschedule, name="myview_schedule"),
-    url(r'^record$', views.myrecord, name="myview_record")
+    url(r'^record/(\d+)$', views.myrecord, name="myview_record")
 ]

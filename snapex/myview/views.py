@@ -249,9 +249,9 @@ def myrecords(req, pid):
 
     page = int(req.GET.get('page', '1'))
     number_per_page = int(req.GET.get('num', '20'))
-    number_of_pages = int(ceil(ret['records_count'] / number_per_page))
+    number_of_pages = int(ceil(ret['records_count'] / number_per_page)) + 1
     number_offset = (page - 1) * number_per_page
-    ret['records'] = Record.objects.filter(plan__survey__project=project).all()[number_offset:number_offset+number_per_page]
+    ret['records'] = Record.objects.filter(plan__survey__project=project).order_by('date_created').all()[number_offset:number_offset+number_per_page]
     ret['page_range'] = [1+i for i in range(number_of_pages)]
     ret['current_page'] = page
     return render(req, 'myview/project_records.html', ret)
@@ -410,5 +410,5 @@ def myrecord(req, rid):
             i_html += template_simpletext_question%(question, description, reply) + '<br>'
 
     from django.utils.safestring import mark_safe
-    return render(req, 'mypage/record.html', {'record': mark_safe(i_html)})
+    return render(req, 'myview/record.html', {'record': mark_safe(i_html)}, content_type='text/html')
     
