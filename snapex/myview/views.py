@@ -10,7 +10,7 @@ from django.db.models import Q
 from django.db.models import Min, Max, Count
 from datetime import date
 from datetime import timedelta
-
+from math import ceil
 
 @csrf_exempt
 def index(req):
@@ -91,7 +91,8 @@ def myproject(req, pid=None, action=None):
             project = Project.objects.get(pk=int(pid))
             ret['project'] = project
             ret['testees'] = db_ops.get_testees_from_project(project)
-            ret['surveys'] = Survey.objects.filter(project=project)
+            surveys = Survey.objects.filter(project=project)
+            ret['surveys'] = surveys
             ret['records'] = Record.objects.filter(plan__survey__project=project)
             ret['schedules'] = Schedule.objects.filter(project=project)
             today = date.today()
@@ -102,44 +103,35 @@ def myproject(req, pid=None, action=None):
             else:
                 ret['project_progress'] = 100;
 
-            t = []
-            testees = db_ops.get_testees_from_project(project)
-            for testee in testees:
-                tinfo = {}
-                tinfo['name'] = testee.username
-                tinfo['last_name'] = testee.last_name
-                tinfo['telephone'] = testee.telephone
-                tinfo['email'] = testee.email
-                tinfo['age'] = testee.age
-                tinfo['is_active'] = testee.is_active
-                pls = Plan.objects.filter(testee=testee, project=project)
-                tinfo['plan_count'] = pls.count()
-                #tinfo['record_count'] = Record.objects.filter(plan__in=pls).count()
-                tinfo['record_count'] = Record.objects.filter(testee=testee).count()
-                if testee.qr_image:
-                    tinfo['qr_code'] = testee.qr_image.url
+            result = Record.objects.filter(plan__survey__project=project).all().aggregate(Max('date_created'))
+            last_date = result['date_created__max']
+            number_of_days = 14
+            date_list = [last_date - timedelta(days=number_of_days-1-x) for x in range(number_of_days)]
+            total = [0] * number_of_days
+            stats = [[0] * number_of_days] * surveys.count()
+            change = [0] * surveys.count()
+            for i in range(surveys.count()):
+                for j in range(number_of_days):
+                    stats[i][j] = db_ops.get_records_from_survey_and_date(surveys[i], date_list[j]).count()
+                    total[j] = total[j] + stats[i][j]
+                if stats[i][number_of_days-2] == 0:
+                    change[i] = 1
                 else:
-                    db_ops.create_qrcode_for_testee(testee)
-                    tinfo['qr_code'] = testee.qr_image.url
-                t.append(tinfo)
-            ret['testees'] = t
-            ret['surveys'] = Survey.objects.filter(project=project).all()
-            today = date.today()
-            yesterday = today - timedelta(days=1)
-            ret['surveys_summary'] = []
-            ret['date'] = today
-            for survey in ret['surveys']:
-                total_number_today = db_ops.get_records_from_survey_and_date(survey, today).count()
-                total_number_yesterday = db_ops.get_records_from_survey_and_date(survey, yesterday).count()
-                total = Record.objects.filter(plan__survey=survey).count()
-                ret['surveys_summary'].append({
-                    "name": survey.name,
-                    "total_today": total_number_today,
-                    "total_yesterday": total_number_yesterday,
-                    "total": total
-                    })
-            ret['schedules'] = Schedule.objects.filter(project=project).all()
-            ret['plans'] = Plan.objects.filter(project=project).all()
+                    change[i] = stats[i][number_of_days-1] * 1.0 / stats[i][number_of_days-2] - 1.0
+            if total[number_of_days-2] == 0:
+                change_total = 1
+            else:
+                change_total = total[number_of_days-1] * 1.0 / total[number_of_days-2] - 1.0
+            ret['last_10_days_stats'] = {'last_date':last_date, 'total': total, 'stats': zip(surveys, stats, change), 'change': change_total}
+
+            number_of_active_testee = [0] * number_of_days
+            for i in range(number_of_days):
+                number_of_active_testee[i] = db_ops.get_records_from_date(date_list[i]).values('testee').annotate(Count('testee')).count()
+            ret['number_of_active_testee'] = number_of_active_testee
+
+            total_number_of_active_testee = ret['testees'].filter(is_active=True).count()
+            ret['total_number_of_active_testee'] = total_number_of_active_testee
+            print total_number_of_active_testee
             return render(req, 'myview/project_dashboard.html', ret)
         
 
@@ -250,13 +242,33 @@ def mytestee(req, pid, uid = None):
     return render(req, 'myview/project_testees.html', ret)
 
 def myrecords(req, pid):
-    return render(req, 'myview/project_records.html', {})
+    ret = {'user_name': req.user.username}
+    project = Project.objects.get(pk=int(pid))
+    ret['project'] = project
+    ret['records_count'] = Record.objects.filter(plan__survey__project=project).count()
 
-def myschedules(req, pid):
-    return render(req, 'myview/project_schedule.html', {})
+    page = int(req.GET.get('page', '1'))
+    number_per_page = int(req.GET.get('num', '20'))
+    number_of_pages = int(ceil(ret['records_count'] / number_per_page))
+    number_offset = (page - 1) * number_per_page
+    ret['records'] = Record.objects.filter(plan__survey__project=project).all()[number_offset:number_offset+number_per_page]
+    ret['page_range'] = [1+i for i in range(number_of_pages)]
+    ret['current_page'] = page
+    return render(req, 'myview/project_records.html', ret)
 
-def myquestionaires(req, pid):
-    return render(req, 'myview/project_questionaire.html', {})
+def myschedule(req, pid):
+    ret = {'user_name': req.user.username}
+    project = Project.objects.get(pk=int(pid))
+    ret['project'] = project
+    ret['schedules'] = Schedule.objects.filter(project=project)
+    return render(req, 'myview/project_schedules.html', ret)
+
+def myquestionaire(req, pid):
+    ret = {'user_name': req.user.username}
+    project = Project.objects.get(pk=int(pid))
+    ret['project'] = project
+    ret['surveys'] = Survey.objects.filter(project=project)
+    return render(req, 'myview/project_questionaires.html', ret)
 
 @login_required
 def mysurvey(req):
@@ -305,7 +317,7 @@ def mysurvey(req):
         return HttpResponse('invalid method')
 
 
-def myschedule(req):
+def myschedules(req):
     '''
         /mypage/schedule
     '''
@@ -352,11 +364,10 @@ def myschedule(req):
 
 
 @login_required
-def myrecord(req):
+def myrecord(req, rid):
     '''
-        /mypage/record
+        /mypage/record/<rid>
     '''
-    rid = req.GET.get('rid', None)
     if rid is None or rid=='':
         return HttpResponse("rid can't be blank")
 

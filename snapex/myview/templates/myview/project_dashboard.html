@@ -111,22 +111,45 @@
       </div>
       <!--widget end-->
       <div class="panel terques-chart">
-        <div class="panel-body chart-texture">
-          <div class="chart">
+        <div class="panel-body chart-texture tab-content">
+
+          <div id='chart-total' class="chart tab-pane active">
             <div class="heading">
-              <span>Friday</span>
-              <strong>$ 57,00 | 15%</strong>
+              <span> {{ last_10_days_stats.last_date|date:"D, M d" }}</span>
+              <div class='values'>
+              <strong> {{ last_10_days_stats.total.9 }} | {% widthratio last_10_days_stats.change 1 100 %} %</strong>
+              </div>
             </div>
             <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff"
-            data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
+              data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="{{ last_10_days_stats.total }}">
+            </div>
           </div>
+          {% for stat in last_10_days_stats.stats %}
+          <div id='chart-{{ stat.0.id }}' class="chart tab-pane">
+          <div class="heading">
+            <span> {{ last_10_days_stats.last_date|date:"D, M d" }}</span>
+            <div class='values'>
+            <strong> {{ stat.1.9 }} | {% widthratio stat.2 1 100 %} % </strong>
+            </div>
+          </div>
+            <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff"
+              data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="{{ stat.1 }}"></div>
+          </div>
+          {% endfor %}
         </div>
+
+
         <div class="chart-tittle">
-          <span class="title">New Earning</span>
-          <span class="value">
-            <a href="#" class="active">Market</a>|
-            <a href="#">Referal</a>|
-            <a href="#">Online</a>
+          <span class="title">Records</span>
+          <span class="value" class='nav nav-tabs' id='chart-tab'>
+            <a href="#chart-total" class='active'>Total</a>
+            {% for survey in surveys %}
+            {% if survey.code %}
+            | <a href="#chart-{{ survey.id }}">{{ survey.code }}</a>
+            {% else %}
+            | <a href="#chart-{{ survey.id }}">{{ survey.name }}</a>
+            {% endif %}
+            {% endfor %}
           </span>
         </div>
       </div>
@@ -137,11 +160,11 @@
               <span>June</span>
               <strong>23 Days | 65%</strong>
             </div>
-            <div id="barchart"></div>
+            <div id="barchart" data-data="{{ number_of_active_testee }}"></div>
           </div>
         </div>
         <div class="chart-tittle">
-          <span class="title">Questionair Fill</span>
+          <span class="title">Active Testees</span>
           <span class="value">199</span>
         </div>
       </div>
@@ -199,5 +222,6 @@
 
       //knob
       $(".knob").knob();
+
     </script>
 {% endblock %}

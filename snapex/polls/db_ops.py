@@ -248,6 +248,14 @@ def get_records_from_survey_and_date(survey, date):
     objs = Record.objects.filter(Q(plan__survey=survey)&Q(date_created__range=(datetime.datetime.combine(date, datetime.time.min), datetime.datetime.combine(date, datetime.time.max))))
     return objs
 
+def get_records_from_testee_and_date(testee, date):
+    objs = Record.objects.filter(Q(testee=testee)&Q(date_created__range=(datetime.datetime.combine(date, datetime.time.min), datetime.datetime.combine(date, datetime.time.max))))
+    return objs
+
+def get_records_from_date(date):
+    objs = Record.objects.filter(Q(date_created__range=(datetime.datetime.combine(date, datetime.time.min), datetime.datetime.combine(date, datetime.time.max))))
+    return objs
+
 def add_testee_to_project(testee, project):
     if hasattr(testee, 'testee'):
         testee = testee.testee

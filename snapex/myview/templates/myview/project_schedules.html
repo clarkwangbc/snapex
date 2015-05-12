@@ -1,0 +1,93 @@
+{% extends "myview/project_base.html" %}
+
+{% block title %}
+  <title>SnapEx | Project Schedules</title>
+{% endblock %}
+
+{% block sidebar-schedules %}
+  <a class='active' href="/myview/project/{{ project.id }}/schedules">
+              <i class="icon-calendar"></i>
+              <span>Schedules</span>
+          </a>
+{% endblock %}
+
+{% block main-content %}
+<section id="main-content">
+  <section class="wrapper">
+    <div>
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Schedules</div>
+        <div class="panel-body">
+          <a href="/mypage/schedule?action=create&pid={{ project.id }}">Create new schedule</a>
+        </div>
+        
+        <!-- Table -->
+        <table class="table" id="schedule_table">
+          <thead>
+            <tr>
+              <th>Schedule Name</th>
+              <th>Date Created</th>
+              <th>Used Times</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for schedule in schedules %}
+              <tr>
+                <td><a href="/mypage/schedule?action=view&sid={{ schedule.id }}">
+                    {{ schedule.name }}
+                    <!-- <div style="height:100%;width:100%"> -->
+                    <!-- </div> -->
+                  </a>
+                </td>
+                <td>{{ schedule.date_created }}</td>
+                <td>{{ schedule.schedule_plans.count }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="/static/snapex-new/js/jquery-1.8.3.min.js"></script>
+<script src="/static/snapex-new/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="/static/snapex-new/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/static/snapex-new/js/jquery.scrollTo.min.js"></script>
+<script src="/static/snapex-new/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/static/snapex-new/js/jquery.sparkline.js" type="text/javascript"></script>
+<script src="/static/snapex-new/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+<script src="/static/snapex-new/js/owl.carousel.js"></script>
+<script src="/static/snapex-new/js/jquery.customSelect.min.js"></script>
+<script src="/static/snapex-new/js/respond.min.js"></script>
+<!--common script for all pages-->
+<script src="/static/snapex-new/js/common-scripts.js"></script>
+<!--script for this page-->
+<script src="/static/snapex-new/js/count.js"></script>
+<script type="text/javascript" language="javascript" src="/static/snapex-new/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+<script>
+  //owl carousel
+
+  $(document).ready(function() {
+      $("#owl-demo").owlCarousel({
+          navigation : true,
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem : true,
+    autoPlay:true
+
+      });
+  });
+
+  //custom select box
+
+  $(function(){
+      $('select.styled').customSelect();
+  });
+</script>
+{% endblock %}
