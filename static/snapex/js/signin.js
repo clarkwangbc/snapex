@@ -17,7 +17,7 @@ signin = function(){
 			},
 		}).done(function(data){
 			if (data && data.status===200) {
-				window.location.replace("http://snapex.duapp.com/mypage");
+				window.location.replace("http://snapex.duapp.com/myview/project");
 			} else {
 				$("#wrong_secret_msg")[0].style.display = "";
 				$("#empty_secret_msg")[0].style.display = "none";
