@@ -96,6 +96,7 @@
 <script type="text/javascript">
     $("#remoteModal").on("hidden.bs.model", function(e){$(this).removeData();});
     function remoteUrl(u) {
+      $("#remoteModalBody").html("");
       $.get(u, '', function(data){
         $("#remoteModalBody").html(data);
         
