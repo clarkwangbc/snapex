@@ -140,13 +140,13 @@
 
         <div class="chart-tittle">
           <span class="title">Records</span>
-          <span class="value" class='nav nav-tabs' id='chart-tab' role='tablist'>
-            <a href="#chart-total" class='active' data-toggle='tab'>Total</a>
+          <span class="value nav nav-pills" id='chart-tab' role='tablist'>
+            <a href="#chart-total" class='active' data-toggle='pill'>Total</a>
             {% for survey in surveys %}
             {% if survey.code %}
-            | <a href="#chart-{{ survey.id }}" data-toggle='tab'>{{ survey.code }}</a>
+            | <a href="#chart-{{ survey.id }}" data-toggle='pill'>{{ survey.code }}</a>
             {% else %}
-            | <a href="#chart-{{ survey.id }}" data-toggle='tab'>{{ survey.name }}</a>
+            | <a href="#chart-{{ survey.id }}" data-toggle='pill'>{{ survey.name }}</a>
             {% endif %}
             {% endfor %}
           </span>
@@ -214,6 +214,17 @@
       $(function(){
           $('select.styled').customSelect();
       });
+
+      $("span.nav-pills a.active").addClass('clicked');
+      $("span.nav-pills a").click(function(){
+        $(this).parent().children().removeClass('clicked');
+        $(this).addClass('clicked');
+      }).hover(function(){
+        $("span.nav-pills a.clicked").removeClass('active');
+      });
+      $("span.nav-pills").hover(null, function(){
+        $("span.nav-pills a.clicked").addClass('active');
+      })
 
       //knob
       $(".knob").knob();
