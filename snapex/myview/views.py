@@ -108,12 +108,15 @@ def myproject(req, pid=None, action=None):
             number_of_days = 14
             date_list = [last_date - timedelta(days=number_of_days-1-x) for x in range(number_of_days)]
             total = [0] * number_of_days
-            stats = [[0] * number_of_days] * surveys.count()
+            stats = [[0] * number_of_days for i in range(surveys.count())]
             change = [0] * surveys.count()
             for i in range(surveys.count()):
                 for j in range(number_of_days):
+                    #print i,j,db_ops.get_records_from_survey_and_date(surveys[i], date_list[j]).count()
                     stats[i][j] = db_ops.get_records_from_survey_and_date(surveys[i], date_list[j]).count()
+                    #print stats
                     total[j] = total[j] + stats[i][j]
+
                 if stats[i][number_of_days-2] == 0:
                     change[i] = 1
                 else:
@@ -123,7 +126,7 @@ def myproject(req, pid=None, action=None):
             else:
                 change_total = total[number_of_days-1] * 1.0 / total[number_of_days-2] - 1.0
             ret['last_10_days_stats'] = {'last_date':last_date, 'total': total, 'stats': zip(surveys, stats, change), 'change': change_total}
-
+            #print stats
             number_of_active_testee = [0] * number_of_days
             for i in range(number_of_days):
                 number_of_active_testee[i] = db_ops.get_records_from_date(date_list[i]).values('testee').annotate(Count('testee')).count()
@@ -131,11 +134,11 @@ def myproject(req, pid=None, action=None):
 
             total_number_of_active_testee = ret['testees'].filter(is_active=True).count()
             ret['total_number_of_active_testee'] = total_number_of_active_testee
-            print total_number_of_active_testee
+            #print total_number_of_active_testee
             return render(req, 'myview/project_dashboard.html', ret)
         
 
-        elif action == "stats":
+        elif action == "stat":
             ret = {}
             project = Project.objects.get(pk=int(pid))
             ret['project'] = project
@@ -241,6 +244,8 @@ def mytestee(req, pid, uid = None):
         ret['testee'] = testee
     return render(req, 'myview/project_testees.html', ret)
 
+@csrf_exempt
+@login_required
 def myrecords(req, pid):
     ret = {'user_name': req.user.username}
     project = Project.objects.get(pk=int(pid))
@@ -256,6 +261,8 @@ def myrecords(req, pid):
     ret['current_page'] = page
     return render(req, 'myview/project_records.html', ret)
 
+@csrf_exempt
+@login_required
 def myschedule(req, pid):
     ret = {'user_name': req.user.username}
     project = Project.objects.get(pk=int(pid))
@@ -263,6 +270,8 @@ def myschedule(req, pid):
     ret['schedules'] = Schedule.objects.filter(project=project)
     return render(req, 'myview/project_schedules.html', ret)
 
+@csrf_exempt
+@login_required
 def myquestionaire(req, pid):
     ret = {'user_name': req.user.username}
     project = Project.objects.get(pk=int(pid))
@@ -270,6 +279,7 @@ def myquestionaire(req, pid):
     ret['surveys'] = Survey.objects.filter(project=project)
     return render(req, 'myview/project_questionaires.html', ret)
 
+@csrf_exempt
 @login_required
 def mysurvey(req):
     '''
@@ -317,6 +327,8 @@ def mysurvey(req):
         return HttpResponse('invalid method')
 
 
+@csrf_exempt
+@login_required
 def myschedules(req):
     '''
         /mypage/schedule
@@ -362,7 +374,7 @@ def myschedules(req):
         # post a schedule creating form?
         return HttpResponse('post test')
 
-
+@csrf_exempt
 @login_required
 def myrecord(req, rid):
     '''

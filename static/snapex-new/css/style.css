@@ -8,6 +8,17 @@ Website: http://thevectorlab.net/
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
+/* bootstrap hack: fix content width inside hidden tabs */
+/* bootstrap hack: fix content width inside hidden tabs */
+.tab-content > .tab-pane, .pill-content > .pill-pane {
+    display: block;    /* undo display:none          */
+    height: 0;         /* height:0 is also invisible */ 
+    overflow: hidden;  /* no-overflow                */
+}
+.tab-content > .active, .pill-content > .active {
+    height: auto;      /* let the content decide it  */
+} /* bootstrap hack end */
+
 body {
     color: #797979;
     background: #f1f2f7;
