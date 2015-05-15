@@ -117,7 +117,7 @@
             <div class="heading">
               <span> {{ last_10_days_stats.last_date|date:"D, M d" }}</span>
               <div class='values'>
-              <strong> {{ last_10_days_stats.total.9 }} | {% widthratio last_10_days_stats.change 1 100 %} %</strong>
+              <strong> {{ last_10_days_stats.total|last }} | {% widthratio last_10_days_stats.change 1 100 %} %</strong>
               </div>
             </div>
             <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff"
@@ -129,7 +129,7 @@
           <div class="heading">
             <span> {{ last_10_days_stats.last_date|date:"D, M d" }}</span>
             <div class='values'>
-            <strong> {{ stat.1.9 }} | {% widthratio stat.2 1 100 %} % </strong>
+            <strong> {{ stat.1|last }} | {% widthratio stat.2 1 100 %} % </strong>
             </div>
           </div>
             <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff"
