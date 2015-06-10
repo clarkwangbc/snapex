@@ -105,6 +105,8 @@ def myproject(req, pid=None, action=None):
 
             result = Record.objects.filter(plan__survey__project=project).all().aggregate(Max('date_created'))
             last_date = result['date_created__max']
+            if last_date is None:
+                last_date = today
             number_of_days = 14
             date_list = [last_date - timedelta(days=number_of_days-1-x) for x in range(number_of_days)]
             total = [0] * number_of_days
