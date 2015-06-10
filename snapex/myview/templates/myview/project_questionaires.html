@@ -67,7 +67,7 @@
                         <tbody>
                         {% for survey in surveys %}
                         <tr>
-                            <td><a href="#"> {{ survey.name }} </a></td>
+                            <td><a href="/mypage/survey?action=view&pid={{ project.id }}&sid={{ survey.id }}"> {{ survey.name }} </a></td>
                             <td> {{ survey.code }} </td>
                             <td> {{ survey.questions | length }} </td>
                             <td class="hidden-phone"> {{ survey.date_created }} </td>
