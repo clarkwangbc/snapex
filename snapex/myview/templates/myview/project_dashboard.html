@@ -99,8 +99,7 @@
       <div class="panel">
         <div class="panel-body">
           <div class="bio-chart">
-            <input class="knob" data-width="101" data-height="101" data-displayPrevious=true data-thickness=".2" value="{{ project_progress }}" data-fgColor="#4CC5CD"
-            data-bgColor="#e8e8e8">
+            <input class="knob" data-width="101" data-height="101" data-displayPrevious=true data-thickness=".2" value="{{ project_progress }}" data-fgColor="#4CC5CD" data-readOnly="true" data-bgColor="#e8e8e8">
           </div>
           <div class="bio-desk">
             <h4 class="terques">Project Progress</h4>
@@ -152,6 +151,7 @@
           </span>
         </div>
       </div>
+
       <div class="panel green-chart">
         <div class="panel-body">
           <div class="chart">
@@ -159,7 +159,7 @@
               <span>June</span>
               <strong>23 Days | 65%</strong>
             </div>
-            <div id="barchart" data-data="{{ number_of_active_testee }}"></div>
+            <div class="sparkline" data-type="bar" data-resize="true" data-data="{{ number_of_active_testee }}" data-height="65" data-width="90%" data-bar-width="12" data-bar-spacing="10" data-bar-color='#fff'></div>
           </div>
         </div>
         <div class="chart-tittle">

@@ -145,6 +145,14 @@ class Researcher(User):
     def __unicode__(self):
         return u"%s" % (self.username)
 
+    def full_name(self):
+        if self.first_name is not None and self.first_name != "":
+            return self.first_name + " " + self.last_name
+        elif self.last_name is not None and self.last_name != "":
+            return self.last_name
+        else:
+            return self.username
+
 class Project(models.Model):
     pid = models.CharField(max_length=30, 
                     unique=True,

@@ -33,12 +33,12 @@
       <form class="form-signin">
         <h2 class="form-signin-heading">sign in now</h2>
         <div class="login-wrap">
-                <div><h3 class="text-center" id="wrong_secret_msg" style="display: none">
+                <div id="wrong_secret_msg" class='alert alert-danger' role='alert' style="display:none">
                     Wrong Secret?
-                </h3></div>
-                <div><h3 class="text-center" id="empty_secret_msg" style="display: none">
+                </div>
+                <div id="empty_secret_msg" class='alert alert-danger' role='alert' style="display:none">
                     Empty Secret?
-                </h3></div>
+                </div>
             <input type="text" id="input_account" class="form-control" placeholder="User Name" autofocus required>
             <input type="password" class="form-control" placeholder="Password" id="input_secret" >
             <label class="checkbox">
@@ -48,6 +48,7 @@
                 </span>
             </label>
             <input type="button" value="Sign in" class="btn btn-lg btn-primary btn-block" id="submit_button" onclick=signin();>
+            <!--
             <p>or you can sign in via social network</p>
             <div class="login-social-link">
                 <a href="profile.html" class="facebook">
@@ -65,7 +66,7 @@
                     Create an account
                 </a>
             </div>
-
+            -->
         </div>
 
           <!-- Modal -->
@@ -98,7 +99,7 @@
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/static/snapex-new/js/jquery.js"></script>
-
+    <script src="/static/snapex-new/js/bootstrap.min.js"></script>
 
   </body>
 </html>

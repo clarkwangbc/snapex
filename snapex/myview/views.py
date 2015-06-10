@@ -19,7 +19,7 @@ def index(req):
 @csrf_exempt
 @login_required
 def profile(req):
-    ret = {'user_name': req.user.username}
+    ret = {'user': req.user.researcher}
     return render(req, 'myview/profile.html', ret)
 
 @csrf_exempt
@@ -35,7 +35,7 @@ def myprojects(req):
             return redirect('/mypage/project')
         # for researchers, display a project displaying page
         elif req.user.user_profile.is_researcher:
-            ret = {'user_name': req.user.username}
+            ret = {'user': req.user.researcher}
             projects = db_ops.get_projects_from_researcher(req.user)
             ret['projects'] = projects
             return render(req, 'myview/project.html', ret)
@@ -87,7 +87,7 @@ def myproject(req, pid=None, action=None):
 
         # default: view project
         if action is None or action == 'dash':
-            ret = {'user_name': req.user.username}
+            ret = {'user': req.user.researcher}
             project = Project.objects.get(pk=int(pid))
             ret['project'] = project
             ret['testees'] = db_ops.get_testees_from_project(project)
@@ -139,7 +139,7 @@ def myproject(req, pid=None, action=None):
         
 
         elif action == "stat":
-            ret = {}
+            ret = {'user': req.user.researcher}
             project = Project.objects.get(pk=int(pid))
             ret['project'] = project
             schedules = Schedule.objects.filter(project=project).all()
@@ -231,7 +231,7 @@ def myproject(req, pid=None, action=None):
 @csrf_exempt
 @login_required
 def mytestee(req, pid, uid = None):
-    ret = {'user_name': req.user.username}
+    ret = {'user': req.user.researcher}
     project = Project.objects.get(pk=int(pid))
     ret['project'] = project
     ret['testees'] = db_ops.get_testees_from_project(project)
@@ -247,16 +247,40 @@ def mytestee(req, pid, uid = None):
 @csrf_exempt
 @login_required
 def myrecords(req, pid):
-    ret = {'user_name': req.user.username}
+    ret = {'user': req.user.researcher}
+
+    filter_for_testee_id = req.GET.get('testee', None)
+    filter_for_questionaire_id = req.GET.get('questionaire', None)
+    filter_for_schedule_id = req.GET.get('schedule', None)
+
     project = Project.objects.get(pk=int(pid))
+
+    query = Q(plan__survey__project=project)
+    if filter_for_testee_id:
+        filter_for_testee = Testee.objects.get(pk=filter_for_testee_id)
+        if filter_for_testee:
+            query = query&Q(testee=filter_for_testee)
+
+    if filter_for_questionaire_id:
+        filter_for_questionaire = Survey.objects.get(pk=filter_for_questionaire_id)
+        if filter_for_questionaire:
+            query = query&Q(plan__survey=filter_for_questionaire)
+
+    if filter_for_schedule_id:
+        filter_for_schedule = Schedule.objects.get(pk=filter_for_schedule_id)
+        if filter_for_schedule:
+            query = query&Q(plan__survey=filter_for_schedule)
+
     ret['project'] = project
-    ret['records_count'] = Record.objects.filter(plan__survey__project=project).count()
+    #ret['records_count'] = Record.objects.filter(plan__survey__project=project).count()
+    ret['records_count'] = Record.objects.filter(query).count()
 
     page = int(req.GET.get('page', '1'))
     number_per_page = int(req.GET.get('num', '20'))
     number_of_pages = int(ceil(ret['records_count'] / number_per_page)) + 1
     number_offset = (page - 1) * number_per_page
-    ret['records'] = Record.objects.filter(plan__survey__project=project).order_by('date_created').all()[number_offset:number_offset+number_per_page]
+    #ret['records'] = Record.objects.filter(plan__survey__project=project).order_by('date_created').all()[number_offset:number_offset+number_per_page]
+    ret['records'] = Record.objects.filter(query).order_by('date_created').all()[number_offset:number_offset+number_per_page]
     ret['page_range'] = [1+i for i in range(number_of_pages)]
     ret['current_page'] = page
     return render(req, 'myview/project_records.html', ret)
@@ -264,7 +288,7 @@ def myrecords(req, pid):
 @csrf_exempt
 @login_required
 def myschedule(req, pid):
-    ret = {'user_name': req.user.username}
+    ret = {'user': req.user.researcher}
     project = Project.objects.get(pk=int(pid))
     ret['project'] = project
     ret['schedules'] = Schedule.objects.filter(project=project)
@@ -273,7 +297,7 @@ def myschedule(req, pid):
 @csrf_exempt
 @login_required
 def myquestionaire(req, pid):
-    ret = {'user_name': req.user.username}
+    ret = {'user': req.user.researcher}
     project = Project.objects.get(pk=int(pid))
     ret['project'] = project
     ret['surveys'] = Survey.objects.filter(project=project)

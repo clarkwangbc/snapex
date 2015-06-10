@@ -36,7 +36,7 @@
                 <li class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <img alt="" src="/static/snapex-new/img/avatar1_small.jpg">
-                        <span class="username"> {{ user_name }} </span>
+                        <span class="username"> {{ user.full_name }} </span>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu extended logout">
@@ -166,7 +166,7 @@
             $('select.styled').customSelect();
         });
       </script>
-      
+
     {% endblock scripts %}
 
     <script src="/static/snapex/js/mypage.js" type="text/javascript"></script>

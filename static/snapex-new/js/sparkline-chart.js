@@ -4,6 +4,7 @@ var Script = function () {
         var $data = $(this).data();
 
         $data.valueSpots = {'0:': $data.spotColor};
+        console.log($data);
 
         $(this).sparkline( $data.data || "html", $data,
         {
@@ -28,6 +29,8 @@ var Script = function () {
 //            '<span style="color: {{color}}">&#9679;</span> {{offset:names}} ({{percent.1}}%)</span>'
 
     });
+
+    $(".barchart").sparkline();
 
 
     $("#linechart").sparkline([1,5,3,7,9,3,6,4,7,9,7,6,2], {
