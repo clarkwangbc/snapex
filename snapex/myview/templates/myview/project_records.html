@@ -1,0 +1,162 @@
+{% extends "myview/project_base.html" %}
+
+{% block title %}
+  <title>SnapEx | Project Records</title>
+{% endblock %}
+
+{% block sidebar-records %}
+  <a class='active' href="/myview/project/{{ project.id }}/records">
+              <i class="icon-book"></i>
+              <span>Records</span>
+          </a>
+{% endblock %}
+
+{% block main-content %}
+      <!--main content start-->
+      <section id="main-content">
+        <section class="wrapper">
+
+          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="remoteModal" class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                          <h4 id="remoteModalTitle" class="modal-title">Record</h4>
+                      </div>
+                      <div id="remoteModalBody" class="modal-body"></div>
+                  </div>
+              </div>
+          </div>
+
+          <!--
+          <section class="panel">
+          <header  class="panel-heading">
+            <h4> Filters </h4>
+          </header>
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Testee &lt;All&gt;
+          <span class="caret"></span>
+          </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+              </ul>
+          </div>
+
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Questionaire &lt;All&gt;
+          <span class="caret"></span>
+          </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+              </ul>
+          </div>
+
+          <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Schedule &lt;All&gt;
+          <span class="caret"></span>
+          </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+              </ul>
+          </div>
+          </section>
+          -->
+
+          <section class="panel">
+            <table class="table table-striped table-advance table-hover">
+              <thead>
+                <tr>
+                  <th>Testee Name</th>
+                  <th>Submission Time</th>
+                  <th>Questionaire</th>
+                  <th>Schedule</th>
+                  <th>Status</th>
+                  <th>Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for record in records %}
+                <tr>
+                  <td>
+                    <a href="#">{{ record.testee.last_name }}</a>
+                  </td>
+                  <td>{{ record.date_created }}</td>
+                  <td>{{ record.plan.survey.name }}</td>
+                  <td class="hidden-phone">{{ record.plan.schedule.name }}</td>
+                  <td>
+                    {% if record.record_aentries.count == record.plan.survey.questions|length %}
+                    <span class="label label-success label-mini">Finished</span>
+                    {% else %}
+                    <span class='label label-danger label-mini'>Incompleted</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <button class="btn btn-primary btn-xs" onclick="remoteUrlForRecord({{ record.pk }});">
+                      <i class="icon-search "></i>
+                    </button>
+                    </a>
+                    <button class="btn btn-danger btn-xs">
+                      <i class="icon-trash "></i>
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <ul class='pagination'>
+              {% for page in page_range %}
+              {% if page == current_page %}
+              <li class='active'><a href="/myview/project/{{project.id}}/records?page={{page}}">
+                {{page}}
+              </a></li>
+              {% else %}
+              <li><a href="/myview/project/{{project.id}}/records?page={{page}}">
+                {{page}}
+              </a></li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </section>
+          </div>
+          </div>
+        </section>
+      </section>
+      <!--main content end-->
+
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript">
+    $("#remoteModal").on("hidden.bs.model", function(e){$(this).removeData();});
+    function remoteUrl(u) {
+      $("#remoteModalBody").html("");
+      $.get(u, '', function(data){
+        $("#remoteModalBody").html(data);
+        
+      });
+    $("#remoteModal").modal({show:true, backdrop:false});
+    }
+    function remoteUrlForRecord(id) {
+      $("#remoteModalBody").html("");
+      $.get("/myview/record/"+id, '', function(data){
+        $("#remoteModalBody").html(data);
+      });
+    $("#remoteModal").modal({show:true, backdrop:false});
+    $("#remoteModalTitle").text("Record " + id);
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/snapex/css/mypage.css" rel="stylesheet">
+    <link href="/static/snapex/css/base.css" rel="stylesheet">
+
+    <script src="/static/snapex/js/mypage.js"></script>
+
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    {% include "mypage/project_navbar.html" %}
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" role="main">
+          <!-- Header -->
+          <div class="page-header">
+          </div>
+          
+          <!-- Plan -->
+          {% include "mypage/testee_page.html" %}
+        </div>  
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <p class="text-muted">Snap Experience Team: snapex$163.com</p>
+      </div>
+    </div>
+
+    <script src="/static/snapex/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/snapex/js/jquery.tablesorter.min.js"></script>
+    <script>
+      // table sorter init
+      $(document).ready(function(){ 
+        $("#testee_table").tablesorter();
+        $("#survey_table").tablesorter(); 
+        $("#schedule_table").tablesorter(); 
+        $("#plan_table").tablesorter(); 
+      }); 
+    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>

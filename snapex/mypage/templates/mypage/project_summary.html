@@ -1,0 +1,39 @@
+<div class='container'>
+
+<h2> Summary for Today:({{ date }}) </h2>
+
+	<table class='table' id='summary-table'>
+		<thead>
+	        <tr>
+	          <th>Survey</th>
+	          {% for survey in surveys_summary %}
+	          <th> {{ survey.name }} </th>
+	          {% endfor %}
+	        </tr>
+	    </thead>
+
+	    <tbody>
+	    <tr>
+	    	<td>Yesterday</td>
+	    	{% for survey in surveys_summary %}
+	    	<td> {{ survey.total_yesterday }} </td>
+	    	{% endfor %}
+	    </tr>
+	    <tr>
+	    	<td>Today</td>
+	    	{% for survey in surveys_summary %}
+	    	<td> {{ survey.total_today }} </td>
+	    	{% endfor %}
+	    </tr>
+
+	    <tr>
+	    	<td>Total</td>
+	    	{% for survey in surveys_summary %}
+	    	<td> {{ survey.total}} </td>
+	    	{% endfor %}
+	    </tr>
+
+	    </tbody>
+
+	</table>
+</div>

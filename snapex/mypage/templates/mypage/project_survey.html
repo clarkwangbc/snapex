@@ -1,0 +1,38 @@
+<div>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Surveys</div>
+    <div class="panel-body">
+      <a href="/mypage/survey?action=create&pid={{ project.id }}">Create new survey</a>
+    </div>
+    
+    <!-- Table -->
+    <table class="table" id="survey_table">
+      <thead>
+        <tr>
+          <th>Survey Name</th>
+          <th>Question Number</th>
+          <th>Date Created</th>
+          <th>Used Times</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for survey in surveys %}
+          <tr>
+            <td>
+              <a href="/mypage/survey?action=view&pid={{ project.id }}&sid={{ survey.id }}">
+                <!-- <div style="height:100%;width:100%"> -->
+                  {{ survey.name }}
+                <!-- </div> -->
+              </a>
+            </td>
+            <td>{{ survey.questions.count }}</td>
+            <td>{{ survey.date_created }}</td>
+            <td>{{ survey.survey_plans.count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,2188 @@
+commit e8c4dd1d76e519a103fbbe5dec0d0ca4db00739a
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Fri May 15 23:20:12 2015 +0800
+
+    Chart Tabs jQuery
+
+commit e0540765c74da27d3f171de56cff387872d73583
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Fri May 15 22:50:36 2015 +0800
+
+    Chart Bug Fixes
+
+commit f0a45a88bb2e2fab83f5968d348b01437ed5ce11
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Fri May 15 21:35:59 2015 +0800
+
+    update graph
+
+commit df27c8f6860d4efcf87abf22ba8127ba4cc76d95
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Fri May 15 21:24:56 2015 +0800
+
+    jquery duplicate change
+
+commit cfddc4f239d6f1198aec9ceb3726f2fd69992c6e
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Fri May 15 21:08:25 2015 +0800
+
+    Revert "duplicate js"
+    
+    This reverts commit 18bb2eab507c8bd3beb3be310b27684bf9476a6d.
+
+commit 18bb2eab507c8bd3beb3be310b27684bf9476a6d
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Wed May 13 16:41:56 2015 +0800
+
+    duplicate js
+
+commit aa8f73c344f0f3a1d226d49a8fc95d126b73d908
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Wed May 13 02:51:51 2015 +0800
+
+    Bug fix
+
+commit eef024ddeeeff4c0c1395541417a860f26e49e34
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Wed May 13 02:48:24 2015 +0800
+
+    UX Update
+
+commit 30cb37064c0a7bb4ad62622ccaa6b75331d94db7
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Wed May 13 01:29:19 2015 +0800
+
+    UI Update and Fulfillments
+
+commit 3cca813c3e0a26eb8c2e89322f69f14fc3f4ddef
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Tue May 12 19:43:09 2015 +0800
+
+    Sign out
+
+commit b7402fb1a92d2759fedbece728b9c67ecad1029e
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Tue May 12 19:41:21 2015 +0800
+
+    Logout
+
+commit 66a02f52b13dcfc73949885677e90e7b4017a6c6
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Tue May 12 19:39:44 2015 +0800
+
+    Log out
+
+commit abad917192be0965c6d399274cb61607250eb60c
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Tue May 12 19:23:03 2015 +0800
+
+    Update View Big Version 2.0
+    
+    Update View
+
+commit bbe535c197e410ff0f96bebd624db8727e233a77
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Tue Apr 21 15:50:58 2015 +0800
+
+    Stats
+
+commit 0f69350dcd7bbf68530af1b0794d4bad7e1640bc
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 07:06:57 2015 +0800
+
+    Delete part for print
+
+commit 4f55370207f172bce0fcbec4bd4022f2ae43831e
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 06:58:19 2015 +0800
+
+    Print
+
+commit 51ae52023ca495b5b40e6ac71b385740fd7e52c8
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 06:00:58 2015 +0800
+
+    Update View
+
+commit 8e45eb5ae070737f2febcf04342bb3f890ce3a11
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 05:41:13 2015 +0800
+
+    bug fix
+
+commit a05abb454b8a1b479f62a48508093d593c044fda
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 05:38:20 2015 +0800
+
+    bug fix
+
+commit b304ee1f56dcad89e30686d05b3401feffd7efba
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 05:36:18 2015 +0800
+
+    bug fix
+
+commit 693d0a6c01aa6683205c259c1c20d379616fb3a7
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 05:33:25 2015 +0800
+
+    auto_create_plans
+
+commit fd9c2e5b743133b506ac5f2a7888e98399f0f41e
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 02:52:25 2015 +0800
+
+    update views
+
+commit 7a59bcd75890fc28dc25fd9da30ff2f75c93d180
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:51:55 2015 +0800
+
+    debug
+
+commit 396c927b0d2e3d821a7f8e26e8ca69e9045b6d50
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:43:28 2015 +0800
+
+    bug fiex
+
+commit dfd62cde582c7fb8ca9c2282528f792be9669746
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:38:37 2015 +0800
+
+    debug
+
+commit 8e1ce743e67606bb2a1212fe53d821ef92e58613
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:32:23 2015 +0800
+
+    debug
+
+commit 2616971903ddea63f3c0654fdf8428e9b35ecf14
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:29:10 2015 +0800
+
+    Debug
+
+commit 4d3c49cc252968a529104240d89ad7689c470d18
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:26:40 2015 +0800
+
+    debug
+
+commit 641677ecd86f5d7126e019d8057212085cf0d411
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 01:19:23 2015 +0800
+
+    debug
+
+commit 3f6de87742538611c30dbe525f67768c9e9e4997
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Sat Apr 11 00:36:15 2015 +0800
+
+    Model updates and bug fixes
+
+commit 2aa851f9ceb06e49c25b3dda3706f2ab2a71780f
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro-Retina.local>
+Date:   Wed Apr 8 22:36:35 2015 +0800
+
+    update api
+
+commit a93465be88e702b988ea5547f09d3d4d5ed746c9
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Mon Mar 9 15:02:05 2015 +0800
+
+    Done
+
+commit 88cea07b89614282a493e719d92d3b0b20ced66e
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Mon Mar 9 13:42:12 2015 +0800
+
+    bug fix
+
+commit 531a2133c2432c037b9254afd5b2f942de74c6cc
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Mon Mar 9 11:36:06 2015 +0800
+
+    BIG VERSION
+
+commit 934458c190f767a655f3e876fbe753b09aaf37d9
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Thu Mar 5 14:55:44 2015 +0800
+
+    Media Storage Update
+
+commit e5db2b765c264007a7716f2dfc7f38f69c312ce7
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Thu Mar 5 10:24:10 2015 +0800
+
+    url update
+
+commit 181d46584405cd47623b959140e7731fbd55bb48
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Wed Mar 4 12:40:56 2015 +0800
+
+    bug fix
+
+commit 080935391ce753d41731009538359968b1c9d5e0
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Wed Mar 4 12:33:08 2015 +0800
+
+    Some bug fixed
+
+commit ecbd9c327358e7d656ca5d9e4e58d3a79134160b
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Wed Mar 4 11:53:10 2015 +0800
+
+    Error fix
+
+commit 27931738695c179002f4218894bdff5420c0b235
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Wed Mar 4 11:42:43 2015 +0800
+
+    update user personal info functionality
+
+commit a1aee175b3c2fc0c0cd79c66486ed262234c2f65
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Thu Jan 22 13:45:02 2015 +0800
+
+    Debug
+
+commit ce711e4747e80d1613c713a1e5ff5a0cae071695
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Thu Jan 22 13:31:25 2015 +0800
+
+    New version of code
+
+commit d6e2b702093d02b40d40e7759a84ef2644bacc23
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Tue Jan 13 17:03:14 2015 +0800
+
+    specify versions for requirements
+
+commit b82fbb7a4b2be4eb4613b65ccd183cebadb2f8f4
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Tue Jan 13 16:19:53 2015 +0800
+
+    Django 1.5.2
+
+commit 8b303a6da283805b273838e7cf35fb88cf4d7aff
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Tue Jan 13 16:15:09 2015 +0800
+
+    Django 1.5.6
+
+commit d5bf35d997c84837ec0a102ee726d37c72cd861e
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Tue Jan 13 16:06:33 2015 +0800
+
+    upgrade django to 1.7.2
+    
+    Test upgrading
+
+commit 46835e621538943ef032adcc7dd45652a3959faf
+Author: Yuming Tao <Yuming@Yumings-MacBook-ProR.local>
+Date:   Tue Jan 13 15:58:40 2015 +0800
+
+    Upgrade To Django 1.5.6
+    
+    upgrade django to support djangorestframework
+
+commit 23668147a2d9bafbab3895a06b3cddb97b88f126
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 15:18:09 2014 +0800
+
+    add jquery-ui
+
+commit e461eaa59cfd9e253f2d6a50efe25dc9765561bf
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 15:04:27 2014 +0800
+
+    let's try
+
+commit b4dc870ec9db6d797efc8e79b38da5e29cbd8ebd
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:56:33 2014 +0800
+
+    bug fix
+
+commit 362167bdb618570d7f6b29e6b52d9e7b4ca552e6
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:55:12 2014 +0800
+
+    bug fix
+
+commit 352cc6ec7e53785066913aab16bfea4d27b7a9b3
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:54:11 2014 +0800
+
+    bug fix
+
+commit 179792aa0258dd9cbb5805de3f6ca7d04b2f58bd
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:51:38 2014 +0800
+
+    bug fix
+
+commit 5d7e51ba17711be4086688c592f0d1c81a7e0776
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:50:27 2014 +0800
+
+    fix
+
+commit 38111f19a195279548dfbdd00ff07c8b0bfe639d
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:47:00 2014 +0800
+
+    bug fix
+
+commit 4d5500789f97afa8f5bb621200386ea8be1a040e
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:31:14 2014 +0800
+
+    bug fix
+
+commit 73b56e0ba768ce762b7c2737378237c135db5c15
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:29:14 2014 +0800
+
+    generate qr codes test functionality
+
+commit 24e12f2349bf714ef15bec4bbb08f4e05feb9f26
+Author: Yuming Tao <Yuming@tu059079.ip.tsinghua.edu.cn>
+Date:   Wed Dec 31 14:26:18 2014 +0800
+
+    Big Version
+
+commit d3efdda591036c8b4c1e8a49bdb8ed3e656df5c8
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 12:35:26 2014 +0800
+
+    bug fix
+
+commit feaee2dbbcd669ed4cefecd227bd85beb10490be
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 12:31:08 2014 +0800
+
+    import models
+
+commit 78fa418b4cb5b5fc23a8e94bfab522d57b9f0a99
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 12:29:48 2014 +0800
+
+    fix bug tempfile import
+
+commit bd48be8d514c04de1fa9276b818813ee7d90bcb4
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 12:25:44 2014 +0800
+
+    bc_ops
+
+commit 8846b038d7134b31a4c59d50249885c2b4960f2e
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 11:59:32 2014 +0800
+
+    bug fix
+
+commit 5737ba177443e2fd086c3ccf6f892867312dc754
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 11:56:39 2014 +0800
+
+    media and bucket
+
+commit 0929e82462773e8f0a755ae703f710feeca4c28f
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 11:24:45 2014 +0800
+
+    reply bug
+
+commit a8e7782523d98ead7189369b3e39a350054a8b45
+Author: Yuming Tao <Yuming@tu059128.ip.tsinghua.edu.cn>
+Date:   Mon Dec 29 11:13:02 2014 +0800
+
+    reply modification
+
+commit 55c7a0729222313f70d655224de720575d886507
+Author: Yuming Tao <Yuming@tu059121.ip.tsinghua.edu.cn>
+Date:   Thu Dec 18 20:40:43 2014 +0800
+
+    auth modification
+
+commit b0edf1bac8541df3e129a51c44df78e0ab32d969
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 15:55:41 2014 +0800
+
+    name acc to aac
+
+commit b2b6c1980df6e9ccb92ac4edced81d8eed079b92
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 15:54:02 2014 +0800
+
+    bucket name change
+
+commit 7ff59c05b622e0ba55c53f58382a99dbb2d91f57
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 15:50:33 2014 +0800
+
+    fix bug
+
+commit dba3c6602fe7e1ebd00f3b4712a7fec5b9047bd4
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 15:47:37 2014 +0800
+
+    audio upload
+
+commit bfcdaca5e97f49241b0cb75e512546e3f45a401f
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:34:23 2014 +0800
+
+    photo renamed
+
+commit 6f16acc598bd533f902b26a1d4553c7a4f0d5bbc
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:29:24 2014 +0800
+
+    bug fix
+
+commit 9c3f431015e2c9d8d284844038ad14671cfcc2da
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:27:45 2014 +0800
+
+    filename
+
+commit c2f111ede404bd3747c45bafc10d81cab1018330
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:25:43 2014 +0800
+
+    bucket name bug fix
+
+commit 2c20c37a23c5fc103f15e214dd00d67df48aafc2
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:22:29 2014 +0800
+
+    file name
+
+commit c00cfda79f65dbfc8eced85c6c42fed7a85bfb7b
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:16:05 2014 +0800
+
+    post file to put file
+
+commit c4122e8827dfec4859e6aaf6ee927e73e2458802
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:11:06 2014 +0800
+
+    post data instead of file
+
+commit a7d82859fe0fa1322475b90dceb842c0a7e1a7b2
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:08:45 2014 +0800
+
+    bbcs
+
+commit a7cc9d68d6082a4b17ece105739f0e989d86e724
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:07:02 2014 +0800
+
+    tempMediaFile
+
+commit ff0f10df2cd5bddbfa94bec73efb428012855fd9
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:05:36 2014 +0800
+
+    db_ops
+
+commit a994b1952188bff7e0c24a5a790d3ada30d577d5
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 14:04:15 2014 +0800
+
+    bug fix
+
+commit 8558a1bd1e66ac9fccb59c0122dc6bc825d67e62
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 13:57:44 2014 +0800
+
+    PhotoInput
+
+commit 32720dfa2e8f605a78d007103b0cb4c6bc631eab
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 13:53:10 2014 +0800
+
+    date_created
+
+commit 6a867bebe0bb919a3cd549ca4818af41aded3239
+Author: Yuming Tao <Yuming@tu059093.ip.tsinghua.edu.cn>
+Date:   Tue Dec 16 13:41:34 2014 +0800
+
+    testee
+
+commit 1b7bf5c769833f1c3ac086cc07bfd7629634abc6
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 23:23:15 2014 +0800
+
+    commit debug
+
+commit 5e3421cc41af0f96d6b225902b55d5008a94aab2
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 23:17:01 2014 +0800
+
+    debug
+
+commit 6593a994399b4615c6956d5536b6a83782cb88fa
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 23:10:47 2014 +0800
+
+    bug fix
+
+commit c560c609b5d488b1ffc07b86524c6a2cfcf1b63d
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 23:04:17 2014 +0800
+
+    update questions
+
+commit 25f39e9cb964a22466db46c9fd82f5ade3b2225c
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 22:55:46 2014 +0800
+
+    bcd update
+
+commit 5c741af9fab7cbf0076fa3e8060162f399f65df9
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 22:27:51 2014 +0800
+
+    pybcs install requirement
+
+commit d7c8b45295aa203b5a3ca50c246a702ca89fda6e
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 22:24:01 2014 +0800
+
+    bcs 2
+
+commit cd678c0f0ee435ec196d272d3b19fe617b5f1611
+Author: Yuming Tao <Yuming@tu059077.ip.tsinghua.edu.cn>
+Date:   Mon Dec 15 16:00:34 2014 +0800
+
+    bcs
+
+commit 0520078544f5765a09ffb2be34501bf727e9d3f5
+Author: Yuming Tao <Yuming@tu059149.ip.tsinghua.edu.cn>
+Date:   Wed Dec 10 15:00:12 2014 +0800
+
+    report media list
+
+commit 14341bd018954d5e05b4554a2847f3b9038f89c1
+Author: Yuming Tao <Yuming@tu059058.ip.tsinghua.edu.cn>
+Date:   Mon Nov 24 15:23:59 2014 +0800
+
+    api modification
+
+commit 0d2ff3f9cda90a5744ebba204753eeb57b25d4f7
+Author: Yuming Tao <Yuming@tu059058.ip.tsinghua.edu.cn>
+Date:   Mon Nov 24 01:59:41 2014 +0800
+
+    api modification
+
+commit 938572202cf3356d43a3e290c0e20b65a6552e95
+Author: Yuming Tao <Yuming@tu059127.ip.tsinghua.edu.cn>
+Date:   Thu Nov 20 15:46:33 2014 +0800
+
+    api updates
+
+commit 4c73f1f6a8b9d0079090fbcf7d4e9ad18b6a6a7c
+Author: Yuming Tao <Yuming@tu059122.ip.tsinghua.edu.cn>
+Date:   Tue Nov 18 17:44:15 2014 +0800
+
+    api modifications
+    
+    - modify attributes for plan in model
+
+commit 091ddb1d6e47d219ef796ccadde5146409f37bb0
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Tue Nov 4 00:06:29 2014 +0800
+
+    Fix some bugs
+
+commit f8ab93be32f172b90355dc5436be8ea415320e18
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 23:35:18 2014 +0800
+
+    Bug fix
+
+commit d26e87bd3474584bbf2e79f2a7f070f62747db53
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 23:29:42 2014 +0800
+
+    db_ops bugs fixed
+
+commit 5756f475631bc27e10ffe703216b3a9454064cc1
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 23:12:50 2014 +0800
+
+    db_ops
+
+commit dc274119640f4ea453a0bd54d06ad634f3b36d07
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 22:29:16 2014 +0800
+
+    model static values
+
+commit 3ad6240e4b7249f67cf4bd206e43fcfa1543f2f1
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 21:03:43 2014 +0800
+
+    QR Code Lib
+
+commit 06de2f4460065a741474b883bb67d21865c40e62
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 16:34:24 2014 +0800
+
+    Requirements
+
+commit d8a9a2f1bd45f1f428c6c0bbfcc883392aa35716
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 16:21:01 2014 +0800
+
+    Settings changed
+
+commit fa9d0a7db16980df7b7923af0d24fc14ba7fa409
+Author: Yuming Tao <Yuming@tu059119.ip.tsinghua.edu.cn>
+Date:   Mon Nov 3 16:19:46 2014 +0800
+
+    Big Version Interation
+
+commit ecd19d91b30e4e88f8586f35305d21d514304eb8
+Author: Yuming Tao <Yuming@tu059125.ip.tsinghua.edu.cn>
+Date:   Tue Oct 28 15:51:31 2014 +0800
+
+    Ignorance Settings Update
+
+commit ff2209d0205751ac30006fa206ec89d560d63aa5
+Author: Yuming Tao <Yuming@tu059125.ip.tsinghua.edu.cn>
+Date:   Tue Oct 28 15:49:18 2014 +0800
+
+    manage.py
+
+commit 02e5d1106bcf729df34c860f07982c43f8d01e31
+Author: Yuming Tao <Yuming@tu059125.ip.tsinghua.edu.cn>
+Date:   Tue Oct 28 15:46:01 2014 +0800
+
+    Setting up remote
+
+commit 0a005cbb4e786e953849086d03f6800eed6150ad
+Author: Yuming Tao <Yuming@tu059125.ip.tsinghua.edu.cn>
+Date:   Tue Oct 28 15:10:43 2014 +0800
+
+    Ignorance
+
+commit d8de4e6870fbf48128ef099b59f735bf4e90283a
+Author: Yuming Tao <Yuming@tu059125.ip.tsinghua.edu.cn>
+Date:   Tue Oct 28 15:09:09 2014 +0800
+
+    manage.py modification
+
+commit 58e9e3926902936af9c442ca313ea86b28a88862
+Author: Yuming Tao <Yuming@tu059120.ip.tsinghua.edu.cn>
+Date:   Mon Oct 27 20:56:25 2014 +0800
+
+    Ignorations
+
+commit d8826063bd28067f0f3c0e5cc164862137387d84
+Author: Yuming Tao <Yuming@tu059120.ip.tsinghua.edu.cn>
+Date:   Mon Oct 27 16:47:42 2014 +0800
+
+    Bug fix
+
+commit adb34f1aa48526cd04017d3e1371dd41402d40b1
+Author: Yuming Tao <Yuming@tu059120.ip.tsinghua.edu.cn>
+Date:   Mon Oct 27 16:45:40 2014 +0800
+
+    bug fix
+
+commit 4610367dbb1d80718eced6871719077c8b020cb8
+Author: Yuming Tao <Yuming@tu059120.ip.tsinghua.edu.cn>
+Date:   Mon Oct 27 16:39:22 2014 +0800
+
+    problem fixed
+
+commit db2f54096b267cb23e19a45feb65a38d9a117965
+Author: Yuming Tao <Yuming@tu059120.ip.tsinghua.edu.cn>
+Date:   Mon Oct 27 16:31:43 2014 +0800
+
+    Non-ASCII not supported fix
+
+commit 5576351892315dd835f755b7ddd8db2199aff227
+Author: Yuming Tao <Yuming@tu059120.ip.tsinghua.edu.cn>
+Date:   Mon Oct 27 16:28:01 2014 +0800
+
+    model modified version
+
+commit e7cd9fa067ff1acb5241baec2cf07ee07c92e9db
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Oct 8 19:38:17 2014 +0800
+
+    models modified
+
+commit 413019cb080a5c90817be9c89fcb7dfe381f5cfb
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Oct 8 19:31:56 2014 +0800
+
+    Models modified
+
+commit 5f6028aba2391c92512212abbc50906479b9ee04
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Fri Sep 26 09:31:56 2014 +0800
+
+    test
+
+commit 2a24a31490cc97a786f47b92c0439d7a7b02b456
+Author: Yuming Tao <Yuming@tu059057.ip.tsinghua.edu.cn>
+Date:   Tue Sep 16 15:21:34 2014 +0800
+
+    fix syntax error
+
+commit a89b943e81953bf9eaf1e6aacaf85cb7ebb54188
+Author: Yuming Tao <Yuming@tu059057.ip.tsinghua.edu.cn>
+Date:   Tue Sep 16 15:20:19 2014 +0800
+
+    fix syntax error
+
+commit ef694139cbbec3d2190a701dce2c0a409e9fbf17
+Author: Yuming Tao <Yuming@tu059057.ip.tsinghua.edu.cn>
+Date:   Tue Sep 16 15:18:52 2014 +0800
+
+    create testees
+
+commit b9e7d45b3f1b3bea0aa4f7a97221b5b671f28006
+Author: Yuming Tao <Yuming@tu059057.ip.tsinghua.edu.cn>
+Date:   Tue Sep 16 15:13:00 2014 +0800
+
+    create testees
+
+commit 1aa5759a135ec01eb48afc3801be7f6e23ab6794
+Author: Yuming Tao <Yuming@tu059057.ip.tsinghua.edu.cn>
+Date:   Tue Sep 16 15:10:34 2014 +0800
+
+    create testees
+
+commit 1938d6b5f8c2c1c24d8bf4f75aebf837b9dde46b
+Author: Yuming Tao <Yuming@tu059072.ip.tsinghua.edu.cn>
+Date:   Sat Sep 13 14:02:04 2014 +0800
+
+    Bug Fix
+
+commit 98bc9b96ecf5e7cb32108b7d6c3c7fc8cfeb713a
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Sat Sep 13 13:49:02 2014 +0800
+
+    test modification
+
+commit 723dd2eaf1abf1b758f7d81d14838812fe0682dd
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 13:35:28 2014 +0800
+
+    ssh public key
+
+commit aa4f336c6564f063c6a377cad91d854e2424ae89
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 12:41:45 2014 +0800
+
+    test fix
+
+commit 87941da67cccfb9cac06db16a8ced84811abf436
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 12:37:40 2014 +0800
+
+    test
+
+commit 636b679acc61b1f343546ce86fa8fda043be260d
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 11:09:51 2014 +0800
+
+    test
+
+commit 2d3153d4d3b2089105eab7ba6a20316833efc4f6
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 11:03:32 2014 +0800
+
+    bug fix
+
+commit fc02f8211839338785db377227d2903b35e6bdfb
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 11:00:54 2014 +0800
+
+    Bug Fix
+
+commit 9744c226f9e351ba3ae1820565ab2f282dd65232
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 10:58:44 2014 +0800
+
+    Bug fix
+
+commit 88f5c0f71f35ec07fb58e838f88c823d951a9588
+Author: Yuming Tao <Yuming@tu059136.ip.tsinghua.edu.cn>
+Date:   Fri Sep 12 10:56:51 2014 +0800
+
+    model modification
+
+commit 932daf79a0b5738e8207f4686d4dde6a5b7f7f3c
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 14:34:40 2014 +0800
+
+    fix bug
+
+commit 03fe0ca4ed258e98e6c423776ea039e55f00d480
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 14:32:29 2014 +0800
+
+    index modification
+
+commit 4236c8c3f5717123101a123acc4ed6697ae231c3
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 14:23:19 2014 +0800
+
+    snapex login fix
+
+commit 82dc0fad8bc23667120040389c81c20071a735eb
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 13:24:42 2014 +0800
+
+    Replace /t with 4 white spaces
+
+commit 138875f4fe3fca6171b2e5cb42fdf6a6d8b6c01c
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 13:14:21 2014 +0800
+
+    fix bugs
+
+commit 0521cfa391eee1f98cccf88d644f4bc9959c7ef9
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 13:09:03 2014 +0800
+
+    update
+
+commit 990c464481d9566127b21576563a2a3b05dcd320
+Merge: b0df005 0fac716
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 13:03:54 2014 +0800
+
+    Merge branch 'master' of https://git.duapp.com/appid282gcboc93
+
+commit b0df005f67a4686e443f04ff824c24f99d283d81
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 07:11:18 2014 +0800
+
+    debug 2
+
+commit 3508831aac9c90d3888e12dfcd062e2286660b45
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Thu Sep 4 06:56:30 2014 +0800
+
+    debug
+
+commit af362832c5af95224086b2dbf196239a80f73c0c
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Sep 3 23:26:13 2014 +0800
+
+    bug fix
+
+commit ac2a74c1d926c6597eff81a3a29a74645fdbcffd
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Sep 3 23:25:18 2014 +0800
+
+    debug
+
+commit fe0dfa3d81e30a53ccf537267904b67ffaee276b
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Sep 3 23:22:22 2014 +0800
+
+    API Login Modified
+
+commit 97acd1f5cb727241af11d027eba6ca75eccc573d
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Sep 3 22:17:33 2014 +0800
+
+    Modified Login
+
+commit f6a21fe51cc0138b01fd7a888c447260f494972f
+Author: Yuming Tao <Yuming@Yumings-MacBook-Pro.local>
+Date:   Wed Sep 3 16:07:50 2014 +0800
+
+    create ssh service
+
+commit 0fac7160af89eb273a8fece5a6bf5302409165df
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 20:24:05 2014 +0800
+
+    test
+
+commit 7e444868cce7a26fc579dc10217b89b8721f826c
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 20:03:32 2014 +0800
+
+    test
+
+commit b3f6dc4c736df6b2f2aa8b37e67e0a245d1766ab
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 20:02:05 2014 +0800
+
+    test
+
+commit dcd0a6b7d705847d088a5a72c3546640b20ef7cd
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 19:46:44 2014 +0800
+
+    temp version
+
+commit 61c9acd70b25a145d41d9abbf5529c282f5b588d
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 19:23:45 2014 +0800
+
+    test
+
+commit 8cb91c934179229220d60db1364a5fe9a4aa790b
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:53:44 2014 +0800
+
+    test
+
+commit 9bf93f5358730534277851cce20ae17d6566044a
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:28:23 2014 +0800
+
+    test
+
+commit bd84a2612c5fa2e48608d2448528f42a4824452b
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:23:43 2014 +0800
+
+    test
+
+commit f00b13efd460120ee54cbf30dcf44fbc7004866d
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:22:42 2014 +0800
+
+    test
+
+commit 629c305fb314640290e082e61bac0b707717f414
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:19:51 2014 +0800
+
+    test
+
+commit 4a65a37f927da2da830ec3f528f629816839b4fd
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:16:48 2014 +0800
+
+    test
+
+commit f4930eb40fae0c5a8d7fad2384e92ace3a6c3583
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:10:36 2014 +0800
+
+    test
+
+commit 3ff8897c45e49bcde061f39099072176b352a22d
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 18:05:03 2014 +0800
+
+    test
+
+commit 51a85cbe5071536d6c4645a220799162b0e24ab3
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 17:23:26 2014 +0800
+
+    test
+
+commit 83de1723c764af3538ab7bfdcf571d06c1e015fc
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 17:18:38 2014 +0800
+
+    test
+
+commit 06c3b99599684ba7c7487efed0c8b68ebc78be83
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 17:17:16 2014 +0800
+
+    test
+
+commit 8d79fbe930e7e91e6c0b89ebdffbd7de466fc620
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 17:13:06 2014 +0800
+
+    test
+
+commit 5c814422397247883f5e5751485f0cd0586a06f9
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 17:08:19 2014 +0800
+
+    add flush
+
+commit eabbda6cd8dff0cd072677b16e2dad8f383def50
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 17:02:43 2014 +0800
+
+    test
+
+commit 2958dadfa4efe4f8212fd792d8d89567a5915e79
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 16:49:49 2014 +0800
+
+    test
+
+commit 1a6e0a59d40cd88bcd4e4aa639b5e25640b19409
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 16:48:37 2014 +0800
+
+    test
+
+commit 92c2c4d4b2927ded67982ae8e93c777931a65480
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 16:43:18 2014 +0800
+
+    revise push module, add push_on_time switch
+
+commit 77ba789b6a0d68bf3e752158b091bddd278253ac
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 00:54:44 2014 +0800
+
+    test
+
+commit f27786946a52dca97ce3949fea05b6e3fbc50141
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 26 00:44:00 2014 +0800
+
+    test baidu push module
+
+commit 317b2fb39cd2ce0d2a98e78fc99aa804c0a69220
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 23:10:00 2014 +0800
+
+    test
+
+commit 182dc60b359d9f537828e01ee3bdcc30a6112d46
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 23:04:37 2014 +0800
+
+    add testee project page
+
+commit 772d49459bb58062bbc0831eecb70ab4a27a63dc
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 22:45:06 2014 +0800
+
+    test
+
+commit 3c389e5442d7ebeff719819875448069c0b8c7c6
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 21:35:49 2014 +0800
+
+    test
+
+commit ecc44c3ce3919d216ce5797fe10effb243b620a3
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 21:32:53 2014 +0800
+
+    add new rest api
+
+commit 327cf9427ad19f7add372749f830b797a82687c2
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 18:25:58 2014 +0800
+
+    add tablesorter
+
+commit 9cbd662b81a948eaeaf99cd8c22013585d129274
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 18:15:27 2014 +0800
+
+    test
+
+commit 6698c2fe9601a1fe5f1372a9c822ab478772cdeb
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 18:11:40 2014 +0800
+
+    test
+
+commit 02a13335f26b7cc4a6f7ad1bcfce88ad1751a118
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 17:17:00 2014 +0800
+
+    test
+
+commit 940ec7c517ab4c0bffe135c8d47f817b9d127f46
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 16:57:22 2014 +0800
+
+    test
+
+commit 8e32170037dea454f32bf99d0d7f16cc919a1957
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 16:53:44 2014 +0800
+
+    test
+
+commit 51addfe5a17f0b2499ddf0e9380027f66d7f6710
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 16:41:54 2014 +0800
+
+    test
+
+commit 6de9744044dbba60807d5cc3db791781f751af9f
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 16:36:18 2014 +0800
+
+    test
+
+commit 0b790ba0242dc9597c182a1d01117e107d553c59
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 16:34:06 2014 +0800
+
+    add record module
+
+commit d2c146efb4080d28cf7f17f1105241c855246590
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 14:31:31 2014 +0800
+
+    test
+
+commit 98f5f73653017cd3cbe26c9885b602bb83ee9718
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 13:28:54 2014 +0800
+
+    test
+
+commit c977607943e5178eb046ef764a253a1ade6ad8c7
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 13:25:02 2014 +0800
+
+    test
+
+commit 4681c1419d4b837c61e788a0250ccdb14b9f9d75
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 13:23:59 2014 +0800
+
+    test
+
+commit 4460eefde22d642f048e0fec202c2c0a1e781866
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 13:19:35 2014 +0800
+
+    test
+
+commit fdc97f5d3d559f17c1f7f69a3093e37d4ebd7b96
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 12:55:20 2014 +0800
+
+    test
+
+commit dfa5704e06fe515d8c9a77c2b303590d43f704bb
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 12:01:22 2014 +0800
+
+    add plan module
+
+commit 95151fe8393caa3c7fc55279bdb46f85dff39150
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 11:06:50 2014 +0800
+
+    test
+
+commit 63d6dbc1442ca2db10648d150b95f6ee7173a5c5
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 11:04:30 2014 +0800
+
+    test
+
+commit 340eb818b2daa85b1a7309017ae3aedfe7fcce73
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:59:41 2014 +0800
+
+    test
+
+commit 61397f1d44daf315e4cf69107392d42ef5732f17
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:58:05 2014 +0800
+
+    test
+
+commit 780636e753bda0ffa7cfb59165348e277dea2cdd
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:51:09 2014 +0800
+
+    test
+
+commit cf5f5c32ac069d7ea35122d932356d6564802385
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:40:28 2014 +0800
+
+    add requirement
+
+commit 518f33e4e3208dae544e2abc9e8253bf49c29b5a
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:38:13 2014 +0800
+
+    test
+
+commit 3bc2acae89440e44b1e38b8bbfe59f466714fb77
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:35:58 2014 +0800
+
+    test
+
+commit 50e027f21aa3d3d8cb5088c2481012c5c791beff
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 10:21:47 2014 +0800
+
+    test
+
+commit 82ba773f54ceca0f33c1f2e0a12e5c573d1f593a
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 09:48:05 2014 +0800
+
+    test
+
+commit a5d2e451c9bf1a50b26c4299fdefdda536cd29d3
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 09:45:46 2014 +0800
+
+    test
+
+commit 35865a2fd2b019dfeb357ecb5f7215924c066c2f
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 09:42:04 2014 +0800
+
+    test
+
+commit ad77531623bd9083797cc9e7df82ee44192ee6bc
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 09:38:32 2014 +0800
+
+    test
+
+commit 78c6b7b23798501263a369de0676a305547c81a7
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 03:00:13 2014 +0800
+
+    test
+
+commit 6e1059fe9dc1d8ac72734c1030017272acc8be00
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 02:58:30 2014 +0800
+
+    test
+
+commit d3d47b00d53653547d8f3c29c119bd390df67e55
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 01:50:17 2014 +0800
+
+    test
+
+commit 78a315b0cfd9b67d31cec40e66252ff2ec3e0d38
+Author: niyuna <niyuna@gmail.com>
+Date:   Tue Aug 19 01:33:41 2014 +0800
+
+    test
+
+commit bd893823442364df7c901d70e8e7bd214a286e57
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 23:46:00 2014 +0800
+
+    test
+
+commit 0b658e8c10e66a036015f58790ec2969882ac399
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 23:43:52 2014 +0800
+
+    test
+
+commit 468bedbacc3995cfb30d7e735ee73f1e5f9d4b10
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 23:34:05 2014 +0800
+
+    test
+
+commit b34e84c7f505181bb45cfb53fc2e3ddc18225060
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 23:27:41 2014 +0800
+
+    test
+
+commit 3f3417acc26106765d562a9fdd36dd1c55118bdc
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 22:10:54 2014 +0800
+
+    test
+
+commit 957a4c0a8732aaf2b0b1c4c2010c99f9f6d1356f
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 22:06:55 2014 +0800
+
+    test
+
+commit e02c11b2c70159de3bc7ff487d43caccbd74331f
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 21:38:43 2014 +0800
+
+    revise model
+
+commit c97b08532851595b9e1f069e8a3eac0e341860e8
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 21:32:29 2014 +0800
+
+    test
+
+commit 60314ed5cd6d4733fb91bfb498babca3614cd4a2
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 21:20:34 2014 +0800
+
+    revise models
+
+commit 1c7b826c392e9b115124ebd37639a9cd1022bc7e
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 21:11:42 2014 +0800
+
+    test
+
+commit 6bc1f272f2a7a5523097b8d31d3823b686189c30
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:35:30 2014 +0800
+
+    test
+
+commit c5f04fea91a5cb35538d1511b41720084c35c8cf
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:32:02 2014 +0800
+
+    test
+
+commit 07d96c7cc68e0799ed9ead4ce9a7ada143d68c28
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:25:54 2014 +0800
+
+    test
+
+commit 10c307945bd992fac60615225063a4c87ffaa548
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:23:53 2014 +0800
+
+    test
+
+commit e1aa81f8fbca0255787bfd47b70fe3196421220c
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:19:42 2014 +0800
+
+    test
+
+commit b847ece74dd1befb9717f8d74fd9cefaeb2739f2
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:10:32 2014 +0800
+
+    test
+
+commit acb01302438ce0e99a3d2f643faac6f38e7b8187
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:05:36 2014 +0800
+
+    test
+
+commit 64c61e63e4a11b00ffa32f7bbc54f57e240a3b73
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:04:25 2014 +0800
+
+    test
+
+commit c0c12ed55655f76078c8cea98bd5803749d2da2d
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 20:02:56 2014 +0800
+
+    test
+
+commit 2908418b8c41110700085c86d18bab01853a90f9
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 19:57:31 2014 +0800
+
+    test
+
+commit fa256882b6ac45382536be7d594e9ea06bcc2665
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 19:31:41 2014 +0800
+
+    test
+
+commit 03642654612beced8227ba37d2b035a97a766a44
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 19:22:07 2014 +0800
+
+    test
+
+commit cb6be3a628f130e536f0a95a8ec4d1b55a05b228
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 19:12:06 2014 +0800
+
+    test
+
+commit 31048cc870a33dce5f313b4d1a3cba851671e529
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 17:55:15 2014 +0800
+
+    add survey_create module
+
+commit e7e202d594ff879c07efcc4aec5fc4a86ea38da3
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 12:26:06 2014 +0800
+
+    test
+
+commit 97a48ce8a07c7fe484bf7b334c334eafa52b44db
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 12:24:38 2014 +0800
+
+    test
+
+commit 075f37ab06494dc8036fb5f28d2efd4beb9614c3
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 12:23:27 2014 +0800
+
+    add project_survey module
+
+commit fd86cf7f7a1e767f96ed0256c1eeaf4e5dc2828b
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 11:50:50 2014 +0800
+
+    debug
+
+commit a40166e235e1970449b9c4dad49ba3932903ff32
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 11:47:15 2014 +0800
+
+    test
+
+commit b4a9a53e74b5ab25d82f219f2aa4bdb23775fe7e
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 11:32:36 2014 +0800
+
+    test
+
+commit 2ade2dac9f104f59cd83a969f90b28ac7d6cfb35
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 11:30:41 2014 +0800
+
+    test
+
+commit 6f64eaec0b613fbcfcb43fa44fc5dc221dc8e3cc
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 11:28:21 2014 +0800
+
+    test
+
+commit 774acc834fbb8376f21ffe0932102676d5204aa1
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 02:31:03 2014 +0800
+
+    test
+
+commit 99b80d08c8fd478e08c4eaa4d6a01f5a7e3ec7dd
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 02:29:18 2014 +0800
+
+    test
+
+commit 5dc030220a3dfed996e1929bc376b39a513052f4
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 02:27:36 2014 +0800
+
+    test
+
+commit a67a3c92ce6b4d5d4669685d5062c05760ccaf33
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 01:02:41 2014 +0800
+
+    test
+
+commit 344d5cb5e80b9b897fca2f1d281b5df41b865c03
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 00:59:37 2014 +0800
+
+    test
+
+commit 633cdbf982feaebfc6cf70256ae0a6b8b3aa1ef7
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 00:56:56 2014 +0800
+
+    test
+
+commit 54debe48fabdcbb4b527cecbb9ed8d79f6b0975c
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 00:38:46 2014 +0800
+
+    test
+
+commit e5201e1626914d6167cf154cf54d032be0174058
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 00:32:43 2014 +0800
+
+    test
+
+commit fd4e351606d47d781b38b7797f498be14564078e
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 00:31:28 2014 +0800
+
+    test
+
+commit 9e94161fc41d92d7ea245cd12c2a7355940f7ce3
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 18 00:27:16 2014 +0800
+
+    test
+
+commit fc47afaac2b24f12e6c359e2c610cb5ea7537356
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 22:34:00 2014 +0800
+
+    test
+
+commit 396565442b5d63de5dfba484c94a22198651a234
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 19:57:07 2014 +0800
+
+    test
+
+commit 770721b758322a09cdcca339a1eb40743c188c90
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 15:33:22 2014 +0800
+
+    test
+
+commit 7d73b006539110b4af19fe3649c313cd235447cf
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 15:28:04 2014 +0800
+
+    revise models
+
+commit c707aa98e0119756c3c3458f4d6aaf0128a60a41
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 11:02:21 2014 +0800
+
+    test
+
+commit a4e5422e80d93e3a9a61c8e43f3af73999e0e928
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 10:59:39 2014 +0800
+
+    test
+
+commit c5449b20c563b64ed63f0b9132cb0bc92e7c070a
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 10:47:55 2014 +0800
+
+    test
+
+commit 97858377d6c497e038c9b3e381bbb41d9b028082
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 01:41:33 2014 +0800
+
+    test
+
+commit 1b8b3912663a169cefec6d8a8bf423fdc8ade305
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 01:32:37 2014 +0800
+
+    test
+
+commit 164d02b3d183a3ae4df1918e0d54e1f5a5f5015e
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 01:31:03 2014 +0800
+
+    change route pattern, add login required
+
+commit 06a6d3726f997bdde8030d659fcf43cf1dca7e55
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 01:22:20 2014 +0800
+
+    add mypage module
+
+commit b29050b72ab65b9e07b7bfd2b4a566b448998700
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 01:00:45 2014 +0800
+
+    test
+
+commit 073ca9ad8b6e4886ac50cbbcc3d98123132286aa
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:57:33 2014 +0800
+
+    test
+
+commit 947fe4106d181d3603e8c24c71346fb6068d12bb
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:50:29 2014 +0800
+
+    test
+
+commit 3b3d128db26b328e9b6fbacc42796b624df63d84
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:46:06 2014 +0800
+
+    test
+
+commit ed53fe2b23c115c331d745a29057031d530e2ce4
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:39:05 2014 +0800
+
+    test
+
+commit 17a6a503e568cd5f4234fad09e4731eac4b1a166
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:35:22 2014 +0800
+
+    test
+
+commit 5ef3c44c3dd208abbb90dfd08c2b0a0192e2643a
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:32:12 2014 +0800
+
+    test
+
+commit b23346c58bd055b33e9eac3648abed714d7a8126
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 17 00:28:56 2014 +0800
+
+    add signin and api module
+
+commit baed80f125d1d4ec4cee54542cf151cc9cc74211
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 17:21:07 2014 +0800
+
+    test
+
+commit 7541fec45b0710016fa4b24a6a392ddfe21a4186
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 17:13:40 2014 +0800
+
+    test
+
+commit 3e4ae394e0dc6c8703f1230d8996a243b87eb8e4
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 17:06:47 2014 +0800
+
+    test
+
+commit 5b72c987ee919b9a437f145bd60fc13923d37c31
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 17:00:08 2014 +0800
+
+    test
+
+commit 7bb6bc12bb7ee49bb6a0ee72e307a7a7f7e36697
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:52:26 2014 +0800
+
+    test
+
+commit 9203595bd08047eb61e32f2171a7c2f1b126f548
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:48:23 2014 +0800
+
+    test
+
+commit addf076087f0304e05fa7d106b30e0d7261cf687
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:33:16 2014 +0800
+
+    test
+
+commit 0d71fed08965084bd763f7fac5376e491406e8ab
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:31:17 2014 +0800
+
+    test
+
+commit 94127e42ff3093e2ca74fad8df9fef2fedeac633
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:20:31 2014 +0800
+
+    test
+
+commit 953da3b9022ab99e6addff5e245770e6a4c2e175
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:13:34 2014 +0800
+
+    test
+
+commit f4831e5b4816f525cb7cff234a4fdb3a29eb057f
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:06:04 2014 +0800
+
+    test
+
+commit ee2c2b8bf7dcaa52d500ebfd0c0be1ccd0acc3ee
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 16:03:41 2014 +0800
+
+    test
+
+commit 7c415e366587624845e28aceea18f061a53e81cb
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 14:21:13 2014 +0800
+
+    test
+
+commit 7f57a11b7c871f1dff08c1583d0d0bd7485b6c4c
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 14:05:25 2014 +0800
+
+    test
+
+commit c6c93b2c60caf5e7d330d1834e9db200084c5e2b
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:57:42 2014 +0800
+
+    test
+
+commit b8cc7c0c2c2d930df90307df0a9de1d8546a8a77
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:38:53 2014 +0800
+
+    test
+
+commit 046cda66602a2790ea88da5c0a56e75270055a59
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:32:07 2014 +0800
+
+    test
+
+commit 2539db495421d98b4cdcadec9d756d2fc8d50c7d
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:29:49 2014 +0800
+
+    test
+
+commit 1caf05ee4b8212a647191a70fd5631aa53c62751
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:28:40 2014 +0800
+
+    test
+
+commit 004a8ae463551fc99f24b568bb16ed1b77a72841
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:26:24 2014 +0800
+
+    test
+
+commit 527cb16ff6514b05abb5409707b36dca8258de4c
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:25:32 2014 +0800
+
+    test
+
+commit 6d5adbcb88030977721508e7105baafb68e953d5
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 16 13:23:14 2014 +0800
+
+    test
+
+commit 0a44b1486c338495d22e0b25bd82479795c9e187
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 23:34:02 2014 +0800
+
+    test
+
+commit 274ad588c1868a95623f0aca49231a103165cbb3
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 23:32:31 2014 +0800
+
+    test
+
+commit d5ac3e5c4aa79d68dc70e82f1b1f69e40223e12d
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 23:24:03 2014 +0800
+
+    test
+
+commit fcb20c11b5090594a4a32806f49a870c202c06f0
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 23:22:12 2014 +0800
+
+    test
+
+commit 4e41b76dd66f3a23052349cfe832d85a5032c074
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 23:18:41 2014 +0800
+
+    test
+
+commit f12037a8240307e967e6ff450ef1b151bbb6c679
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 21:23:19 2014 +0800
+
+    test
+
+commit 34068f9d0e3ea4a2673ffc4ce211bc5423b01438
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:51:43 2014 +0800
+
+    test
+
+commit 75e8ace084093304047711b51b91775f6ad9214b
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:45:14 2014 +0800
+
+    test
+
+commit 3a0d92a169430e741b36b7fae30ad17bff8ad7b2
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:40:18 2014 +0800
+
+    test
+
+commit caadf154f4e0b88723c16723177c8dd65b4c3c65
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:29:59 2014 +0800
+
+    test
+
+commit 657bc118fac2f6f8c468c6644a3909a26cf3cb29
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:28:46 2014 +0800
+
+    test
+
+commit 65bb230e5c309d929604e39996dda177574157d1
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:22:56 2014 +0800
+
+    test
+
+commit f38986548bf0f9572f621de602bab49d6e830ef1
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:21:05 2014 +0800
+
+    test
+
+commit f4533c572bc878af630f444e9d02bf781dff9da7
+Author: niyuna <niyuna@gmail.com>
+Date:   Fri Aug 15 20:08:51 2014 +0800
+
+    test
+
+commit 359d5c0a2457e1141d6db58644316e0eead6b6e7
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 15:58:20 2014 +0800
+
+    add create_survey
+
+commit 6e19b3b9434e0d40db90afee608b2bbbc8381fac
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 15:41:02 2014 +0800
+
+    test
+
+commit 81d79879b07f8d89cc544067e2a86227c8d5a9dc
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 15:37:43 2014 +0800
+
+    test
+
+commit f0fc0d321cccfb3218c992e6af6d0f74b1509edc
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 15:36:13 2014 +0800
+
+    test
+
+commit d0a0cb9e5cb68770c592dc728a987956b9e0d11a
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 15:33:12 2014 +0800
+
+    test
+
+commit 331f987b18fce9679414c5d15e355836fc11c435
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 15:30:34 2014 +0800
+
+    add create_project
+
+commit 16ec102fbad806240fadf00bf5ad785235a7976a
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 12:02:10 2014 +0800
+
+    change timezone setting
+
+commit bd04407e9cbcc024fdf2c9f3c7125e032057cd46
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 11:46:27 2014 +0800
+
+    test
+
+commit 0261966a6a5018b1ee1768c082c082dcec4d5666
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 11:43:02 2014 +0800
+
+    add user db_ops
+
+commit 48c124f462eb3737be3928e02f65def1f366003f
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 10:44:53 2014 +0800
+
+    modify related_names
+
+commit ce46aa296a5a64de876c6b862a9f0a29c830518b
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 10:38:20 2014 +0800
+
+    add related_name
+
+commit 3003376b4600e7aa4019dd1dce1f1e0c5caa3a53
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 10:27:33 2014 +0800
+
+    test
+
+commit 33bc39c29ec167503ce1a962a49dd0714bf380e2
+Author: niyuna <niyuna@gmail.com>
+Date:   Mon Aug 11 10:25:58 2014 +0800
+
+    add db models
+
+commit e9ecb27a4629b5ae5b8272072b35f74714cbce3f
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 17:17:23 2014 +0800
+
+    test
+
+commit 0026ccbcc8531be723c8302b44bf5acedef10c8a
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 17:16:03 2014 +0800
+
+    test
+
+commit 6e01cb39e5cd7c27fd1585e589d9b91d9335d4d4
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:59:09 2014 +0800
+
+    test
+
+commit e6bdf01d50a849cc017fa8005ebb3fcdfab1d7dc
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:55:12 2014 +0800
+
+    test
+
+commit 6871108b7ee709a1e6bb5296a8ac57eec4c9b7d6
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:52:46 2014 +0800
+
+    test
+
+commit d6894d5a10e2a017f602a79a9a2a0408fd75d1a2
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:51:21 2014 +0800
+
+    test
+
+commit 3c3f51216c4e735ff6afe4477486fe6c08d1f025
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:48:11 2014 +0800
+
+    test
+
+commit e1fa0b7f1e4ebd34e098230105e0a7b19c830255
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:46:45 2014 +0800
+
+    test
+
+commit 17c1436e4349c81f0b698f02e7c9e6a63b39a380
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:43:31 2014 +0800
+
+    test
+
+commit adb4ced37353529dee394b1124619f3a011711a7
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:31:52 2014 +0800
+
+    test
+
+commit e5137d42bf175ba9cb74cdaddecfbc3874509666
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:18:50 2014 +0800
+
+    test
+
+commit 4512b2de5da7cd9f362b533c07c6041536c49777
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:04:47 2014 +0800
+
+    test
+
+commit fcfbe736765a83e204db711f312a53099e6a915b
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 16:00:45 2014 +0800
+
+    test
+
+commit 757017c897c0e1907973625dacb0f0045012e239
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:56:22 2014 +0800
+
+    test
+
+commit e3701b1631cd67a3804e7e5102bfc41fc1dcf4c4
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:54:08 2014 +0800
+
+    test
+
+commit 5fa6099cf2b2bf87846f40f704c1f23bf931bdb9
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:51:01 2014 +0800
+
+    test
+
+commit ff75417850ab9fbfff2e55b9e8968d74b7980876
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:48:24 2014 +0800
+
+    test logging
+
+commit f2d76f60a10772a95e10f1253c813039df30e4e8
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:22:35 2014 +0800
+
+    test
+
+commit 6ea0d94801e4511bdcc78597a1a90324a1c42a3a
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:21:13 2014 +0800
+
+    test
+
+commit ad4689f6517ca13aac27db73a0658974c783f884
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 15:19:33 2014 +0800
+
+    test runcmd
+
+commit 9131a745908e65b467d3e87fa30124a493ee875d
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 11:40:58 2014 +0800
+
+    test
+
+commit a04915dc627c23904132bf7d33427c369d0391c5
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 11:30:18 2014 +0800
+
+    test
+
+commit f3835e293d7f8e699a9c7e83a471c515aa0bd342
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 11:24:25 2014 +0800
+
+    test
+
+commit 7dfa227b819bd2d8aea323d2d10676092b8ae814
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 11:17:21 2014 +0800
+
+    add test module
+
+commit 0f3de7745ae57bd18a510b73225f280db47fa9c4
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:59:58 2014 +0800
+
+    test
+
+commit 1edf4360b991e2caf9d6e6afc50c7e1f99bdb594
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:54:31 2014 +0800
+
+    test
+
+commit a23ff48f630e4a271215102502ab693dbba9dff8
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:50:50 2014 +0800
+
+    test
+
+commit 709a0075547da4f965b7600404d92d3fe3b4cb49
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:44:40 2014 +0800
+
+    test
+
+commit eaed4a4ace55ea61f05fff6b40b4ff6405457d6c
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:35:06 2014 +0800
+
+    test
+
+commit c5d111384cd215235f1218d30c934ae6a1a839ef
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:13:56 2014 +0800
+
+    test
+
+commit 447afa5e064fd7f0b92ae8b8713adb9948b18c09
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 10:10:47 2014 +0800
+
+    adjust folder structure
+
+commit 04d0e3c0ad42d91850c1e75e46b6ef3ef1ed0a1d
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 09:53:23 2014 +0800
+
+    update global django settings
+
+commit 3afeb36e0c4f7fb9fb8b1dcdc2e9d725d4ed3e49
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 09:43:11 2014 +0800
+
+    change project structure
+
+commit dddc5a44ba7c694e30bf264ec587ea2da0e38f40
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Aug 3 09:42:45 2014 +0800
+
+    change folder structure
+
+commit 60e2de538aa041869a779e0826762b92c73d0d56
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 2 20:16:29 2014 +0800
+
+    change settings.py
+
+commit 238129dc26d037434a48d03ecab035ba26437cff
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 2 20:11:08 2014 +0800
+
+    change index.py
+
+commit 2b99803c40126a5013f3178259c5931bf361ca14
+Author: niyuna <niyuna@gmail.com>
+Date:   Sat Aug 2 19:59:17 2014 +0800
+
+    django deployment test
+
+commit bea6457a6286d5fcebf882bd5a64620d15649484
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Jul 20 21:05:22 2014 +0800
+
+    fix requirements.txt
+
+commit b07b308f073d7f84accb41bda5bfc171f0b5a960
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Jul 20 21:00:51 2014 +0800
+
+    fix requirements.txt
+
+commit c261537be7cb0ea01d5498562fdb233c8fa8deca
+Author: niyuna <niyuna@gmail.com>
+Date:   Sun Jul 20 20:57:21 2014 +0800
+
+    django init
+
+commit 8ed13ee37fc23378fbc23997df7b1afdb11d5c0b
+Author: baeadmin <baeadmin@baidu.com>
+Date:   Sun Jul 20 17:58:21 2014 +0800
+
+    add app appid282gcboc93
